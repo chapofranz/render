@@ -1,4 +1,4 @@
-html {
+* {
   font-family: 'Crete Round', serif;
   font-variant-ligatures: no-common-ligatures;
   font-weight: 300;
@@ -29,8 +29,8 @@ footer {
 h1 {
   font-family: 'Azerte mono', monospace;
   padding: 10px;
-  color: #5f5f64;
-  font-size: 2.6em;
+  color: #000000;
+  font-size: 16px;
 }
 
 h2, h3, h4 {
@@ -45,9 +45,10 @@ h2, h3, h4 {
   border-color: black;
   border-radius: 20px;
   padding: 12px 24px;
-  font-size: 16px;
+  font-size: 12px;
   cursor: pointer;
   text-shadow: 1px 1px 0 #FFD600;
+  text-decoration: none;
 }
 
 .red-button {
@@ -58,40 +59,55 @@ h2, h3, h4 {
   border-color: #ffffff;
   border-radius: 20px;
   padding: 12px 24px;
-  font-size: 16px;
+  font-size: 12px;
   cursor: pointer;
   text-shadow: 1px 1px 0 #C40000;
+  text-decoration: none;
 }
 
 a {
   font-size: 12px;
   font-family: "DejaVu Sans Mono";
+  text-decoration: none;
 }
 
 .button:hover {
   cursor: pointer;
 }
 
-.footer-container {
-  display: flex;
+.navbar {
+  background-color: lightgray;
+  color: black;
+  border-radius: 20px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: lightgray;
 
 }
-.footer-item {
-  flex-grow: 1;
-  flex-basis: 50%;
+
+.logo {
+  text-align: left;
+  padding-left: 20px;
 }
 
-.main-container {
-  display: flex;
-
-}
-.item-content {
-  flex-grow: 1;
-  flex-basis: 70%;
+#navbar-title {
+  color: black;
+  text-decoration: underline;
 }
 
-.item-aside {
-  flex-grow: 1;
-  flex-basis: 30%;
+.navbar-collapser {
+  -ms-flex-align: center;
 }
 
+.textbox {
+  background-color: lightblue;
+  padding: 10px;
+  border-radius: 20px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: lightblue;
+}
+
+.sign-up-button {
+  -ms-flex-align: center;
+}
