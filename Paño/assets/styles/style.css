@@ -108,6 +108,6 @@ a {
   border-color: lightblue;
 }
 
-.sign-up-button {
-  -ms-flex-align: center;
+.row {
+  margin-bottom: 50px;
 }
