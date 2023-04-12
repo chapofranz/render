@@ -1,10 +1,15 @@
 html {
-  font-family: 'Open Sans', Arial, sans-serif;
+  font-family: 'Crete Round', serif;
   font-variant-ligatures: no-common-ligatures;
   font-weight: 300;
   margin: 0px;
   cursor: default;
 }
+@font-face {
+  font-family: 'Crete Round';
+  src: url('/assets/fonts/CreteRound-Regular.ttf') format('truetype');
+}
+
 body {
   font-size: 13px;
 }
@@ -28,8 +33,8 @@ h1 {
   font-size: 2.6em;
 }
 
-h1, h2, h3 {
-  font-family: 'Crete Round';
+h2, h3, h4 {
+  font-family: 'Crete Round', serif;
 }
 
 .yellow-button {
@@ -58,7 +63,35 @@ h1, h2, h3 {
   text-shadow: 1px 1px 0 #C40000;
 }
 
+a {
+  font-size: 12px;
+  font-family: "DejaVu Sans Mono";
+}
+
 .button:hover {
   cursor: pointer;
+}
+
+.footer-container {
+  display: flex;
+
+}
+.footer-item {
+  flex-grow: 1;
+  flex-basis: 50%;
+}
+
+.main-container {
+  display: flex;
+
+}
+.item-content {
+  flex-grow: 1;
+  flex-basis: 70%;
+}
+
+.item-aside {
+  flex-grow: 1;
+  flex-basis: 30%;
 }
 
