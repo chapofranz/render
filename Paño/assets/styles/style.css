@@ -6,6 +6,10 @@
   cursor: default;
 }
 
+/*.content {*/
+/*  */
+/*}*/
+
 @font-face {
   font-family: 'Crete Round';
   src: url('/assets/fonts/CreteRound-Regular.ttf') format('truetype');
@@ -190,6 +194,12 @@ a {
   border-color: lightblue;
 }
 
+.handshake-image img,
+.textbox img {
+  max-width: 100%;
+  height: auto;
+
+}
 
 @media screen and (min-width: 992px) {
 
@@ -222,21 +232,8 @@ a {
   }
 
 
-  .red-button {
-    background-color: #ffffff;
-    color: #000000;
-    border-width: 1px;
-    border-style: solid;
-    border-color: #ffffff;
-    border-radius: 20px;
-    padding: 12px 24px;
-    font-size: 50px;
-    cursor: pointer;
-    text-shadow: 1px 1px 0 #C40000;
-    text-decoration: none;
 
-  }
-  a{
+  a {
     font-size: 36px;
   }
 
@@ -251,13 +248,6 @@ a {
     max-width: 80%;
     height: auto;
   }
-
-  #handshake-id {
-    align-content: center;
-  }
-
-
-
 
 
 }
