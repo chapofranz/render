@@ -1,0 +1,21 @@
+body {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.box {
+  background-color: #FFD600;
+  padding: 20px;
+  margin: 10px;
+  border: 1px solid #C40000;
+}
+
+.statusbar {
+  background-color: #C40000;
+  padding: 20px;
+  color: #ffffff;
+  margin-top:80px;
+}
+.content {
+  margin-top: 80px;
+}
