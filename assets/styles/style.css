@@ -203,38 +203,18 @@ a {
 
 @media screen and (min-width: 992px) {
 
-  .navbar-toggle {
-    color: red;
-    border-radius: 10px;
-    border-width: 1px;
-    border-style: solid;
-    border-color: lightblue;
-  }
-
-  #logo-nav {
-    height: 80px;
-    width: 130px;
-
-  }
-
   * {
     font-family: 'Crete Round', serif;
     font-variant-ligatures: no-common-ligatures;
     font-weight: 300;
     margin: 0px;
     cursor: default;
-    font-size: 50px;
+    font-size: 15px;
   }
 
   @font-face {
     font-family: 'Crete Round';
     src: url('/assets/fonts/CreteRound-Regular.ttf') format('truetype');
-  }
-
-
-
-  a {
-    font-size: 36px;
   }
 
   .handshake-container {
@@ -249,7 +229,71 @@ a {
     height: auto;
   }
 
-
 }
+
+
+.navbar {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.navbar-nav li a:hover {
+  background-color: rgba(0, 0, 0, 50%);
+  border-radius: 10px;
+}
+
+.navbar-toggler .icon-bar {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background-color: #cccccc;
+  border-radius: 5px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: lightblue;
+}
+
+form.nosubmit {
+  display: flex;
+  align-content: center;
+  border: none;
+  padding: 0;
+}
+
+input.nosubmit {
+  border: 1px solid #555;
+  border-radius: 5px;
+  width: 100%;
+  padding: 9px 4px 9px 40px;
+  margin-top: 20px;
+  background: transparent url("/images/search.png") no-repeat 13px center;
+}
+
+.logo-image {
+  width: 45px;
+}
+
+.user-profile-img {
+  width: 45px !important;
+  float: right;
+  padding-right: 20px;
+  margin: auto 10px;
+  justify-content: flex-end;
+}
+
+.test-h1 {
+  padding-top: 60px;
+  padding-left: 10px;
+}
+
+.lefty{
+  position: relative;
+  float: right;
+}
+
 
 
