@@ -56,5 +56,8 @@ module.exports.datastores = {
     user: 'user13_test',
     password: 't116115',
     database: 'studie_connect_test'
-    }
+
+  },
+
+
 };
