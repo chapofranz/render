@@ -1,0 +1,35 @@
+<div class="container-fluid">
+    <h1>Neues Konto erstellen</h1>
+    <form action="/register" method="POST">
+        <label for="vorname">Vorname:</label>
+        <input type="text" name="vorname" id="vorname" required>
+        <br>
+        <label for="nachname">Nachname:</label>
+        <input type="text" name="nachname" id="nachname" required>
+        <br>
+        <label for="geburtsdatum">Geburtsdatum:</label>
+        <input type="text" name="geburtsdatum" id="geburtsdatum" required>
+        <br>
+        <label for="studiengang">Studiengang:</label>
+        <input type="text" name="studiengang" id="studiengang" required>
+        <select name="studiengang" id="studiengang" required>
+            <option value="">--Wählen einen StudiengangID aus--</option>
+            <% studiengaenge.forEach(function(studiengang) { %>
+                <option value="<%= studiengang.id %>"><%= studiengang.name %> (<%= studiengang.id %>)</option>
+            <% }); %>
+        </select>
+        <input type="text" name="studiengang" id="studiengang" required>
+        <br>
+        <label for="username">Benutzername:</label>
+        <input type="text" name="nutzername" id="username" required>
+        <br>
+        <label for="email">E-Mail:</label>
+        <input type="email" name="email" id="email" required>
+        <br>
+        <label for="password">Passwort:</label>
+        <input type="password" name="passwort" id="passwort" required>
+        <br>
+        <button class ="btn-primary" type="submit">Registrieren</button>
+    </form>
+
+</div>

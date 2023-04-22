@@ -20,7 +20,16 @@ module.exports.routes = {
   ***************************************************************************/
 
   '/': { view: 'pages/homepage' },
-  '/test': {view: 'pages/bot'}
+
+
+  'GET /benutzer/new': 'benutzer.register',
+  'GET /benutzer/existing': { view: 'pages/benutzer/existing' },
+  'POST /register': { controller: 'BenutzerController', action: 'create'},
+  'POST /login': { controller: 'BenutzerController', action: 'login'},
+  'GET /benutzer/dashboard': { view: 'pages/benutzer/dashboard'}
+
+
+
 
 
   /***************************************************************************

@@ -10,6 +10,7 @@
 
 .slogan {
   color: var(--primary);
+  font-size: 17.5px;
 }
 
 @font-face {
@@ -23,8 +24,12 @@ body {
 
 header {
   background-color: #F2DCC2;
+  margin-bottom: 60px;
 }
 
+footer {
+  margin-top: 20px;
+}
 
 h1 {
   font-family: 'Azerte mono', monospace;
@@ -33,7 +38,9 @@ h1 {
   font-size: 16px;
 }
 
-h2, h3, h4 {
+h2,
+h3,
+h4 {
   font-family: 'Crete Round', serif;
 }
 
@@ -110,9 +117,11 @@ a {
   0% {
     transform: translateX(0);
   }
+
   50% {
     transform: translateX(10px);
   }
+
   100% {
     transform: translateX(0);
   }
@@ -192,6 +201,7 @@ a {
   border-radius: 10px;
   background-image: linear-gradient(135deg, #5A9, var(--secondary));
 }
+
 .social-icons {
   margin-top: 10px;
   margin-bottom: 10px;
@@ -206,6 +216,7 @@ a {
 .social-icons a:hover {
   color: #5A9;
 }
+
 #logo-nav {
   height: 50px;
   width: 80px;
@@ -228,14 +239,39 @@ a {
   border-radius: 10px;
   background-image: linear-gradient(135deg, #5A9, var(--secondary));
   padding: 10px;
+
+
+}
+
+#statusbar-head {
+  font-size: 35px;
+  margin-bottom: 40px;
+  text-decoration: underline;
+
+}
+
+.statusbar-body ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
 }
 
 
-
-.main-container {
-  padding-top: 60px;
-  padding-bottom: 10px;
+.statusbar-body ul li a {
+  font-size: 25px;
 }
+
+ul.statusbar-text {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.statusbar-body ul li {
+  margin-bottom: 10px;
+}
+
+
 
 
 .libraryPicture-container {
@@ -266,13 +302,20 @@ a {
   margin-bottom: 1rem;
 }
 
+
+.libraryPicture-container img,
+.peoplePicture-container img {
+  border-radius: 15px;
+}
+
 @media screen and (min-width: 768px) {
 
-  .main-container {
-    padding-top: 80px;
-    padding-bottom: 20px;
-
+  footer {
+    margin-top: 30px
   }
+
+
+
   .slogan {
     font-size: 22px;
   }
@@ -283,6 +326,13 @@ a {
 }
 
 @media screen and (min-width: 992px) {
+  footer {
+    margin-top: 70px
+  }
+
+  header {
+    margin-bottom: 90px;
+  }
 
   .statusbar {
     margin-top: 15px
@@ -308,10 +358,6 @@ a {
   }
 
 
-  .main-container {
-    padding-top: 140px;
-    padding-bottom: 20px;
-  }
 
   #logo-nav {
     height: 70px;
@@ -365,8 +411,9 @@ a {
 }
 
 .navbar-nav li a:hover {
-  background-color: rgba(0, 0, 0, 50%);
+  background-image: linear-gradient(135deg, rgba(90, 169, 153, 0.4), rgb(205, 173, 0,0.4));
   border-radius: 10px;
+  
 }
 
 .navbar-toggler .icon-bar {
@@ -413,7 +460,7 @@ input.nosubmit {
   padding-left: 10px;
 }
 
-.lefty{
+.lefty {
   position: relative;
   float: right;
 }
