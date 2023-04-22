@@ -51,6 +51,20 @@ h2, h3, h4 {
   text-decoration: none;
 }
 
+.red-button {
+  background-color: #ffffff;
+  color: #000000;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #000000;
+  border-radius: 20px;
+  padding: 12px 24px;
+  font-size: 12px;
+  cursor: pointer;
+  text-shadow: 1px 1px 0 #C40000;
+  text-decoration: none;
+}
+
 .sec-button-own {
   background-color: #CDAD00;
   color: #000000;
@@ -351,6 +365,9 @@ a {
     font-size: 25px;
 
   }
+  h1 {
+    font-size: 36px;
+  }
 
 }
 
@@ -416,4 +433,62 @@ input.nosubmit {
 .lefty{
   position: relative;
   float: right;
+}
+
+.headline{
+  text-align: center;
+  background-image: linear-gradient(to right, #56aa97, #cdad00);
+  border-width: 1px;
+  border-style: solid;
+  border-color: lightblue;
+  border-radius: 10px;
+}
+
+.studiums-auswahl{
+  display: flex;
+  justify-content: center;
+  padding-top: 30px;
+}
+
+.top-10-downloads-headline{
+  text-align: center;
+  padding-top: 30px;
+}
+
+.top-10-downloads{
+  display: flex;
+  justify-content: center;
+}
+/*ul {*/
+/*  list-style-type: none;*/
+/*}*/
+/*li{*/
+/*  display: flex;*/
+/*  justify-content: center;*/
+/*  text-align: center;*/
+/*  font-size: 1.2rem;*/
+/*  padding-top: 20px;*/
+/*  background-image: linear-gradient(to right, #56aa97, #cdad00);*/
+/*  border-width: 1px;*/
+/*  border-style: solid;*/
+/*  border-color: lightblue;*/
+/*  border-radius: 10px;*/
+/*}*/
+
+#call-to-action-2{
+  /*display: flex;*/
+  /*justify-content: center;*/
+  text-align: center;
+}
+ .unordered-lists{
+   list-style-type: none;
+ }
+
+.list-items{
+  background-image: linear-gradient(to right, #cdad00, #56aa97);
+  border: 0px;
+  border-radius: 15px;
+  padding: 5px;
+  margin-top: 15px;
+  text-align: center;
 }

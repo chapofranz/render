@@ -20,7 +20,12 @@ module.exports.routes = {
   ***************************************************************************/
 
   '/': { view: 'pages/homepage' },
-  '/test': {view: 'pages/bot'}
+  '/test': {view: 'pages/bot'},
+  '/ressourcen': {view: 'pages/ressourcen'},
+  '/login': {view: 'pages/login'},
+  '/studiengang': {view: 'pages/studiengang'},
+  '/wirtschaftsinformatik': {view: 'pages/wirtschaftsinformatik'},
+  '/ressourcen-login-request': {view: 'pages/ressourcen-login-request'}
 
 
   /***************************************************************************
