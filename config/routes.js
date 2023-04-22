@@ -25,7 +25,10 @@ module.exports.routes = {
   '/login': {view: 'pages/login'},
   '/studiengang': {view: 'pages/studiengang'},
   '/wirtschaftsinformatik': {view: 'pages/wirtschaftsinformatik'},
-  '/ressourcen-login-request': {view: 'pages/ressourcen-login-request'}
+  '/ressourcen-login-request': {view: 'pages/ressourcen-login-request'},
+  '/marketplace': {view: 'pages/marketplace'},
+  '/chat': {view: 'pages/chat'},
+  '/dozenten': {view: 'pages/dozenten'}
 
 
   /***************************************************************************
