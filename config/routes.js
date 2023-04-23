@@ -28,7 +28,8 @@ module.exports.routes = {
   '/ressourcen-login-request': {view: 'pages/ressourcen-login-request'},
   '/marketplace': {view: 'pages/marketplace'},
   '/chat': {view: 'pages/chat'},
-  '/dozenten': {view: 'pages/dozenten'}
+  '/dozenten': {view: 'pages/dozenten'},
+  '/upload': {view: 'pages/upload'}
 
 
   /***************************************************************************
