@@ -280,7 +280,17 @@ a {
   margin-bottom: 1rem;
 }
 
+  .social-media-icons-size{
+    width: 24px;
+    height: 24px;
+  }
+
 @media screen and (min-width: 768px) {
+
+  .social-media-icons-size{
+    width: 48px;
+    height: 48px;
+  }
 
   .main-container {
     padding-top: 80px;
@@ -534,8 +544,10 @@ input.nosubmit {
 }
 
 .footer-icons {
-  display: grid;
+  display: flex;
   justify-content: center;
   grid-column: 1 / 4;
   grid-row: 2;
+  grid-column-gap: 2em;
+  margin: 20px;
 }
