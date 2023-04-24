@@ -501,3 +501,41 @@ input.nosubmit {
   grid-template-columns: repeat(2, 1fr);
   padding: 10px;
 }
+
+.footer-grid{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr 1fr;
+  padding: 1em;
+  margin-top: 20px;
+  justify-content: center;
+}
+
+.footer-1{
+  display: grid;
+  justify-content: center;
+  grid-column: 1;
+  grid-row: 1;
+  grid-column-gap: 1em;
+}
+.footer-2{
+  display: grid;
+  justify-content: center;
+  grid-column: 2;
+  grid-row: 1;
+  grid-column-gap: 1em;
+}
+.footer-3{
+  display: grid;
+  justify-content: center;
+  grid-column: 3;
+  grid-row: 1;
+  grid-column-gap: 1em;
+}
+
+.footer-icons {
+  display: grid;
+  justify-content: center;
+  grid-column: 1 / 4;
+  grid-row: 2;
+}
