@@ -41,6 +41,16 @@ module.exports.routes = {
 
   'GET /ressourcen/show ': 'ressourcen.show',
 
+  '/test': {view: 'pages/bot'},
+  '/ressourcen': {view: 'pages/ressourcen'},
+  '/login': {view: 'pages/login'},
+  '/studiengang': {view: 'pages/studiengang'},
+  '/wirtschaftsinformatik': {view: 'pages/wirtschaftsinformatik'},
+  '/ressourcen-login-request': {view: 'pages/ressourcen-login-request'},
+  '/marketplace': {view: 'pages/marketplace'},
+  '/chat': {view: 'pages/chat'},
+  '/dozenten': {view: 'pages/dozenten'},
+  '/upload': {view: 'pages/upload'}
 
 
   /***************************************************************************

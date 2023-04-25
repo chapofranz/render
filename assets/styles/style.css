@@ -58,6 +58,20 @@ h4 {
   text-decoration: none;
 }
 
+.red-button {
+  background-color: #ffffff;
+  color: #000000;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #000000;
+  border-radius: 20px;
+  padding: 12px 24px;
+  font-size: 12px;
+  cursor: pointer;
+  text-shadow: 1px 1px 0 #C40000;
+  text-decoration: none;
+}
+
 .sec-button-own {
   background-color: #CDAD00;
   color: #000000;
@@ -585,6 +599,9 @@ ul.statusbar-text {
     font-size: 25px;
 
   }
+  h1 {
+    font-size: 36px;
+  }
 
 }
 
@@ -651,4 +668,111 @@ input.nosubmit {
 .lefty {
   position: relative;
   float: right;
+}
+
+.headline{
+  text-align: center;
+  background-image: linear-gradient(to right, #56aa97, #cdad00);
+  border-width: 1px;
+  border-style: solid;
+  border-color: lightblue;
+  border-radius: 10px;
+}
+
+.studiums-auswahl{
+  display: flex;
+  justify-content: center;
+  padding-top: 30px;
+}
+
+.top-10-downloads-headline{
+  text-align: center;
+  padding-top: 30px;
+}
+
+.top-10-downloads{
+  display: flex;
+  justify-content: center;
+}
+
+#call-to-action-2{
+  text-align: center;
+}
+ .unordered-lists{
+   list-style-type: none;
+   margin-right: 30px;
+ }
+
+.list-items{
+  background-image: linear-gradient(to right, #cdad00, #56aa97);
+  border: 0px;
+  border-radius: 15px;
+  padding: 5px;
+  margin-top: 15px;
+  text-align: center;
+}
+
+.upload {
+  background-image: linear-gradient(to right, #cdad00, #56aa97);
+  border: 0px;
+  border-radius: 15px;
+}
+
+.wrapper-grid{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 1em;
+  margin-top: 20px;
+}
+
+.wrapper{
+  justify-content: center;
+  grid-column: 2 / 3;
+  padding-left: 20px;
+}
+
+.nested {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  padding: 10px;
+}
+
+.footer-grid{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr 1fr;
+  padding: 1em;
+  margin-top: 20px;
+  justify-content: center;
+}
+
+.footer-1{
+  display: grid;
+  justify-content: center;
+  grid-column: 1;
+  grid-row: 1;
+  grid-column-gap: 1em;
+}
+.footer-2{
+  display: grid;
+  justify-content: center;
+  grid-column: 2;
+  grid-row: 1;
+  grid-column-gap: 1em;
+}
+.footer-3{
+  display: grid;
+  justify-content: center;
+  grid-column: 3;
+  grid-row: 1;
+  grid-column-gap: 1em;
+}
+
+.footer-icons {
+  display: flex;
+  justify-content: center;
+  grid-column: 1 / 4;
+  grid-row: 2;
+  grid-column-gap: 2em;
+  margin: 20px;
 }
