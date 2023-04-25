@@ -18,5 +18,8 @@ module.exports.policies = {
   ***************************************************************************/
 
   // '*': true,
+  // 'BenutzerController.editOne': 'isAdmin',
+  // 'BenutzerController.login' : 'isNotLoggedIn',
+  // 'BenutzerController.findOneDashboard' : 'isLoggedIn'
 
 };
