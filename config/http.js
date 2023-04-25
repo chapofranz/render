@@ -32,6 +32,7 @@ module.exports.http = {
     // order: [
     //   'cookieParser',
     //   'session',
+    //   'attachUser',
     //   'bodyParser',
     //   'compress',
     //   'poweredBy',
@@ -39,7 +40,8 @@ module.exports.http = {
     //   'www',
     //   'favicon',
     // ],
-
+    // attachUser: require('../api/middleware/attachUser'), 
+    
 
     /***************************************************************************
     *                                                                          *

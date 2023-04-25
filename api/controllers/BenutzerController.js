@@ -7,8 +7,18 @@ module.exports = {
         sails.log.debug("Erstellt Benutzter....");
         let params = req.allParams();
         sails.log.debug("Benutzer-Modell: ", Benutzer)
+        sails.log.debug("Eingabeparameter: ", params);
         await Benutzer.create(params);
-        res.redirect('/benutzer');
+        let benutzer = await Benutzer.findOne({ nutzername: params.nutzername }).populate('role').populate('studiengang');
+
+        if (!benutzer) {
+            return res.status(404).send('Benutzer nicht gefunden');
+        }
+
+        req.session.userId = benutzer.id;
+        req.session.userRole = benutzer.role.name;
+        
+        res.redirect(`/benutzer/dashboard/${benutzer.id}`);
     },
 
     login: async function (req, res) {
@@ -16,35 +26,45 @@ module.exports = {
         let params = req.allParams();
         let nutzername = params.nutzername;
 
+        // let id = req.params.id;
 
-        let benutzer = await Benutzer.findOne({ nutzername: nutzername });
+
+
+        let benutzer = await Benutzer.findOne({ nutzername: nutzername }).populate('role');
+
 
         if (!benutzer) {
             sails.log.debug("Benutzer nicht gefunden");
             return res.status(401).send("Benutzer nicht gefunden");
         }
         if (benutzer.passwort === params.passwort) {
+
             sails.log.debug("Benutzer authenthifiziert");
 
-            res.view('pages/benutzer/dashboard', {benutzer: benutzer});
+            req.session.userId = benutzer.id;
+            req.session.userRole = benutzer.role.name;
+
+            res.redirect(`/benutzer/dashboard/${benutzer.id}`);
+
         } else {
             sails.log.debug("Falsches Passwort");
             res.status(401).send("Falsches Passwort");
-            
+
         }
     },
 
-    register: async function(req,res) {
+    register: async function (req, res) {
         try {
             const studiengaenge = await Studiengang.find();
-            return res.view('pages/benutzer/new', { studiengaenge });
-          } catch (err) {
+            const roles = await Role.find();
+            return res.view('pages/benutzer/new', { studiengaenge, roles });
+        } catch (err) {
             return res.serverError(err);
-          }
+        }
     },
 
     findOne: async function (req, res) {
-        let id = req.param('id');
+        let id = req.params.id;
         let benutzer = await Benutzer.findOne({ id: id });
 
         if (!benutzer) {
@@ -54,28 +74,63 @@ module.exports = {
         res.view('pages/benutzer/show', { benutzer: benutzer });
     },
 
-    findAll: async function (req, res) {
-        let benutzers = await Benutzer.find();
-        res.view('pages/benutzer/list', { benutzers: benutzers });
+    findOneDashboard: async function (req, res) {
+        let id = req.params.id;
+        let benutzer = await Benutzer.findOne({ id: id }).populate('studiengang').populate('role');
+
+        if (!benutzer) {
+            return res.status(404).send('Benutzer nicht gefunden');
+        }
+
+        res.view('pages/benutzer/dashboard', { benutzer: benutzer });
     },
 
-    update: async function (req, res) {
-        let id = req.param('id');
-        let updatedParams = req.allParams();
-        await Benutzer.update({ id: id }, updatedParams);
-        res.redirect(`/benutzer/${id}`);
+    findAll: async function (req, res) {
+        let benutzers = await Benutzer.find();
+        return res.json(benutzers);
+    },
+
+    updateOne: async function (req, res) {
+        sails.log.debug("Update single user....")
+        let benutzer = await Benutzer.updateOne({ id: req.params.id }).set(req.body);
+        res.redirect('/benutzer');
     },
 
     editOne: async function (req, res) {
-        sails.log.debug("Edit single meal....")
-        let benutzer = await Benutzer.findOne({ id: req.params.id }).populate('category');
-        res.view('pages/meal/edit', { benutzer: benutzer });
+        sails.log.debug("Edit single user....")
+        let benutzer = await Benutzer.findOne({ id: req.params.id }).populate('studiengang');
+        res.view('pages/benutzer/edit', { benutzer: benutzer });
     },
 
 
-    delete: async function (req, res) {
-        let id = req.param('id');
-        await Benutzer.destroy({ id: id });
+
+    updateOne: async function (req, res) {
+        sails.log.debug("Update single user....")
+        let benutzer = await Benutzer.updateOne({ id: req.params.id }).set(req.body);
         res.redirect('/benutzer');
     },
+
+    find: async function (req, res) {
+        sails.log.debug("List all users....")
+        let benutzers;
+        if (req.query.q && req.query.q.length > 0) {
+            benutzers = await Benutzer.find({
+                nutzername: {
+                    'contains': req.query.q
+                }
+            })
+        } else {
+            benutzers = await Benutzer.find().populate("studiengang");
+        }
+        res.view('pages/benutzer/index', { benutzers: benutzers });
+    },
+
+    destroyOne: async function (req, res) {
+        sails.log.debug("Destroy single user....")
+        let id = req.params.id;
+        await Benutzer.destroyOne({ id: id });
+        res.redirect('/benutzer');
+    },
+
+
 };

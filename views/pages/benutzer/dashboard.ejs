@@ -1,70 +1,33 @@
-<style>
-    .container {
-        margin-top: 50px;
-    }
-    .panel {
-        border-radius: 0;
-    }
-    .panel-heading {
-        background-color: #428bca;
-        color: white;
-        border-radius: 0;
-    }
-    .panel-body {
-        padding: 20px;
-    }
-    .dashboard-icons {
-        font-size: 4em;
-        margin-bottom: 10px;
-    }
-    .dashboard-link {
-        color: #428bca;
-    }
-</style>
-<title> Dashboard </title>
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-4">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">User</h3>
-                    <%= benutzer.vorname %>
-                    <%= benutzer.nachname %>
-                    <%= benutzer.studiengang.name %>
-                
-                </div>
-                <div class="panel-body">
-                    <a href="#" class="dashboard-link">
-                        <span class="glyphicon glyphicon-user dashboard-icons"></span>
-                        <span class="dashboard-text">View Users</span>
-                    </a>
+<div class="container-fluid dashboard-container">
+    <div class="dashboard-content">
+        <h1 class="text-center mb-4" id="dashheader">Dashboard</h1>
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <div class="card">
+                    <div class="card-header">Benutzerinformation</div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Vorname: <%= benutzer.vorname %>
+                        </li>
+                        <li class="list-group-item">Nachname: <%= benutzer.nachname %>
+                        </li>
+                        <li class="list-group-item">Nutzername: <%= benutzer.nutzername %>
+                        </li>
+                        <li class="list-group-item">Email: <%= benutzer.email %>
+                        </li>
+                        <li class="list-group-item">Geburtsdatum: <%= benutzer.geburtsdatum %>
+                        </li>
+                        <li class="list-group-item">Rolle: <%= benutzer.role.name %>  
+                        </li>
+                        <li class="list-group-item">Studiengang: <%= benutzer.studiengang.name %> 
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Projects</h3>
-                </div>
-                <div class="panel-body">
-                    <a href="#" class="dashboard-link">
-                        <span class="glyphicon glyphicon-folder-open dashboard-icons"></span>
-                        <span class="dashboard-text">View Projects</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Settings</h3>
-                </div>
-                <div class="panel-body">
-                    <a href="#" class="dashboard-link">
-                        <span class="glyphicon glyphicon-cog dashboard-icons"></span>
-                        <span class="dashboard-text">View Settings</span>
-                    </a>
-                </div>
+        <div class="row">
+            <div class="sign-up-button text-center">
+                <div class="button"><a class="sec-button-own" href="http://localhost:1337">Zurück zur Homepage
+                        ></a></div>
             </div>
         </div>
     </div>

@@ -22,13 +22,24 @@ module.exports.routes = {
   '/': { view: 'pages/homepage' },
 
 
+  'GET /benutzer/all': 'benutzer.findAll',
+  'GET /role/all': 'role.findAll',
+// justForTesting
+
   'GET /benutzer/new': 'benutzer.register',
   'GET /benutzer/existing': { view: 'pages/benutzer/existing' },
+  'GET /benutzer/dashboard/:id': 'benutzer.findOneDashboard',
+  'GET /benutzer': 'benutzer.find', 
+  // 'GET /benutzer/show': 'benutzer.findOne',
+
+  'POST /benutzer/destroy/:id': 'benutzer.destroyOne',
+  'POST /benutzer/edit/:id': 'benutzer.editOne',
+  'POST /benutzer/update/:id': { controller: 'BenutzerController', action: 'updateOne' },
+
   'POST /register': { controller: 'BenutzerController', action: 'create'},
   'POST /login': { controller: 'BenutzerController', action: 'login'},
-  'GET /benutzer/dashboard': { view: 'pages/benutzer/dashboard'}
 
-
+  'GET /ressourcen/show ': 'ressourcen.show',
 
 
 
