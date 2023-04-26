@@ -5,15 +5,18 @@
         </h1>
     </div>
     <div class="container-flex top-10-downloads">
-        <ul class="unordered-lists">
+        <ul class="unordered-lists" id="studiengang-element">
             <% studiengaenge.forEach(function(studiengang) { %>
                 <li class="list-items">
                     <a href="/<%= studiengang.name.toLowerCase().replace(/ /g, '') %>"><%= studiengang.name %></a>
                 </li>
             <% }); %>
-        </ul>
+
         <% if (currentUser.role.name === 'Admin') { %>
-            <a href="/studiengang/edit" class="btn btn-sm btn-secondary">Edit</a>
+            <div class="col-12">
+                <a href="/studiengang/edit" class="btn btn-sm btn-secondary col-6 offset-3" id="studiengang-element">Edit</a>
+            </div>
         <% } %>
+        </ul>
     </div>
 </div>

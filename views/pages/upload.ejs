@@ -8,20 +8,20 @@
         <form class="wrapper upload">
             <div class="nested">
                 <label for="Dateiname-input">Name:</label>
-                <input id="Dateiname-input" type="text" placeholder="Dateiname" name="Dateiname">
+                <input id="Dateiname-input" type="text" placeholder="Dateiname" name="Dateiname" class="upload-form">
             </div>
             <div class="nested">
                 <label for="Kategorie-selector">Kategorie:</label>
-                <select id="Kategorie-selector" name="Kategorie" class="nested">
+                <select id="Kategorie-selector" name="Kategorie" class="nested upload-form">
                     <option value="Bitte auswählen">Bitte auswählen</option>
                     <option value="Skript">Skript</option>
                     <option value="Anleitung">Anleitung</option>
                 </select>
             </div>
             <div class="nested">
-                <label for="studiengang" class="form-label">Studiengang:</label>
-                <select name="studiengang" id="studiengang" class="form-select" required>
-                    <option value="">--Wählen einen Studiengang aus--</option>
+                <label for="studiengang">Studiengang:</label>
+                <select name="studiengang" id="studiengang" class="upload-form" required>
+                    <option value="Studiengang wählen">Wählen einen Studiengang aus</option>
                     <% studiengaenge.forEach(function(studiengang) { %>
                         <option value="<%= studiengang.id %>">
                             <%= studiengang.name %> (<%= studiengang.id %>)
@@ -31,7 +31,7 @@
             </div>
             <div class="nested">
                 <label for="Modul-selector">Modul:</label>
-                <select id="Modul-selector" name="Modul">
+                <select id="Modul-selector" name="Modul" class="upload-form">
                     <option value="Bitte auswählen">Bitte auswählen</option>
                     <option value="WETE">Webtechnologie</option>
                     <option value="PLH">Placeholder A</option>
@@ -42,15 +42,15 @@
             </div>
             <div class="nested">
                 <label for="Beschreibung-input">Beschreibung:</label>
-                <input id="Beschreibung-input" type="text" placeholder="Beschreibung des Inhalts" name="Beschreibung">
+                <input id="Beschreibung-input" type="text" placeholder="Beschreibung des Inhalts" name="Beschreibung" class="upload-form">
             </div>
             <div class="nested">
                 <label for="Author-input">Author:</label>
-                <input id="Author-input" type="text" placeholder="Dein Name (optional)" name="Author">
+                <input id="Author-input" type="text" placeholder="Dein Name (optional)" name="Author" class="upload-form">
             </div>
             <div class="nested">
                 <label for="Dokument-selection">Dokument:</label>
-                <input id="Dokument-selection" type="file" placeholder="Datei auswählen" name="Datei">
+                        <input id="Dokument-selection" type="file" placeholder="Datei auswählen" name="Datei">
             </div>
             <div class="nested">
                 <label for="upload-button">Jetzt hochladen</label>
