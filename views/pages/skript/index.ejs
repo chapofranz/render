@@ -1,0 +1,48 @@
+<div class="container-fluid destoryOne-container">
+    <h1>Skripte</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Beschreibung</th>
+                <th>Pfad</th>
+                <th>Author</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% skripte.forEach(function(skript) { %>
+                <tr>
+                    <td>
+                        <%= skript.id %>
+                    </td>
+                    <td>
+                        <%= skript.name %>
+                    </td>
+                    <td>
+                        <%= skript.beschreibung %>
+                    </td>
+                    <td>
+                        <%= skript.pfad %>
+                    </td>
+                     <td>
+                        <%= skript.author %>
+                    </td>
+                    <td>
+                        <form action="/skript/destroy/<%= skript.id %>" method="POST">
+                            <input class="btn btn-danger" type="submit" value="Löschen"
+                                onclick="return confirm('Sind Sie sicher, dass Sie dieses Skript löschen möchten?');">
+                        </form>
+                    </td>
+                    <td>
+                        <form action="/skript/edit/<%= skript.id %>" method ="POST">
+                           <input class="btn btn-warning" type="submit" value="Edit"
+                            onclick="return confirm('Sind Sie sicher, dass Sie diesen Skript bearbeiten möchten?');">
+                        </form>   
+                    </td>
+                </tr>
+                <% }); %>
+        </tbody>
+    </table>
+    <a class="btn btn-primary" href="/skript/new">Hinzufügen</a>
+</div>

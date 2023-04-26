@@ -62,8 +62,8 @@
                         <ul class="navbar-nav ms-auto">
                             <li class="nav-item">
                                 <div class="container-flex">
-                                    <form class="nosubmit">
-                                        <input class="nosubmit" type="search" placeholder="Search...">
+                                    <form class="nosubmit" action="/search" method="get">
+                                        <input class="nosubmit" type="search" name="term" placeholder="Search...">
                                     </form>
                                 </div>
                             </li>
@@ -244,6 +244,7 @@
 <!--SCRIPTS-->
 <script src="/dependencies/sails.io.js"></script>
 <script src="/dependencies/bootstrap.min.js"></script>
+<script src="/js/searchFilter.js"></script>
 <!--SCRIPTS END-->
 </body>
 

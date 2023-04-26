@@ -1,0 +1,23 @@
+<div class="container">
+    <form action="/anleitung/update/<%=anleitung.id%>" method="post">
+        <div>
+            <div class="form-group">
+                <label class="col-form-label-lg">Name</label>
+                <input type="text" class="form-control" maxlength="80" value="<%= anleitung.name %>" name="name">
+            </div>
+            <div class="form-group">
+                <label class="col-form-label-lg">Beschreibung</label>
+                <input type="text" class="form-control" maxlength="8" value="<%= anleitung.beschreibung %>" name="beschreibung">
+            </div>
+            <div class="form-group">
+                <label class="col-form-label-lg">Pfad</label>
+                <input type="text" maxlength="255" class="form-control" size="40" value="<%= anleitung.pfad %>" name="pfad">
+            </div>
+            <div class="form-group">
+                <label class="col-form-label-lg">Author</label>
+                <input type="text" maxlength="255" class="form-control" size="40" value="<%= anleitung.author %>" name="author">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Aktualisieren</button>
+    </form>
+</div>

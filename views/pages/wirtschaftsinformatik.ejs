@@ -18,43 +18,33 @@
     </div>
     <div class="container-flex top-10-downloads">
         <ul class="unordered-lists">
-            <li class="list-items">
-                <a href="#">Placeholder A</a>
-            </li>
-            <li class="list-items">
-                <a href="#">Placeholder B</a>
-            </li>
-            <li class="list-items">
-                <a href="#">Placeholder C</a>
-            </li>
-            <li class="list-items">
-                <a href="#">Placeholder D</a>
-            </li>
-            <li class="list-items">
-                <a href="#">Placeholder E</a>
-            </li>
+            <% skripte.forEach(function(skript) { %>
+                <li class="list-items">
+                    <a href="/download/skript/<%= skript.id %>">
+                        <%= skript.name %> (Autor: <%= skript.author %>)
+                    </a>
+                </li>
+                <% }); %>
         </ul>
+        <% if (currentUser.role.name === 'Admin') { %>
+            <a href="/skript/edit" class="btn btn-sm btn-secondary">Skript Edit</a>
+        <% } %>
     </div>
     <div class="container-flex top-10-downloads-headline">
         <h1>Anleitungen</h1>
     </div>
     <div class="container-flex top-10-downloads">
         <ul class="unordered-lists">
-            <li class="list-items">
-                <a href="#">Placeholder A</a>
-            </li>
-            <li class="list-items">
-                <a href="#">Placeholder B</a>
-            </li>
-            <li class="list-items">
-                <a href="#">Placeholder C</a>
-            </li>
-            <li class="list-items">
-                <a href="#">Placeholder D</a>
-            </li>
-            <li class="list-items">
-                <a href="#">Placeholder E</a>
-            </li>
+            <% anleitungen.forEach(function(anleitung) { %>
+                <li class="list-items">
+                    <a href="/download/anleitung/<%= anleitung.id %>">
+                        <%= anleitung.name %> (Autor: <%= anleitung.author %>)
+                    </a>
+                </li>
+                <% }); %>
         </ul>
+        <% if (currentUser.role.name === 'Admin') { %>
+            <a href="/anleitung/edit" class="btn btn-sm btn-secondary">Anleitung Edit</a>
+        <% } %>
     </div>
 </div>
