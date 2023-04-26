@@ -5,14 +5,14 @@
         </h1>
     </div>
     <div class="wrapper-grid">
-        <form class="wrapper upload">
+        <form class="wrapper upload" id ="upload-form" action="/upload/new" method="POST">
             <div class="nested">
-                <label for="Dateiname-input">Name:</label>
-                <input id="Dateiname-input" type="text" placeholder="Dateiname" name="Dateiname" class="upload-form">
+                <label for="name">Name:</label>
+                <input id="Dateiname-input" type="text" placeholder="Dateiname" name="name" class="upload-form">
             </div>
             <div class="nested">
-                <label for="Kategorie-selector">Kategorie:</label>
-                <select id="Kategorie-selector" name="Kategorie" class="nested upload-form">
+                <label for="kategorie">Kategorie:</label>
+                <select id="Kategorie-selector" name="kategorie" class="nested upload-form">
                     <option value="Bitte auswählen">Bitte auswählen</option>
                     <option value="Skript">Skript</option>
                     <option value="Anleitung">Anleitung</option>
@@ -30,27 +30,27 @@
                 </select>
             </div>
             <div class="nested">
-                <label for="Modul-selector">Modul:</label>
-                <select id="Modul-selector" name="Modul" class="upload-form">
-                    <option value="Bitte auswählen">Bitte auswählen</option>
-                    <option value="WETE">Webtechnologie</option>
-                    <option value="PLH">Placeholder A</option>
-                    <option value="PLH">Placeholder B</option>
-                    <option value="PLH">Placeholder C</option>
-                    <option value="PLH">Placeholder D</option>
+                <label for="modul">Modul:</label>
+                <select name="modul" id="modul" class="upload-form" required>
+                    <option value="Modul">Wählen ein Modul aus</option>
+                    <% module.forEach(function(modul) { %>
+                        <option value="<%= modul.id %>">
+                            <%= modul.name %> (<%= modul.id %>)
+                        </option>
+                        <% }); %>
                 </select>
             </div>
             <div class="nested">
-                <label for="Beschreibung-input">Beschreibung:</label>
-                <input id="Beschreibung-input" type="text" placeholder="Beschreibung des Inhalts" name="Beschreibung" class="upload-form">
+                <label for="beschreibung">Beschreibung:</label>
+                <input id="Beschreibung-input" type="text" placeholder="Beschreibung des Inhalts" name="beschreibung" class="upload-form">
             </div>
             <div class="nested">
-                <label for="Author-input">Author:</label>
-                <input id="Author-input" type="text" placeholder="Dein Name (optional)" name="Author" class="upload-form">
+                <label for="author">Author:</label>
+                <input id="Author-input" type="text" placeholder="Dein Name (optional)" name="author" class="upload-form">
             </div>
             <div class="nested">
-                <label for="Dokument-selection">Dokument:</label>
-                        <input id="Dokument-selection" type="file" placeholder="Datei auswählen" name="Datei">
+                <label for="pfad">Dokument:</label>
+                        <input id="Dokument-selection" type="text" placeholder="Datei Pfad eingeben" name="pfad">
             </div>
             <div class="nested">
                 <label for="upload-button">Jetzt hochladen</label>

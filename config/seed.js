@@ -186,6 +186,40 @@ module.exports.seed = {
       },
     ];
 
+    const module = [
+
+      {
+        name: 'Programmieren 1',
+        beschreibung: 'Einführung in die Programmierung mit Java',
+        studiengang_modul: [],
+        anleitung: [],
+        skript: [],
+      },
+
+      {
+        name: 'BWL 1',
+        beschreibung: 'Einführung in die Betriebswirtschaftslehre',
+        studiengang_modul: [],
+        anleitung: [],
+        skript: [],
+
+      },
+      {
+        name: 'BWL 2',
+        beschreibung: 'Einführung in die Absatzplanung',
+        studiengang_modul: [],
+        anleitung: [],
+        skript: [],
+
+      }
+
+
+    ]
+
+    for (const modul of module) {
+      await Modul.findOrCreate({name: modul.name}, modul)
+    }
+
     for (const studiengang of studiengaenge) {
       await Studiengang.findOrCreate({ kuerzel: studiengang.kuerzel }, studiengang);
     }

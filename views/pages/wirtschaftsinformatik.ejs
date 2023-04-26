@@ -25,10 +25,13 @@
                     </a>
                 </li>
                 <% }); %>
-        </ul>
-        <% if (currentUser.role.name === 'Admin') { %>
-            <a href="/skript/edit" class="btn btn-sm btn-secondary">Skript Edit</a>
-        <% } %>
+                <% if (currentUser.role.name === 'Admin') { %>
+                    <div class = "col-12">
+                    <a href="/skript/edit" class="btn btn-sm btn-secondary col-6 offset-3" id ="studiengang-element">Skript Edit</a>
+                    </div>
+                    <% } %>
+
+                </ul>
     </div>
     <div class="container-flex top-10-downloads-headline">
         <h1>Anleitungen</h1>
@@ -42,9 +45,11 @@
                     </a>
                 </li>
                 <% }); %>
+                <% if (currentUser.role.name === 'Admin') { %>
+                    <div class ="col-12">
+                    <a href="/anleitung/edit" class="btn btn-sm btn-secondary col-6 offset-3" id ="studiengang-element">Anleitung Edit</a>
+                </div>
+                <% } %>
         </ul>
-        <% if (currentUser.role.name === 'Admin') { %>
-            <a href="/anleitung/edit" class="btn btn-sm btn-secondary">Anleitung Edit</a>
-        <% } %>
     </div>
 </div>
