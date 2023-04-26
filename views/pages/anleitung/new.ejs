@@ -1,0 +1,22 @@
+<div class="container">
+    <h1>Anleitung hinzufügen</h1>
+    <form action="/anleitung/create" method="POST">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="beschreibung">Beschreibung</label>
+            <input type="text" class="form-control" id="beschreibung" name="beschreibung" required>
+        </div>
+        <div class="form-group">
+            <label for="Pfad">Pfad</label>
+            <input type="text" class="form-control" id="pfad" name="pfad" required>
+        </div>
+        <div class="form-group">
+            <label for="author">Author</label>
+            <input type="text" class="form-control" id="author" name="author" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Anleitung hinzufügen</button>
+    </form>
+</div>

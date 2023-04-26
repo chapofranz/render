@@ -27,27 +27,27 @@ module.exports.routes = {
 
   'GET /benutzer/all': 'benutzer.findAll',
   'GET /role/all': 'role.findAll',
-// justForTesting
+  // justForTesting
 
   'GET /benutzer/new': 'benutzer.register',
   'GET /benutzer/existing': { view: 'pages/benutzer/existing' },
   'GET /benutzer/dashboard/:id': 'benutzer.findOneDashboard',
-  'GET /benutzer': 'benutzer.find', 
+  'GET /benutzer': 'benutzer.find',
   // 'GET /benutzer/show': 'benutzer.findOne',
 
   'POST /benutzer/destroy/:id': 'benutzer.destroyOne',
   'POST /benutzer/edit/:id': 'benutzer.editOne',
   'POST /benutzer/update/:id': { controller: 'BenutzerController', action: 'updateOne' },
 
-  'POST /register': { controller: 'BenutzerController', action: 'create'},
-  'POST /login': { controller: 'BenutzerController', action: 'login'},
+  'POST /register': { controller: 'BenutzerController', action: 'create' },
+  'POST /login': { controller: 'BenutzerController', action: 'login' },
 
   'GET /ressourcen/show ': 'ressourcen.show',
   'GET /loginRequest ': { view: 'pages/loginRequest' },
-  'GET /studiengang ' : 'studiengang.show',
-  'GET /studiengang/show ': {controller: 'StudiengangController', action: 'show'},
-  'GET /studiengang/new':  { view: 'pages/studiengang/new' },
-  'GET /studiengang/edit ': {controller: 'StudiengangController', action: 'find'},
+  'GET /studiengang ': 'studiengang.show',
+  'GET /studiengang/show ': { controller: 'StudiengangController', action: 'show' },
+  'GET /studiengang/new': { view: 'pages/studiengang/new' },
+  'GET /studiengang/edit ': { controller: 'StudiengangController', action: 'find' },
 
   'POST /studiengang/create': 'studiengang.create',
   'POST /studiengang/destroy/:id': 'studiengang.destroyOne',
@@ -55,13 +55,34 @@ module.exports.routes = {
   // 'POST /studiengang/update/:id': { controller: 'StudiengangController', action: 'updateOne' },
 
   // '/ressourcen': {view: 'pages/ressourcen'},
-  '/wirtschaftsinformatik': {view: 'pages/wirtschaftsinformatik'},
+  'GET /wirtschaftsinformatik': { controller: 'WinController', action: 'show' },
+  'GET /download/skript/:id': 'skript.download',
+  'GET /download/anleitung/:id': 'anleitung.download',
 
 
-  'GET /marketplace': {view: 'pages/marketplace/show'},
-  'GET /chat': {view: 'pages/chat/show'},
-  'GET /dozenten': {view: 'pages/dozenten/show'},
-  'GET /upload': { controller: 'UploadController', action: 'new'} 
+  'GET /skript/edit ': { controller: 'SkriptController', action: 'find' },
+  'POST /skript/destroy/:id': 'skript.destroyOne',
+  'POST /skript/edit/:id': 'skript.editOne',
+  'POST /skript/create': 'skript.create',
+  'POST /skript/update/:id': 'skript.updateOne',
+  'GET /skript/new': { view: 'pages/skript/new' },
+  
+
+
+  'GET /anleitung/edit ': { controller: 'AnleitungController', action: 'find' },
+  'POST /anleitung/destroy/:id': 'anleitung.destroyOne',
+  'POST /anleitung/edit/:id': 'anleitung.editOne',
+  'POST /anleitung/create': 'anleitung.create',
+  'POST /anleitung/update/:id': 'anleitung.updateOne',
+  'GET /anleitung/new': { view: 'pages/anleitung/new' },
+
+  'GET /marketplace': { view: 'pages/marketplace/show' },
+  'GET /chat': { view: 'pages/chat/show' },
+  'GET /dozenten': { view: 'pages/dozenten/show' },
+  'GET /upload': { controller: 'UploadController', action: 'new' },
+
+
+  'GET /search': 'SearchController.search'
 
 
   /***************************************************************************

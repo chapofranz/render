@@ -1,0 +1,59 @@
+<div class="container-fluid">
+    <h1 class="my-4" id="searchUberschrift">Suchergebnisse</h1>
+  
+    <h2 class="my-3">Skripte</h2>
+    <div class="d-flex mb-3">
+      <select id="skripteFilter" class="form-select">
+        <option value="default">Sortieren nach...</option>
+        <option value="name">Name</option>
+        <option value="author">Autor</option>
+      </select>
+    </div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Beschreibung</th>
+          <th>Autor</th>
+        </tr>
+      </thead>
+      <tbody class="skripte-list" data-skripte='<%- JSON.stringify(skripte) %>'>
+        <% skripte.forEach(function(skript) { %>
+          <tr>
+            <td><%- skript.name %></td>
+            <td><%- skript.beschreibung %></td>
+            <td><%- skript.author %></td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  
+    <h2 class="my-3">Anleitungen</h2>
+    <div class="d-flex mb-3">
+      <select id="anleitungenFilter" class="form-select">
+        <option value="default">Sortieren nach...</option>
+        <option value="name">Name</option>
+        <option value="author">Autor</option>
+      </select>
+    </div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Beschreibung</th>
+          <th>Autor</th>
+        </tr>
+      </thead>
+      <tbody class="anleitungen-list" data-anleitungen='<%- JSON.stringify(anleitungen) %>'>
+        <% anleitungen.forEach(function(anleitung) { %>
+          <tr>
+            <td><%- anleitung.name %></td>
+            <td><%- anleitung.beschreibung %></td>
+            <td><%- anleitung.author %></td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  
+  </div>
+  
