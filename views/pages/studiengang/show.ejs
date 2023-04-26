@@ -1,26 +1,22 @@
-<div class="container">
-    <div class="card w-100 mt-4">
-        <h4 class="card-header">
-            Studiengang anzeigen
-        </h4>
-        <div>
-            <div class="row">
-                <div class="col-2">
-                    Name
-                </div>
-                <div class="col-10">
-                    <%= studiengang.name %>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-2">
-                    kürzel
-                </div>
-                <div class="col-10">
-                    <%= studiengang.kürzel %>
-                </div>
-            </div>
+<div class="container-flex main-container">
+    <div class="container-fluid headline">
+        <h1>
+            Studiengang
+        </h1>
+    </div>
+    <div class="container-flex top-10-downloads">
+        <ul class="unordered-lists" id="studiengang-element">
+            <% studiengaenge.forEach(function(studiengang) { %>
+                <li class="list-items">
+                    <a href="/<%= studiengang.name.toLowerCase().replace(/ /g, '') %>"><%= studiengang.name %></a>
+                </li>
+            <% }); %>
 
-        </div>
+        <% if (currentUser.role.name === 'Admin') { %>
+            <div class="col-12">
+                <a href="/studiengang/edit" class="btn btn-sm btn-secondary col-6 offset-3" id="studiengang-element">Edit</a>
+            </div>
+        <% } %>
+        </ul>
     </div>
 </div>

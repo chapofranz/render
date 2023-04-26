@@ -16,10 +16,17 @@
                         </li>
                         <li class="list-group-item">Geburtsdatum: <%= benutzer.geburtsdatum %>
                         </li>
-                        <li class="list-group-item">Rolle: <%= benutzer.role.name %>  
+                        <li class="list-group-item">Rolle: <%= benutzer.role.name %>
                         </li>
-                        <li class="list-group-item">Studiengang: <%= benutzer.studiengang.name %> 
+                        <li class="list-group-item">Studiengang: <%= benutzer.studiengang.name %>
                         </li>
+                        <% if (benutzer.role.name==='Admin' ) { %>
+                            <li class="list-group-item">
+                                <a href="/benutzer" class="btn btn-primary">Sie sind Administrator, weitere Benutzer
+                                    verwalten?</a>
+                            </li>
+                            <% } %>
+
                     </ul>
                 </div>
             </div>

@@ -46,11 +46,11 @@
         <div class="container-flex fixed-top">
             <nav class="navbar navbar-light bg-light">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="http://localhost:1337">
+                    <a class="navbar-brand" href="/">
                         <img class="logo-image" src="/images/Studie-Connect.png" alt="logo">
                     </a>
                     <div class="lefty d-flex align-items-center">
-                    <a class="navbar-icon" href="#">
+                    <a class="navbar-icon" href="/benutzer/existing">
                         <img class="user-profile-img" src="/images/guest.png" alt="user-profile">
                     </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -62,8 +62,8 @@
                         <ul class="navbar-nav ms-auto">
                             <li class="nav-item">
                                 <div class="container-flex">
-                                    <form class="nosubmit">
-                                        <input class="nosubmit" type="search" placeholder="Search...">
+                                    <form class="nosubmit" action="/search" method="get">
+                                        <input class="nosubmit" type="search" name="term" placeholder="Search...">
                                     </form>
                                 </div>
                             </li>
@@ -74,16 +74,17 @@
                                 <a class="nav-link" href="/ressourcen/show">Ressourcen</a>
                             </li>
                             <li class="nav-item active">
-                                <a class="nav-link" href="#">Marketplace</a>
+                                <a class="nav-link" href="/marketplace">Marketplace</a>
                             </li>
                             <li class="nav-item active">
-                                <a class="nav-link" href="#">Chat</a>
+                                <a class="nav-link" href="/chat">Chat</a>
                             </li>
                             <li class="nav-item active">
-                                <a class="nav-link" href="#">Dozenten</a>
+                                <a class="nav-link" href="/dozenten">Dozenten</a>
                             </li>
                             <li class="nav-item">
-                                <a href="/benutzer/existing"><button class="yellow-button" type="button">Login</button></a>
+                                <a href="/benutzer/existing">
+                                    <button class="yellow-button" type="button">Login</button></a>
                             </li>
                         </ul>
                     </div>
@@ -94,25 +95,46 @@
 
 <%- body; %>
 
-<footer class="footer-container">
-    <div class="KID d-flex flex-row mb-3 justify-content-evenly">
-        <a href="http://www.google.com">
-            <div class="p-2"><h6>Kontakt</h6></div>
+<footer class="container-flex">
+    <div class="KID footer-grid">
+        <a href="#">
+            <div class="footer-1 justify-content-center">
+                <h6>
+                    Kontakt
+                </h6>
+            </div>
         </a>
-        <a href="http://www.google.com">
-            <div class="p-2"><h6>Impressum</h6></div>
+        <a href="#">
+            <div class="footer-2">
+                <h6>
+                    Impressum
+                </h6>
+            </div>
         </a>
-        <a href="http://www.google.com">
-            <div class="p-2"><h6>Datenschutz</h6></div>
+        <a href="#">
+            <div class="footer-3">
+                <h6>
+                    Datenschutz
+                </h6>
+            </div>
         </a>
-    </div>
-    <div class="social-icons d-flex justify-content-center">
-        <a href="https://twitter.com" class="p-2"><i class="fab fa-twitter"></i></a>
-        <a href="https://instagram.com" class="p-2"><i class="fab fa-instagram"></i></a>
-        <a href="https://facebook.com" class="p-2"><i class="fab fa-facebook-f"></i></a>
+
+        <div class="footer-icons">
+            <a href="https://twitter.com">
+                <!--            <i class="fab fa-twitter"></i>-->
+                <img src="/images/twitter.png" class="social-media-icons-size" alt="twitter-icon">
+            </a>
+            <a href="https://instagram.com">
+                <!--            <i class="fab fa-instagram"></i>-->
+                <img src="/images/instagram.png" class="social-media-icons-size" alt="instagram-icon">
+            </a>
+            <a href="https://facebook.com">
+                <!--            <i class="fab fa-facebook-f"></i>-->
+                <img src="/images/facebook.png" class="social-media-icons-size" alt="facebook-icon">
+            </a>
+        </div>
     </div>
 </footer>
-
 
 <!--
     Client-side Templates
@@ -181,6 +203,7 @@
 <!--SCRIPTS-->
 <script src="/dependencies/sails.io.js"></script>
 <script src="/dependencies/bootstrap.min.js"></script>
+<script src="/js/searchFilter.js"></script>
 <!--SCRIPTS END-->
 </body>
 
