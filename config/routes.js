@@ -8,6 +8,9 @@
  * https://sailsjs.com/anatomy/config/routes-js
  */
 
+const StudiengangController = require("../api/controllers/StudiengangController");
+const UploadController = require("../api/controllers/UploadController");
+
 module.exports.routes = {
 
   /***************************************************************************
@@ -40,17 +43,25 @@ module.exports.routes = {
   'POST /login': { controller: 'BenutzerController', action: 'login'},
 
   'GET /ressourcen/show ': 'ressourcen.show',
+  'GET /loginRequest ': { view: 'pages/loginRequest' },
+  'GET /studiengang ' : 'studiengang.show',
+  'GET /studiengang/show ': {controller: 'StudiengangController', action: 'show'},
+  'GET /studiengang/new':  { view: 'pages/studiengang/new' },
+  'GET /studiengang/edit ': {controller: 'StudiengangController', action: 'find'},
 
-  '/test': {view: 'pages/bot'},
-  '/ressourcen': {view: 'pages/ressourcen'},
-  '/login': {view: 'pages/login'},
-  '/studiengang': {view: 'pages/studiengang'},
+  'POST /studiengang/create': 'studiengang.create',
+  'POST /studiengang/destroy/:id': 'studiengang.destroyOne',
+  'POST /studiengang/edit/:id': 'studiengang.editOne',
+  // 'POST /studiengang/update/:id': { controller: 'StudiengangController', action: 'updateOne' },
+
+  // '/ressourcen': {view: 'pages/ressourcen'},
   '/wirtschaftsinformatik': {view: 'pages/wirtschaftsinformatik'},
-  '/ressourcen-login-request': {view: 'pages/ressourcen-login-request'},
-  '/marketplace': {view: 'pages/marketplace'},
-  '/chat': {view: 'pages/chat'},
-  '/dozenten': {view: 'pages/dozenten'},
-  '/upload': {view: 'pages/upload'}
+
+
+  'GET /marketplace': {view: 'pages/marketplace/show'},
+  'GET /chat': {view: 'pages/chat/show'},
+  'GET /dozenten': {view: 'pages/dozenten/show'},
+  'GET /upload': { controller: 'UploadController', action: 'new'} 
 
 
   /***************************************************************************

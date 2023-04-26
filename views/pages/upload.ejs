@@ -19,14 +19,14 @@
                 </select>
             </div>
             <div class="nested">
-                <label for="Studiengang-selector">Studiengang:</label>
-                <select id="Studiengang-selector" name="Studiengang">
-                    <option value="Bitte auswählen">Bitte auswählen</option>
-                    <option value="Win">Wirtschaftsinformatik</option>
-                    <option value="PLH">Placeholder A</option>
-                    <option value="PLH">Placeholder B</option>
-                    <option value="PLH">Placeholder C</option>
-                    <option value="PLH">Placeholder D</option>
+                <label for="studiengang" class="form-label">Studiengang:</label>
+                <select name="studiengang" id="studiengang" class="form-select" required>
+                    <option value="">--Wählen einen Studiengang aus--</option>
+                    <% studiengaenge.forEach(function(studiengang) { %>
+                        <option value="<%= studiengang.id %>">
+                            <%= studiengang.name %> (<%= studiengang.id %>)
+                        </option>
+                        <% }); %>
                 </select>
             </div>
             <div class="nested">
@@ -54,8 +54,9 @@
             </div>
             <div class="nested">
                 <label for="upload-button">Jetzt hochladen</label>
-                <button class="red-button" id="upload-button">Upload</button>
+                <button class="btn btn-primary" id="upload-button">Upload</button>
             </div>
         </form>
     </div>
 </div>
+

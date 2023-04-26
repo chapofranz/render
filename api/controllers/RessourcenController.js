@@ -10,7 +10,7 @@ module.exports = {
         let currentUserRole = req.session.userRole;
 
         if(!currentUserId) {
-            res.redirect('/');
+            res.redirect('/loginRequest');
         }else {
             sails.log.debug("CurrentUserId", currentUserId)
             sails.log.debug("CurrentUserRole", currentUserRole)
