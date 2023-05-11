@@ -82,7 +82,8 @@ module.exports.routes = {
   'GET /upload': { controller: 'UploadController', action: 'new' },
 
 
-  'GET /search': 'SearchController.search'
+  'GET /search': 'SearchController.search',
+  'POST /upload/new':  'upload.save'
 
 
   /***************************************************************************
