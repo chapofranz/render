@@ -54,7 +54,6 @@ module.exports.datastores = {
     host: '193.196.53.194',
     port: 33061,
     user: 'user13_prod',
-    password: 't100115',
     database: 'studie_connect_prod'
 
   },
