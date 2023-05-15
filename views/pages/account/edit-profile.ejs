@@ -1,0 +1,59 @@
+<div id="edit-profile" v-cloak>
+  <account-notification-banner></account-notification-banner>
+  <div class="container pt-5 pb-5">
+    <h1>Update personal info</h1>
+    <hr/>
+    <form action="/updateProfile" method="POST">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="full-name">Full name</label>
+            <input class="form-control" id="full-name" name="fullName" type="text"  placeholder="Sturgis P. Sturgeon" autocomplete="name" focus-first value="<%= req.me.fullName %>">
+            <div class="invalid-feedback">Please enter your full name.</div>
+          </div>
+        </div>
+        
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="email-address">Height</label>
+            <input class="form-control" id="height" name="height" type="number" placeholder="cm" autocomplete="height" value="<%= req.me.height %>">
+            <div class="invalid-feedback">Please enter a valid height.</div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="email-address">Weight</label>
+            <input class="form-control" id="weight" name="weight" type="number" placeholder="kg" autocomplete="weight" value="<%= req.me.weight %>">
+            <div class="invalid-feedback">Please enter a valid weight.</div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="email-address">Birthday</label>
+            <input class="form-control" id="birthday" name="birthday" type="string" placeholder="01.01.2000" autocomplete="birthday" value="<%= req.me.birthday %>">
+            <div class="invalid-feedback">Please enter a valid Birthday.</div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="email-address">Email address</label>
+            <input class="form-control" id="email-address" name="emailAddress" type="email" placeholder="sturgeon@example.com" autocomplete="email" value="<%= req.me.emailAddress %>">
+            <div class="invalid-feedback">Please enter a valid email address.</div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          There is already an account using that email address.
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group text-right">
+            <a class="btn btn-outline-info" href="/account">Cancel</a>
+            <button type="submit"  class="btn btn-dark">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<%- /* Expose locals as `window.SAILS_LOCALS` :: */ exposeLocalsToBrowser() %>

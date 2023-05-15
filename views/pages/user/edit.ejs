@@ -1,0 +1,23 @@
+<div class="container">
+    <form action="/user/update/<%=user.id%>" method="post">
+        <div>
+            <div class="form-group">
+                <label class="col-form-label-lg">Vorname</label>
+                <input type="text" class="form-control" maxlength="80" value="<%= user.vorName %>" name="vorName">
+            </div>
+            <div class="form-group">
+                <label class="col-form-label-lg">Nachname</label>
+                <input type="text" class="form-control" maxlength="8" value="<%= user.nachName %>" name="nachName">
+            </div>
+            <div class="form-group">
+                <label class="col-form-label-lg">Nutzername</label>
+                <input type="text" maxlength="255" class="form-control" size="40" value="<%= user.userName %>" name="userName">
+            </div>
+            <div class="form-group">
+                <label class="col-form-label-lg">email</label>
+                <input type="text" value="<%= user.email %>"maxlength="255" class="form-control" size="80" name="email">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Aktualisieren</button>
+    </form>
+</div>
