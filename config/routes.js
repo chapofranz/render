@@ -88,7 +88,9 @@ module.exports.routes = {
   'GET /marketplace': { view: 'pages/marketplace/show' },
   'GET /chat': { view: 'pages/chat/show' },
   'GET /upload': { controller: 'UploadController', action: 'new' },
-
+  'GET /impressum': { view: 'pages/impressum'},
+  'GET /datenschutz': { view: 'pages/datenschutz'},
+  'GET /concept': { view: 'pages/concept'},
 
   'GET /search': 'SearchController.search',
   'POST /upload/new':  'upload.save'
