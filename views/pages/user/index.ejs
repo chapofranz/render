@@ -1,0 +1,42 @@
+<div class="container-fluid destoryOne-container">
+    <h1>Benutzer </h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nutzername</th>
+                <th>Email</th>
+                <th>Aktion</th>
+            </tr>
+        </thead>
+        <tbody>
+            <%  users.forEach(function(user) { %>
+                <tr>
+                    <td>
+                        <%= user.id %>
+                    </td>
+                    <td>
+                        <%= user.userName %>
+                    </td>
+                    <td>
+                        <%= user.email %>
+                    </td>
+                     
+                    <td>
+                        <form action="/user/destroy/<%= user.id %>" method="POST">
+                            <input class="btn btn-danger" type="submit" value="Löschen"
+                                onclick="return confirm('Sind Sie sicher, dass Sie diesen Benutzer löschen möchten?');">
+                        </form>
+                    </td>
+                    <td>
+                        <form action="/user/edit/<%= user.id %>" method ="POST">
+                           <input class="btn btn-warning" type="submit" value="Edit"
+                            onclick="return confirm('Sind Sie sicher, dass Sie diesen Benutzer bearbeiten möchten?');">
+                        </form>   
+                    </td>
+                </tr>
+                <% }); %>
+        </tbody>
+    </table>
+    <a class="btn btn-primary" href="/user/new">Hinzufügen</a>
+</div>
