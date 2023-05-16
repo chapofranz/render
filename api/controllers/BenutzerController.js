@@ -86,7 +86,6 @@ module.exports = {
     },
 
     findAll: async function (req, res) {
-        let benutzers = await Benutzer.find();
         return res.json(benutzers);
     },
 

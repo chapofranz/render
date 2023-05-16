@@ -8,8 +8,8 @@
  * https://sailsjs.com/anatomy/config/routes-js
  */
 
-const StudiengangController = require("../api/controllers/StudiengangController");
-const UploadController = require("../api/controllers/UploadController");
+// const StudiengangController = require("../api/controllers/StudiengangController");
+// const UploadController = require("../api/controllers/UploadController");
 
 module.exports.routes = {
 
@@ -21,29 +21,42 @@ module.exports.routes = {
   * `assets` directory)                                                      *
   *                                                                          *
   ***************************************************************************/
-
   '/': { view: 'pages/homepage' },
 
+  'GET /signup': { action: 'entrance/view-signup' },
+  'GET /login': { action: 'entrance/view-login' },
 
-  'GET /benutzer/all': 'benutzer.findAll',
-  'GET /role/all': 'role.findAll',
-  // justForTesting
 
-  'GET /benutzer/new': 'benutzer.register',
-  'GET /benutzer/existing': { view: 'pages/benutzer/existing' },
-  'GET /benutzer/dashboard/:id': 'benutzer.findOneDashboard',
-  'GET /benutzer': 'benutzer.find',
-  // 'GET /benutzer/show': 'benutzer.findOne',
+  'GET /account': { action: 'account/view-account-overview' },
+  'GET /account/password': { action: 'account/view-edit-password' },
+  'GET /account/profile': { action: 'account/view-edit-profile' },
 
-  'POST /benutzer/destroy/:id': 'benutzer.destroyOne',
-  'POST /benutzer/edit/:id': 'benutzer.editOne',
-  'POST /benutzer/update/:id': { controller: 'BenutzerController', action: 'updateOne' },
+  //  ╔═╗╔═╗╦  ╔═╗╔╗╔╔╦╗╔═╗╔═╗╦╔╗╔╔╦╗╔═╗
+  //  ╠═╣╠═╝║  ║╣ ║║║ ║║╠═╝║ ║║║║║ ║ ╚═╗
+  //  ╩ ╩╩  ╩  ╚═╝╝╚╝═╩╝╩  ╚═╝╩╝╚╝ ╩ ╚═╝
+  // Note that, in this app, these API endpoints may be accessed using the `Cloud.*()` methods
+  // from the Parasails library, or by using those method names as the `action` in <ajax-form>.
+  'GET /logout': { action: 'account/logout' },
+  'POST  /login': { action: 'entrance/login' },
+  'POST  /signup': { action: 'entrance/signup' },
+  'POST  /updateProfile': { action: 'account/update-profile' },
+  'POST  /updatePassword': { action: 'account/update-password' },
 
-  'POST /register': { controller: 'BenutzerController', action: 'create' },
-  'POST /login': { controller: 'BenutzerController', action: 'login' },
+  'GET /admin': {action: 'admin/view-edit-all'},
+  'GET /admin/profiles': {action: 'admin/view-edit-profiles'},
 
-  'GET /ressourcen/show ': 'ressourcen.show',
-  'GET /loginRequest ': { view: 'pages/loginRequest' },
+
+
+  'POST /user': 'user.create',
+  'GET /user': 'user.find',
+  // 'GET /user/show/:id': 'user.findOne',
+  'GET /user/delete/:id': 'user.destroy',
+  'GET /user/edit/:id': 'user.edit',
+  'POST /user/update/:id': 'user.update',
+  'GET /user/dashboard': { view: 'pages/user/dashboard' },
+
+
+  'GET /ressourcen/show': { view: 'pages/ressources/show' },
   'GET /studiengang ': 'studiengang.show',
   'GET /studiengang/show ': { controller: 'StudiengangController', action: 'show' },
   'GET /studiengang/new': { view: 'pages/studiengang/new' },
@@ -54,7 +67,7 @@ module.exports.routes = {
   'POST /studiengang/edit/:id': 'studiengang.editOne',
   // 'POST /studiengang/update/:id': { controller: 'StudiengangController', action: 'updateOne' },
 
-  // '/ressourcen': {view: 'pages/ressourcen'},
+
   'GET /wirtschaftsinformatik': { controller: 'WinController', action: 'show' },
   'GET /download/skript/:id': 'skript.download',
   'GET /download/anleitung/:id': 'anleitung.download',
@@ -66,7 +79,7 @@ module.exports.routes = {
   'POST /skript/create': 'skript.create',
   'POST /skript/update/:id': 'skript.updateOne',
   'GET /skript/new': { view: 'pages/skript/new' },
-  
+
 
 
   'GET /anleitung/edit ': { controller: 'AnleitungController', action: 'find' },
@@ -83,7 +96,7 @@ module.exports.routes = {
 
 
   'GET /search': 'SearchController.search',
-  'POST /upload/new':  'upload.save'
+  'POST /upload/new': 'upload.save'
 
 
   /***************************************************************************

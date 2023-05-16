@@ -6,23 +6,22 @@
                 <div class="card">
                     <div class="card-header">Benutzerinformation</div>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Vorname: <%= benutzer.vorname %>
+                        <li class="list-group-item">Vorname: <%= user.vorName %>
                         </li>
-                        <li class="list-group-item">Nachname: <%= benutzer.nachname %>
+                        <li class="list-group-item">Nachname: <%= user.nachName %>
                         </li>
-                        <li class="list-group-item">Nutzername: <%= benutzer.nutzername %>
+                        <li class="list-group-item">Nutzername: <%= user.userName %>
                         </li>
-                        <li class="list-group-item">Email: <%= benutzer.email %>
+                        <li class="list-group-item">Email: <%= user.emailAddress %>
                         </li>
-                        <li class="list-group-item">Geburtsdatum: <%= benutzer.geburtsdatum %>
+                        <li class="list-group-item">Geburtsdatum: <%= user.birthday %>
                         </li>
-                        <li class="list-group-item">Rolle: <%= benutzer.role.name %>
+        
+                        <li class="list-group-item">Studiengang: <%= user.studiengang.name %>
                         </li>
-                        <li class="list-group-item">Studiengang: <%= benutzer.studiengang.name %>
-                        </li>
-                        <% if (benutzer.role.name==='Admin' ) { %>
+                        <% if (user.isSuperAdmin) { %>
                             <li class="list-group-item">
-                                <a href="/user" class="btn btn-primary">Sie sind Administrator, weitere Benutzer
+                                <a href="/" class="btn btn-primary">Sie sind Administrator, weitere Benutzer
                                     verwalten?</a>
                             </li>
                             <% } %>
@@ -37,5 +36,5 @@
                         ></a></div>
             </div>
         </div>
-    </div>
+      </div>
 </div>

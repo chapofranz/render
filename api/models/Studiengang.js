@@ -2,8 +2,8 @@ module.exports = {
     attributes: {
         name: { type: 'string', columnType: 'varchar(80)', required: true },
         kuerzel: { type: 'string', columnType: 'varchar(80)', unique: true, required: true },
-        benutzer: {
-            collection: 'benutzer',
+        user: {
+            collection: 'user',
             via: 'studiengang'
         },
         dozent: {

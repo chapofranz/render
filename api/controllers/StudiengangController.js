@@ -6,21 +6,21 @@ module.exports = {
   create: async function (req, res) {
     sails.log.debug("Erstellt Studiengang....");
     let params = req.allParams();
-  
+
     sails.log.debug("Request params: ", params);
     sails.log.debug("Request body: ", req.body);
-  
-  
+
+
     if (!params.kuerzel) {
       sails.log.error("Fehlender Wert für kuerzel");
       return res.badRequest("Fehlender Wert für kuerzel");
     }
-  
+
     sails.log.debug("Studiengang-Modell: ", Studiengang)
     await Studiengang.create(params);
     res.redirect('/studiengang');
   },
-  
+
 
   findOne: async function (req, res) {
     let id = req.param('id');
@@ -64,11 +64,11 @@ module.exports = {
     let currentUserId = req.session.userId;
     let currentUserRole = req.session.userRole;
     sails.log.debug("CurrentUserId", currentUserId)
-            sails.log.debug("CurrentUserRole", currentUserRole)
+    sails.log.debug("CurrentUserRole", currentUserRole)
 
 
     try {
-      currentUser = await Benutzer.findOne({id: currentUserId}).populate('role');
+      currentUser = await User.findOne({ id: currentUserId })
       const studiengaenge = await Studiengang.find();
       return res.view('pages/studiengang/show', { studiengaenge, currentUser });
     } catch (err) {
@@ -95,28 +95,28 @@ module.exports = {
     sails.log.debug("List all Studiengange....")
     let studiengaenge;
     if (req.query.q && req.query.q.length > 0) {
-        studiengaenge = await Studiengang.find({
-            name: {
-                'contains': req.query.q
-            }
-        })
+      studiengaenge = await Studiengang.find({
+        name: {
+          'contains': req.query.q
+        }
+      })
     } else {
-        studiengaenge= await Studiengang.find();
+      studiengaenge = await Studiengang.find();
     }
     res.view('pages/studiengang/index', { studiengaenge: studiengaenge });
-},
+  },
 
-destroyOne: async function (req, res) {
-  sails.log.debug("Destroy single Studiengang....")
-  let id = req.params.id;
-  await Studiengang.destroyOne({ id: id });
-  res.redirect('/studiengang/edit');
-},
+  destroyOne: async function (req, res) {
+    sails.log.debug("Destroy single Studiengang....")
+    let id = req.params.id;
+    await Studiengang.destroyOne({ id: id });
+    res.redirect('/studiengang/edit');
+  },
 
-updateOne: async function (req, res) {
-  sails.log.debug("Update single Studiengang....")
-  let studiengang = await Studiengang.updateOne({ id: req.params.id }).set(req.body);
-  res.redirect('/studiengang');
-},
+  updateOne: async function (req, res) {
+    sails.log.debug("Update single Studiengang....")
+    let studiengang = await Studiengang.updateOne({ id: req.params.id }).set(req.body);
+    res.redirect('/studiengang');
+  },
 
 };

@@ -9,6 +9,10 @@ module.exports = {
 
   inputs: {
 
+    userName: {
+      type: 'string'
+    },
+
     vorName: {
       type: 'string'
     },
@@ -25,6 +29,11 @@ module.exports = {
     emailAddress: {
       type: 'string'
     },
+
+    studiengang: {
+      type: 'string'
+    },
+
 
   },
 
@@ -44,7 +53,7 @@ module.exports = {
   },
 
 
-  fn: async function ({ vorName, nachName, emailAddress, birthday }) {
+  fn: async function ({ userName, vorName, nachName, emailAddress, birthday, studiengang }) {
 
     var newEmailAddress = emailAddress;
     if (newEmailAddress !== undefined) {
@@ -89,9 +98,12 @@ module.exports = {
     // Start building the values to set in the db.
     // (We always set the fullName if provided.)
     var valuesToSet = {
+      userName,
       vorName,
       nachName,
-      birthday
+      emailAddress,
+      birthday,
+      studiengang
     };
 
 

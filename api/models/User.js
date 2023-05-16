@@ -80,9 +80,7 @@ module.exports = {
     },
 
     studiengang: {
-
-      model: 'studiengang',
-    
+      model: 'studiengang'
     },
 
     isSuperAdmin: {

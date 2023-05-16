@@ -30,16 +30,7 @@ module.exports.seed = {
 
     ];
 
-    const roles = [
-      {
-        name: 'Admin',
-        beschreibung: 'Administrator der Anwendung',
-      },
-      {
-        name: 'Benutzer',
-        beschreibung: 'Standardbenutzer der Anwendung',
-      },
-    ];
+   
 
     const skripte = [
       {
@@ -222,11 +213,6 @@ module.exports.seed = {
 
     for (const studiengang of studiengaenge) {
       await Studiengang.findOrCreate({ kuerzel: studiengang.kuerzel }, studiengang);
-    }
-
-
-    for (const role of roles) {
-      await Role.findOrCreate({ name: role.name }, role);
     }
 
     for (const skript of skripte) {

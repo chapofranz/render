@@ -11,34 +11,46 @@
         <span class="float-sm-right">
           <a style="width: 150px" class="btn btn-sm btn-outline-info" href="/account/profile">Edit profile</a>
         </span>
+        <% if (req.me.isSuperAdmin) { %>
+        <span class="float-sm-left">
+          <a style="width: 150px" class="btn btn-sm btn-outline-info" href="/admin/profiles" >Edit profiles</a>
+        </span>
+        <% } %>
+      
       </div>
     </div>
     <div class="row">
-      <div class="col-3">Name:</div>
-      <div class="col"><strong><%= req.me.fullName %></strong></div>
+      <div class="col-3">Nutzernane:</div>
+      <div class="col"><strong><%= user.userName %></strong></div>
     </div>
     <div class="row">
       <div class="col-3">Email:</div>
       <div class="col">
-        <strong><%= req.me.emailAddress %></strong>
+        <strong><%= user.emailAddress %></strong>
       </div>
     </div>
     <div class="row">
-      <div class="col-3">Height:</div>
+      <div class="col-3">Vorname:</div>
       <div class="col">
-        <strong><%= req.me.height %> cm</strong>
+        <strong><%= user.vorName %> </strong>
       </div>
     </div>
     <div class="row">
-      <div class="col-3">Weight:</div>
+      <div class="col-3">Nachname:</div>
       <div class="col">
-        <strong><%= req.me.weight %> kg</strong>
+        <strong><%= user.nachName %> </strong>
       </div>
     </div>
     <div class="row">
       <div class="col-3">Birthday:</div>
       <div class="col">
-        <strong><%= req.me.birthday %></strong>
+        <strong><%= user.birthday %></strong>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-3">Studiengang:</div>
+      <div class="col">
+        <strong><%= user.studiengang.name %></strong>
       </div>
     </div>
     <hr/>
