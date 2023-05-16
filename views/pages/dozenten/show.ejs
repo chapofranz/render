@@ -2,4 +2,16 @@
     <div class="headline">
         <h1>Dozenten</h1>
     </div>
+    <div class="col-auto">
+        <ul class="unordered-lists">
+            <% for (let i = 0; i < dozenten.length; i++) { %>
+                <li class="dozenten-list col-3">
+                    <strong> Name:</strong> <%= dozenten[i].vorname  %> <%= dozenten[i].nachname %> <br>
+                    <strong> Email:</strong> <%= dozenten[i].email %> <br>
+                    <strong> Telefonnummer:</strong> <%= dozenten[i].telefonnummer %> <br>
+                    <strong> Studiengang:</strong> <%= dozenten[i].studiengang %> <br>
+                </li>
+            <% } %>
+        </ul>
+    </div>
 </div>

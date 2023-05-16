@@ -11,7 +11,7 @@
             </tr>
         </thead>
         <tbody>
-            <% anleitungen.forEach(function(anleitung) { %>
+            <% anleitungen.forEach(function(Anleitung) { %>
                 <tr>
                     <td>
                         <%= anleitung.id %>
@@ -38,11 +38,10 @@
                         <form action="/anleitung/edit/<%= anleitung.id %>" method ="POST">
                            <input class="btn btn-warning" type="submit" value="Edit"
                             onclick="return confirm('Sind Sie sicher, dass Sie diese Anleitung bearbeiten möchten?');">
-                        </form>   
+                        </form>
                     </td>
                 </tr>
                 <% }); %>
         </tbody>
     </table>
-    <a class="btn btn-primary" href="/anleitung/new">Hinzufügen</a>
 </div>

@@ -66,7 +66,7 @@ module.exports.routes = {
   'POST /skript/create': 'skript.create',
   'POST /skript/update/:id': 'skript.updateOne',
   'GET /skript/new': { view: 'pages/skript/new' },
-  
+
 
 
   'GET /anleitung/edit ': { controller: 'AnleitungController', action: 'find' },
@@ -76,9 +76,17 @@ module.exports.routes = {
   'POST /anleitung/update/:id': 'anleitung.updateOne',
   'GET /anleitung/new': { view: 'pages/anleitung/new' },
 
+  // 'GET /dozenten/edit ': { controller: 'DozentenController', action: 'find' },
+  // 'POST /dozenten/destroy/:id': 'dozent.destroyOne',
+  // 'POST /dozenten/edit/:id': 'dozent.editOne',
+  // 'POST /dozenten/create': 'dozenten.create',
+  // 'POST /dozenten/update/:id': 'dozent.updateOne',
+  // 'GET /dozenten/new': { view: 'pages/dozenten/new' },
+  // 'GET /dozenten': { view: 'pages/dozenten/show' },
+  'GET /dozenten': 'DozentenController.list',
+
   'GET /marketplace': { view: 'pages/marketplace/show' },
   'GET /chat': { view: 'pages/chat/show' },
-  'GET /dozenten': { view: 'pages/dozenten/show' },
   'GET /upload': { controller: 'UploadController', action: 'new' },
 
 

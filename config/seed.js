@@ -213,6 +213,23 @@ module.exports.seed = {
 
       }
 
+    ]
+    const dozenten = [
+      {
+        email: 'johannes.schneider@hteg-konstanz.de',
+        vorname: 'Johannes',
+        nachname: 'Schneider',
+        telefonnummer: '+49 7531 206-9043',
+        studiengang: []
+      },
+
+      {
+        email: 'john@example.com',
+        vorname: 'John',
+        nachname: 'Doe',
+        telefonnummer: '123456789',
+        studiengang: []
+      }
 
     ]
 
@@ -237,6 +254,9 @@ module.exports.seed = {
       await Anleitung.findOrCreate({ name: anleitung.name }, anleitung);
     }
 
+    for (const dozent of dozenten) {
+      await Dozent.findOrCreate({nachname: dozent.nachname}, dozent);
+    }
   }
 };
 
