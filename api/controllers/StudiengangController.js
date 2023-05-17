@@ -62,15 +62,15 @@ module.exports = {
 
     let currentUser;
     let currentUserId = req.session.userId;
-    let currentUserRole = req.session.userRole;
+  
     sails.log.debug("CurrentUserId", currentUserId)
-    sails.log.debug("CurrentUserRole", currentUserRole)
+   
 
 
     try {
       currentUser = await User.findOne({ id: currentUserId })
       const studiengaenge = await Studiengang.find();
-      return res.view('pages/studiengang/show', { studiengaenge, currentUser });
+      return res.view('pages/studiengang/show', { studiengaenge, user: currentUser });
     } catch (err) {
       return res.serverError(err);
     }

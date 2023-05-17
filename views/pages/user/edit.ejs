@@ -1,5 +1,5 @@
 <div class="container">
-    <form action="/user/update/<%=user.id%>" method="post">
+    <form action="/user/<%=user.id%>/update" method="post">
         <div>
             <div class="form-group">
                 <label class="col-form-label-lg">Vorname</label>
@@ -14,8 +14,23 @@
                 <input type="text" maxlength="255" class="form-control" size="40" value="<%= user.userName %>" name="userName">
             </div>
             <div class="form-group">
-                <label class="col-form-label-lg">email</label>
-                <input type="text" value="<%= user.email %>"maxlength="255" class="form-control" size="80" name="email">
+                <label class="col-form-label-lg">Email</label>
+                <input type="email" value="<%= user.emailAddress %>"maxlength="255" class="form-control" size="80" name="emailAddress">
+            </div>
+            <div class="form-group">
+                <label class="col-form-label-lg">Geburtstag</label>
+                <input type="text" value="<%= user.birthday %>"maxlength="255" class="form-control" size="80" name="birthday">
+            </div>
+            <div class="form-group">
+                <label for="studiengang" class="col-form-label-lg">Studiengang</label>
+                <select name="studiengang" id="studiengang" class="form-select" required>
+                    <option value="<%= user.studiengang %>">--Wählen einen Studiengang aus--</option>
+                    <% studiengaenge.forEach(function(studiengang) { %>
+                        <option value="<%= studiengang.id %>">
+                            <%= studiengang.name %> (<%= studiengang.id %>)
+                        </option>
+                        <% }); %>
+                </select>
             </div>
         </div>
         <button type="submit" class="btn btn-primary">Aktualisieren</button>

@@ -7,11 +7,11 @@
     <div class="wrapper-grid">
         <form class="wrapper upload" id ="upload-form" action="/upload/new" method="POST">
             <div class="nested">
-                <label for="name">Name:</label>
+                <label for="name">Name</label>
                 <input id="Dateiname-input" type="text" placeholder="Dateiname" name="name" class="upload-form">
             </div>
             <div class="nested">
-                <label for="kategorie">Kategorie:</label>
+                <label for="kategorie">Kategorie</label>
                 <select id="Kategorie-selector" name="kategorie" class="nested upload-form">
                     <option value="Bitte auswählen">Bitte auswählen</option>
                     <option value="Skript">Skript</option>
@@ -19,7 +19,7 @@
                 </select>
             </div>
             <div class="nested">
-                <label for="studiengang">Studiengang:</label>
+                <label for="studiengang">Studiengang</label>
                 <select name="studiengang" id="studiengang" class="upload-form" required>
                     <option value="Studiengang wählen">Wählen einen Studiengang aus</option>
                     <% studiengaenge.forEach(function(studiengang) { %>
@@ -30,7 +30,7 @@
                 </select>
             </div>
             <div class="nested">
-                <label for="modul">Modul:</label>
+                <label for="modul">Modul</label>
                 <select name="modul" id="modul" class="upload-form" required>
                     <option value="Modul">Wählen ein Modul aus</option>
                     <% module.forEach(function(modul) { %>
@@ -41,15 +41,15 @@
                 </select>
             </div>
             <div class="nested">
-                <label for="beschreibung">Beschreibung:</label>
+                <label for="beschreibung">Beschreibung</label>
                 <input id="Beschreibung-input" type="text" placeholder="Beschreibung des Inhalts" name="beschreibung" class="upload-form">
             </div>
             <div class="nested">
-                <label for="author">Author:</label>
+                <label for="author">Author</label>
                 <input id="Author-input" type="text" placeholder="Dein Name (optional)" name="author" class="upload-form">
             </div>
             <div class="nested">
-                <label for="pfad">Dokument:</label>
+                <label for="pfad">Dokument</label>
                         <input id="Dokument-selection" type="text" placeholder="Datei Pfad eingeben" name="pfad">
             </div>
             <div class="nested">

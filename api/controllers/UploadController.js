@@ -5,9 +5,8 @@ module.exports = {
     new: async function (req, res) {
         try {
             const studiengaenge = await Studiengang.find();
-            const roles = await Role.find();
             const module = await Modul.find();
-            return res.view('pages/upload', { studiengaenge, roles, module });
+            return res.view('pages/ressources/upload', { studiengaenge, module });
         } catch (err) {
             return res.serverError(err);
         }

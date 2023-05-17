@@ -43,22 +43,20 @@ module.exports.routes = {
   'POST  /updatePassword': { action: 'account/update-password' },
 
   'GET /admin': {action: 'admin/view-edit-all'},
-  'GET /admin/profiles': {action: 'admin/view-edit-profiles'},
+  
 
 
 
   'POST /user': 'user.create',
   'GET /user': 'user.find',
-  // 'GET /user/show/:id': 'user.findOne',
-  'GET /user/delete/:id': 'user.destroy',
-  'GET /user/edit/:id': 'user.edit',
-  'POST /user/update/:id': 'user.update',
-  'GET /user/dashboard': { view: 'pages/user/dashboard' },
-
+  'POST /user/:id/delete': 'user.destroy',
+  'GET /user/:id/edit': 'user.edit',
+  'POST /user/:id/update/': 'user.update',
 
   'GET /ressourcen/show': { view: 'pages/ressources/show' },
-  'GET /studiengang ': 'studiengang.show',
-  'GET /studiengang/show ': { controller: 'StudiengangController', action: 'show' },
+
+  'GET /studiengang ': 'studiengang.show', //! funkts
+
   'GET /studiengang/new': { view: 'pages/studiengang/new' },
   'GET /studiengang/edit ': { controller: 'StudiengangController', action: 'find' },
 
@@ -68,7 +66,7 @@ module.exports.routes = {
   // 'POST /studiengang/update/:id': { controller: 'StudiengangController', action: 'updateOne' },
 
 
-  'GET /wirtschaftsinformatik': { controller: 'WinController', action: 'show' },
+  'GET /wirtschaftsinformatik': { action: 'wirtschaftsinformatik/show' },
   'GET /download/skript/:id': 'skript.download',
   'GET /download/anleitung/:id': 'anleitung.download',
 
@@ -92,7 +90,7 @@ module.exports.routes = {
   'GET /marketplace': { view: 'pages/marketplace/show' },
   'GET /chat': { view: 'pages/chat/show' },
   'GET /dozenten': { view: 'pages/dozenten/show' },
-  'GET /upload': { controller: 'UploadController', action: 'new' },
+  'GET /ressources/upload': { controller: 'UploadController', action: 'new' },
 
 
   'GET /search': 'SearchController.search',

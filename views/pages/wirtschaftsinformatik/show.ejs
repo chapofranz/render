@@ -8,7 +8,7 @@
         Du hast eigene Ressourcen und denkst andere Studenten könnten davon profitieren?<br>
         Worauf wartest du dann noch?<br> Lade sie jetzt hoch und helfe anderen Studenten bei ihrem Studium.
         <div class="container-flex studiums-auswahl">
-            <a href="/upload">
+            <a href="/ressources/upload">
                 <button class="yellow-button">Weiter zum Upload ></button>
             </a>
         </div>
@@ -25,9 +25,9 @@
                     </a>
                 </li>
                 <% }); %>
-                <% if (currentUser.role.name === 'Admin') { %>
+                <% if (req.me.isSuperAdmin) { %>
                     <div class = "col-12">
-                    <a href="/skript/edit" class="btn btn-sm btn-secondary col-6 offset-3" id ="studiengang-element">Skript Edit</a>
+                    <a href="/admin" class="btn btn-sm btn-secondary col-6 offset-3" id ="studiengang-element">Skript Edit</a>
                     </div>
                     <% } %>
 
@@ -45,9 +45,9 @@
                     </a>
                 </li>
                 <% }); %>
-                <% if (currentUser.role.name === 'Admin') { %>
+                <% if (req.me.isSuperAdmin) { %>
                     <div class ="col-12">
-                    <a href="/anleitung/edit" class="btn btn-sm btn-secondary col-6 offset-3" id ="studiengang-element">Anleitung Edit</a>
+                    <a href="/admin" class="btn btn-sm btn-secondary col-6 offset-3" id ="studiengang-element">Anleitung Edit</a>
                 </div>
                 <% } %>
         </ul>
