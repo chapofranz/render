@@ -33,12 +33,20 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="sign-up-button text-center">
-                            <div class="button"><a class="sec-button-own" href="/benutzer/new">Kostenlos
-                                    Account
-                                    erstellen
-                                    ></a></div>
-                        </div>
+                        <% if (req.me) { %>
+                            <div class="sign-up-button text-center">
+                                <div class="button"><a class="sec-button-own" href="/account"> Accountverwaltung
+                                        ></a></div>
+                            </div>
+                            <% } else { %>
+                                <div class="sign-up-button text-center">
+                                    <div class="button"><a class="sec-button-own" href="/signup">Kostenlos
+                                            Account
+                                            erstellen
+                                            ></a></div>
+
+                                </div>
+                                <% } %>
                     </div>
                 </div>
 
@@ -47,7 +55,7 @@
         <div class="col-12 col-lg-3 d-flex flex-column">
             <div class="row">
                 <div class="col-12 libraryPicture-container">
-                    <a href="http://www.google.com">
+                    <a href="/">
                         <img src="/images/library.jpg" alt="library" class="img-fluid d-lg-none"><!-- Mobile-->
                         <img src="/images/library-desktop.jpg" alt="test-desktop" class="img-fluid d-none d-lg-block">
                         <!-- Desktop -->

@@ -11,14 +11,26 @@ module.exports = {
 
     success: {
       viewTemplatePath: 'pages/account/edit-profile',
-    }
+    },
 
+    notFound: {
+      description: 'No Studiengaenge found in the database', 
+      responseType: 'notFound'
+    }
   },
 
 
   fn: async function () {
 
-    return {};
+
+    const studiengaenge = await Studiengang.find();
+   
+   
+    if (!studiengaenge) {
+      throw 'notFound';
+    }
+
+    return { studiengaenge: studiengaenge };
 
   }
 
