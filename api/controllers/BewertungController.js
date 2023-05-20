@@ -2,75 +2,133 @@ const Sails = require("sails/lib/app/Sails");
 
 module.exports = {
 
-  create: async function (req, res) {
 
+  create: async function (req, res) {
     const { userId, itemId, bewertung, type } = req.body;
 
+    if (type && typeof type === "string") {
+      // Du kannst den String "type" hier verwenden
+      console.log("Der Wert von 'type' ist:", type);
+    } else {
+      console.log("'type' ist nicht vorhanden oder kein String");
+    }
 
-    console.log("Received userId: ", userId);
-    console.log("Received itemId: ", itemId);
-    console.log("Received bewertung: ", bewertung);
-    console.log("Received type: ", type);
+
 
     let bestehendeBewertung, bewertungen;
     let durchschnittBewertung, gesamtBewertungen;
 
-    if (type==="skript") {
-      try {
-        bestehendeBewertung = await Bewertung.findOne({ user: userId, skript: itemId });
-      } catch (error) {
-        console.log("Fehler beim Abrufen der Bewertung - Skript : ", error)
-      }
+    if (type === "skripte") {
 
-      if (bestehendeBewertung) {
-        await Bewertung.updateOne({ id: bestehendeBewertung.id }).set({ wert: bewertung });
-      } else {
-        await Bewertung.create({ wert: bewertung, user: userId, skript: itemId });
-      }
+      console.log ("wir sind im skript block!!")
+    // Suchen einer bestehenden Bewertung vom gleichen Benutzer für das gleiche Skript
+    bestehendeBewertung = await Bewertung.findOne({ user: userId, skript: itemId });
 
-      try {
-      bewertungen = await Bewertung.find({ skript: itemId });
-      } catch (error) {
-        console.log("Fehler beim Abrufen der Bewertungen - Skript: ", error)
-      }
-
-      gesamtBewertungen = bewertungen.reduce((sum, bewertung) => sum + bewertung.wert, 0);
-      durchschnittBewertung = gesamtBewertungen / bewertungen.length;
-
-      await Skript.updateOne({ id: itemId }).set({ averageRating: durchschnittBewertung });
-
-    } else if (type==="anleitung") {
-      try {
-        bestehendeBewertung = await Bewertung.findOne({ user: userId, anleitung: itemId });
-      } catch (error) {
-        console.log("Fehler beim Abrufen der Bewertung: ", error);
-      }
-      
-      if (bestehendeBewertung) {
-        await Bewertung.updateOne({ id: bestehendeBewertung.id }).set({ wert: bewertung });
-      } else {
-        await Bewertung.create({ wert: bewertung, user: userId, anleitung: itemId });
-      }
-
-      try {
-        bewertungen = await Bewertung.find({ anleitung: itemId });
-      } catch (error) {
-        console.log("Fehler beim Abrufen der Bewertungen - Anleitung: ", error)
-      }
-
-      gesamtBewertungen = bewertungen.reduce((sum, bewertung) => sum + bewertung.wert, 0);
-      durchschnittBewertung = gesamtBewertungen / bewertungen.length;
-
-      await Anleitung.updateOne({ id: itemId }).set({ averageRating: durchschnittBewertung });
+    if (bestehendeBewertung) {
+      // Wenn eine Bewertung existiert, aktualisieren Sie sie
+      await Bewertung.updateOne({ id: bestehendeBewertung.id }).set({ wert: bewertung });
+    } else {
+      // Erstellen einer neuen Bewertung, falls keine existiert
+      await Bewertung.create({
+        wert: bewertung,
+        user: userId,
+        skript: itemId
+      });
     }
+
+    // Alle Bewertungen für das Skript holen 
+    bewertungen = await Bewertung.find({ skript: itemId });
+
+    // Berechnung Durchschnittsbewertung
+    gesamtBewertungen = bewertungen.reduce((sum, bewertung) => sum + bewertung.wert, 0);
+    durchschnittBewertung = gesamtBewertungen / bewertungen.length;
+
+    // Durchschnittsbewertung aktualisieren
+    await Skript.updateOne({ id: itemId }).set({ averageRating: durchschnittBewertung });
+  } else if (type==="anleitungen") {
+    console.log("wir sind in anleitung!")
+
+    //  selber code für anleitung!!
+  }
 
     console.log("bestehendeBewertung: ", bestehendeBewertung);
     console.log("bewertungen: ", bewertungen);
     console.log("gesamtBewertungen: ", gesamtBewertungen);
     console.log("durchschnittBewertung: ", durchschnittBewertung);
 
+    // Zurücksenden der Durchschnittsbewertung
     return res.json({ averageRating: durchschnittBewertung });
   },
+
+  // create: async function (req, res) {
+
+  //   const { userId, itemId, bewertung, type } = req.body;
+
+
+  //   console.log("Received userId: ", userId);
+  //   console.log("Received itemId: ", itemId);
+  //   console.log("Received bewertung: ", bewertung);
+  //   console.log("Received type: ", type);
+
+  //   let bestehendeBewertung, bewertungen;
+  //   let durchschnittBewertung, gesamtBewertungen;
+
+  //   if (type==="skripte") {
+  //     try {
+  //       bestehendeBewertung = await Bewertung.findOne({ user: userId, skript: itemId });
+  //     } catch (error) {
+  //       console.log("Fehler beim Abrufen der Bewertung - Skript : ", error)
+  //     }
+
+  //     if (bestehendeBewertung) {
+  //       await Bewertung.updateOne({ id: bestehendeBewertung.id }).set({ wert: bewertung });
+  //     } else {
+  //       await Bewertung.create({ wert: bewertung, user: userId, skript: itemId });
+  //     }
+
+  //     try {
+  //     bewertungen = await Bewertung.find({ skript: itemId });
+  //     } catch (error) {
+  //       console.log("Fehler beim Abrufen der Bewertungen - Skript: ", error)
+  //     }
+
+  //     gesamtBewertungen = bewertungen.reduce((sum, bewertung) => sum + bewertung.wert, 0);
+  //     durchschnittBewertung = gesamtBewertungen / bewertungen.length;
+
+  //     await Skript.updateOne({ id: itemId }).set({ averageRating: durchschnittBewertung });
+
+  //   } else if (type==="anleitungen") {
+  //     try {
+  //       bestehendeBewertung = await Bewertung.findOne({ user: userId, anleitung: itemId });
+  //     } catch (error) {
+  //       console.log("Fehler beim Abrufen der Bewertung: ", error);
+  //     }
+
+  //     if (bestehendeBewertung) {
+  //       await Bewertung.updateOne({ id: bestehendeBewertung.id }).set({ wert: bewertung });
+  //     } else {
+  //       await Bewertung.create({ wert: bewertung, user: userId, anleitung: itemId });
+  //     }
+
+  //     try {
+  //       bewertungen = await Bewertung.find({ anleitung: itemId });
+  //     } catch (error) {
+  //       console.log("Fehler beim Abrufen der Bewertungen - Anleitung: ", error)
+  //     }
+
+  //     gesamtBewertungen = bewertungen.reduce((sum, bewertung) => sum + bewertung.wert, 0);
+  //     durchschnittBewertung = gesamtBewertungen / bewertungen.length;
+
+  //     await Anleitung.updateOne({ id: itemId }).set({ averageRating: durchschnittBewertung });
+  //   }
+
+  //   console.log("bestehendeBewertung: ", bestehendeBewertung);
+  //   console.log("bewertungen: ", bewertungen);
+  //   console.log("gesamtBewertungen: ", gesamtBewertungen);
+  //   console.log("durchschnittBewertung: ", durchschnittBewertung);
+
+  //   return res.json({ averageRating: durchschnittBewertung });
+  // },
 
   findOne: async function (req, res) {
     let id = req.param('id');
@@ -122,7 +180,7 @@ module.exports = {
       res.serverError("Fehler beim Löschen der Bewertung");
     }
   },
-  
+
   find: async function (req, res) {
     sails.log.debug("List all bewertungen....")
     let bewertungen;
