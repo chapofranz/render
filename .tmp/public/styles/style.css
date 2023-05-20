@@ -523,6 +523,32 @@ ul.statusbar-text {
   transition: 0.3s;
 }
 
+.card {
+  background: linear-gradient(135deg, #5A9, var(--secondary));
+}
+
+.star {
+  cursor: pointer;
+}
+
+.star:hover,
+.star.star-hover,
+.star.star-selected {
+  color: gold;
+}
+
+.card-title {
+  font-size: 1.5em;
+}
+
+.stars {
+  font-size: 1.2em;
+}
+
+.card-subtitle {
+  font-size: 0.9em;
+}
+
 @media screen and (min-width: 768px) {
 
   .social-media-icons-size {

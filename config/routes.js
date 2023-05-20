@@ -8,6 +8,8 @@
  * https://sailsjs.com/anatomy/config/routes-js
  */
 
+const buildOntologyAndRunAutoMigrations = require("sails-hook-orm/lib/build-ontology-and-run-auto-migrations");
+
 // const StudiengangController = require("../api/controllers/StudiengangController");
 // const UploadController = require("../api/controllers/UploadController");
 
@@ -23,30 +25,28 @@ module.exports.routes = {
   ***************************************************************************/
   '/': { view: 'pages/homepage' },
 
-  'GET /signup': { action: 'entrance/view-signup' },
-  'GET /login': { action: 'entrance/view-login' },
+  'GET /signup':            { action: 'entrance/view-signup' },
+  'GET /login':             { action: 'entrance/view-login' },
 
 
-  'GET /account': { action: 'account/view-account-overview' },
-  'GET /account/password': { action: 'account/view-edit-password' },
-  'GET /account/profile': { action: 'account/view-edit-profile' },
+  'GET /account':           { action: 'account/view-account-overview' },
+  'GET /account/password':  { action: 'account/view-edit-password' },
+  'GET /account/profile':   { action: 'account/view-edit-profile' },
 
   //  ╔═╗╔═╗╦  ╔═╗╔╗╔╔╦╗╔═╗╔═╗╦╔╗╔╔╦╗╔═╗
   //  ╠═╣╠═╝║  ║╣ ║║║ ║║╠═╝║ ║║║║║ ║ ╚═╗
   //  ╩ ╩╩  ╩  ╚═╝╝╚╝═╩╝╩  ╚═╝╩╝╚╝ ╩ ╚═╝
   // Note that, in this app, these API endpoints may be accessed using the `Cloud.*()` methods
   // from the Parasails library, or by using those method names as the `action` in <ajax-form>.
-  'GET /logout': { action: 'account/logout' },
-  'POST  /login': { action: 'entrance/login' },
-  'POST  /signup': { action: 'entrance/signup' },
-  'POST  /updateProfile': { action: 'account/update-profile' },
-  'POST  /updatePassword': { action: 'account/update-password' },
 
-  'GET /admin': {action: 'admin/view-edit-all'},
+  'GET /logout':            { action: 'account/logout' },
+  'POST  /login':           { action: 'entrance/login' },
+  'POST  /signup':          { action: 'entrance/signup' },
+  'POST  /updateProfile':   { action: 'account/update-profile' },
+  'POST  /updatePassword':  { action: 'account/update-password' },
+
+  'GET /admin':             {action: 'admin/view-edit-all'},
   
-
-
-
   'POST /user': 'user.create',
   'GET /user': 'user.find',
   'POST /user/:id/delete': 'user.destroy',
@@ -94,7 +94,8 @@ module.exports.routes = {
 
 
   'GET /search': 'SearchController.search',
-  'POST /upload/new': 'upload.save'
+  'POST /upload/new': 'upload.save',
+  'POST /bewertung/create': 'bewertung.create'
 
 
   /***************************************************************************

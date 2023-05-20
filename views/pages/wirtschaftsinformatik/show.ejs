@@ -1,55 +1,122 @@
-<div class="container-flex main-container">
-    <div class="container-fluid headline">
-        <h1>
-            Wirtschaftsinformatik
-        </h1>
-    </div>
-    <div class="container-flex textbox" id="call-to-action-2">
-        Du hast eigene Ressourcen und denkst andere Studenten könnten davon profitieren?<br>
-        Worauf wartest du dann noch?<br> Lade sie jetzt hoch und helfe anderen Studenten bei ihrem Studium.
-        <div class="container-flex studiums-auswahl">
-            <a href="/ressources/upload">
-                <button class="yellow-button">Weiter zum Upload ></button>
-            </a>
-        </div>
-    </div>
-    <div class="container-flex top-10-downloads-headline">
-        <h1>Skripte</h1>
-    </div>
-    <div class="container-flex top-10-downloads">
-        <ul class="unordered-lists">
-            <% skripte.forEach(function(skript) { %>
-                <li class="list-items">
-                    <a href="/download/skript/<%= skript.id %>">
-                        <%= skript.name %> (Autor: <%= skript.author %>)
-                    </a>
-                </li>
-                <% }); %>
-                <% if (req.me.isSuperAdmin) { %>
-                    <div class = "col-12">
-                    <a href="/admin" class="btn btn-sm btn-secondary col-6 offset-3" id ="studiengang-element">Skript Edit</a>
-                    </div>
-                    <% } %>
-
-                </ul>
-    </div>
-    <div class="container-flex top-10-downloads-headline">
-        <h1>Anleitungen</h1>
-    </div>
-    <div class="container-flex top-10-downloads">
-        <ul class="unordered-lists">
-            <% anleitungen.forEach(function(anleitung) { %>
-                <li class="list-items">
-                    <a href="/download/anleitung/<%= anleitung.id %>">
-                        <%= anleitung.name %> (Autor: <%= anleitung.author %>)
-                    </a>
-                </li>
-                <% }); %>
-                <% if (req.me.isSuperAdmin) { %>
-                    <div class ="col-12">
-                    <a href="/admin" class="btn btn-sm btn-secondary col-6 offset-3" id ="studiengang-element">Anleitung Edit</a>
+<body>
+    <script> window.userId = '<%= req.me.id %>';
+    </script>
+    <div class="container-flex main-container">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h1 class="mt-5">Wirtschaftsinformatik</h1>
                 </div>
-                <% } %>
-        </ul>
+            </div>
+        </div>
+
+        <div class="container-flex textbox" id="call-to-action-2">
+            Du hast eigene Ressourcen und denkst andere Studenten könnten davon profitieren?<br>
+            Worauf wartest du dann noch?<br> Lade sie jetzt hoch und helfe anderen Studenten bei ihrem Studium.
+            <div class="container-flex studiums-auswahl">
+                <a href="/ressources/upload">
+                    <button class="yellow-button">Weiter zum Upload ></button>
+                </a>
+            </div>
+        </div>
+        <div id="app" class="container">
+            <div class="row">
+                <div v-for="(section, index) in sections" :key="index" class="col-12 col-lg-6">
+                    <div class="container-flex top-10-downloads-headline" @mouseover="section.showDropdown = true"
+                        @mouseout="section.showDropdown = false" @click="section.showContent = !section.showContent">
+                        <h1>{{ section.title }}</h1>
+                        <div v-show="section.showDropdown">
+                            <p>Dropdown-Inhalt für {{ section.title }}...</p>
+                        </div>
+                    </div>
+                    <div v-show="section.showContent">
+                        <div v-for="item in section.items" :key="item.id" class="card mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <a :href="'/download/' + section.title.toLowerCase() + '/' + item.id">{{ item.name
+                                        }}</a>
+                                    (Autor: {{ item.author }})
+                                </h5>
+                                <p class="card-text"> Bewertung: </p>
+                                <div class="stars mb-2">
+                                    <i v-for="n in 5" :key="n" class="star"
+                                        :class="{ 'star-selected': n <= item.averageRating, 'star-hover': n <= item.tempRating }"
+                                        @click="updateRating(n, item, section.title.toLowerCase())"
+                                        @mouseover="item.tempRating = n"
+                                        @mouseout="item.tempRating = item.averageRating">
+                                        ★
+                                    </i>
+                                </div>
+                                <p class="card-text" v-if="item.averageRating">Durchschnittsbewertung: {{
+                                    item.averageRating.toFixed(2) }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 
+          <% if (req.me.isSuperAdmin) { %>
+            <a href="/admin" class="btn btn-sm btn-secondary mb-3">{{ section.title }} Edit</a>
+          <% } %> -->
     </div>
-</div>
+</body>
+
+<script>
+    const userId = window.userId;
+    const createApp = Vue.createApp({
+        data() {
+            return {
+                sections: [
+                    {
+                        title: 'Skripte',
+                        showDropdown: false,
+                        showContent: false,
+                        items: JSON.parse('<%- JSON.stringify(skripte) %>').map(item => ({ ...item, tempRating: item.averageRating || 0 }))
+                    },
+                    {
+                        title: 'Anleitungen',
+                        showDropdown: false,
+                        showContent: false,
+                        items: JSON.parse('<%- JSON.stringify(anleitungen) %>').map(item => ({ ...item, tempRating: item.averageRating || 0 }))
+                    }
+                ]
+            }
+        },
+        methods: {
+            updateRating: function (rating, item, type) {
+                const data = {
+                    userId: window.userId,
+                    itemId: item.id,
+                    bewertung: rating,
+                    type: type
+                };
+                console.log("Sending data: ", data);
+
+                fetch('/bewertung/create', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        console.log("Received data: ", data);
+                        item.averageRating = data.averageRating;
+                    })
+                    .catch(e => {
+                        console.log("There was a problem with the fetch operation: " + e.message);
+                    });
+            }
+        }
+    });
+
+    createApp.mount('#app');
+</script>

@@ -1,6 +1,6 @@
 module.exports = async function showAll(req, res) {
-    if (!req.me || !req.me.isSuperAdmin) {
-        return res.unauthorized();
+    if (!req.me) {
+        return res.view('pages/entrance/login')
       }
 
       try {
