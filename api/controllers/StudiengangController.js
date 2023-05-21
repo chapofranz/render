@@ -62,11 +62,6 @@ module.exports = {
 
     let currentUser;
     let currentUserId = req.session.userId;
-  
-    sails.log.debug("CurrentUserId", currentUserId)
-   
-
-
     try {
       currentUser = await User.findOne({ id: currentUserId })
       const studiengaenge = await Studiengang.find();

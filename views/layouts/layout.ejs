@@ -59,19 +59,32 @@
         <div class="container-flex fixed-top">
             <nav class="navbar navbar-light bg-light">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="/">
+                    <a class="navbar-brand sc-image" href="/">
                         <img class="logo-image" src="/images/Studie-Connect.png" alt="logo">
                     </a>
                     <div class="lefty d-flex align-items-center">
-                        <a class="navbar-icon" href="/account">
+                        <% if (!req.me) { %>
+                        <a class="navbar-icon flex-item" href="/login">
+                            <span class="navbar-text">Login</span>
+                        </a>
+                        <a class="navbar-icon flex-item" href="/signup"> <!-- Signup Route -->
+                            <span class="navbar-text">Signup</span>
+                        </a>
+                        <% } else { %>
+                        <a class="navbar-icon flex-item" href="/logout">
+                            <span class="navbar-text">Logout</span>
+                        </a>
+                        <% } %>
+                        <a class="navbar-icon flex-item" href="/account">
                             <img class="user-profile-img" src="/images/guest.png" alt="user-profile">
                         </a>
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        <button class="navbar-toggler flex-item" type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
                             aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
                     </div>
+                    
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav ms-auto">
                             <li class="nav-item">
@@ -101,7 +114,7 @@
                                     <a class="nav-link" href="/admin">Admin</a>
                                 </li>
                                 <% } %>
-                                    <% if (req.me) { %>
+                                    <!-- <% if (req.me) { %>
                                         <li class="nav-item logout-button">
                                             <a href="/logout">
                                                 <button class="yellow-button" type="button">Logout</button></a>
@@ -111,7 +124,7 @@
                                                 <a href="/login">
                                                     <button class="yellow-button" type="button">Login</button></a>
                                             </li>
-                                            <% } %>
+                                            <% } %> -->
                         </ul>
                     </div>
                 </div>

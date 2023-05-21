@@ -10,7 +10,7 @@
             </div>
         </div>
 
-        <div class="container-flex textbox" id="call-to-action-2">
+        <div class="container textbox" id="call-to-action-2">
             Du hast eigene Ressourcen und denkst andere Studenten könnten davon profitieren?<br>
             Worauf wartest du dann noch?<br> Lade sie jetzt hoch und helfe anderen Studenten bei ihrem Studium.
             <div class="container-flex studiums-auswahl">
@@ -20,20 +20,25 @@
             </div>
         </div>
         <div id="app" class="container">
-            <div class="row">
-                <div v-for="(section, index) in sections" :key="index" class="col-12 col-lg-6">
+            <div class="d-flex flex-wrap">
+                <div v-for="(section, index) in sections" :key="index" class="col-12 col-sm-6 col-md-6 col-lg-6">
                     <div class="container-flex top-10-downloads-headline" @mouseover="section.showDropdown = true"
                         @mouseout="section.showDropdown = false" @click="section.showContent = !section.showContent">
                         <h1>{{ section.title }}</h1>
                         <div v-show="section.showDropdown">
-                            <p>Dropdown-Inhalt für {{ section.title }}...</p>
+                            <p>Klick zum {{ section.title }} anzeigen und bewerten</p>
                         </div>
                     </div>
                     <div v-show="section.showContent">
                         <div v-for="item in section.items" :key="item.id" class="card mb-3">
                             <div class="card-body">
-                                <h5 class="card-title">
+                                <!-- <h5 class="card-title">
                                     <a :href="'/download/' + section.title.toLowerCase() + '/' + item.id">{{ item.name
+                                        }}</a>
+                                    (Autor: {{ item.author }})
+                                </h5> -->
+                                <h5 class="card-title">
+                                    <a>{{ item.name
                                         }}</a>
                                     (Autor: {{ item.author }})
                                 </h5>

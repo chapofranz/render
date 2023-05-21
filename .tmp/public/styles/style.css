@@ -6,6 +6,17 @@
   cursor: default;
 }
 
+.navbar-text-large {
+  font-size: 18px;
+  transition: color 0.3s, text-decoration 0.3s;
+}
+
+.navbar-text-large:hover {
+  color: var(--secondary);
+  text-decoration: underline;
+
+}
+
 .nav-item.logout-button {
   margin-top: 10px;
 }
@@ -51,7 +62,7 @@ footer {
 h1 {
   font-family: 'Azerte mono', monospace;
   padding: 10px;
-  color: #000000;
+  color: #ffffff;
 
 }
 
@@ -143,6 +154,7 @@ a {
   background: linear-gradient(to bottom, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6));
   box-shadow: 0 0 20px 10px rgba(0, 0, 0, 0.5);
   font-size: 20px;
+  color: var(--primary);
 }
 
 @keyframes move-left-right {
@@ -549,6 +561,61 @@ ul.statusbar-text {
   font-size: 0.9em;
 }
 
+.flex-item {
+  flex-grow: 1;
+  box-sizing: border-box;
+}
+
+.navbar-icon {
+  margin-right: 1rem;
+  text-decoration: none;
+}
+
+
+.navbar-text {
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.navbar-text:hover {
+  color: var(--secondary)
+}
+
+@media (min-width: 435px) {
+  .navbar-text {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 385px) {
+  .sc-image {
+    display: none;
+  }
+
+  .lefty {
+    justify-content: space-between;
+  }
+
+  .flex-item {
+    flex-basis: 24%;
+    text-align: center;
+  }
+
+  .navbar-toggler {
+    flex-basis: 24%;
+  }
+
+  .user-profile-img {
+    width: 40px !important;
+  }
+
+  .navbar-toggler-icon {
+    height: 1.25em;
+  }
+
+
+}
+
 @media screen and (min-width: 768px) {
 
   .social-media-icons-size {
@@ -620,7 +687,7 @@ ul.statusbar-text {
     margin: 0px;
     cursor: default;
 
-  
+
   }
 
   @font-face {
@@ -684,6 +751,16 @@ ul.statusbar-text {
   border-color: lightblue;
 }
 
+.navbar-toggler {
+  transition: all 0.3s ease;
+  color: inherit;
+
+}
+
+.navbar-toggler:hover {
+  color: var(--secondary);
+}
+
 form.nosubmit {
   display: flex;
   align-content: center;
@@ -710,7 +787,10 @@ input.nosubmit {
   padding-right: 20px;
   margin: auto 10px;
   justify-content: flex-end;
+
 }
+
+
 
 .test-h1 {
   padding-top: 60px;
