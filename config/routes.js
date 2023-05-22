@@ -10,8 +10,6 @@
 
 const buildOntologyAndRunAutoMigrations = require("sails-hook-orm/lib/build-ontology-and-run-auto-migrations");
 
-// const StudiengangController = require("../api/controllers/StudiengangController");
-// const UploadController = require("../api/controllers/UploadController");
 
 module.exports.routes = {
 
@@ -24,6 +22,9 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
   '/': { view: 'pages/homepage' },
+
+  'POST /check-email-exists': {action: 'check/email-exists'}, 
+  'POST /check-username-exists': {action: 'check/user-name-exists'}, 
 
   'GET /signup':            { action: 'entrance/view-signup' },
   'GET /login':             { action: 'entrance/view-login' },

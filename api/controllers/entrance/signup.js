@@ -34,6 +34,10 @@ the account verification message.)`,
       description: 'The UserName the User gave to the Account'
     },
 
+    termsAgreement: {
+      type: 'string',
+      description: 'True or False for accepting Terms'
+    },
     password: {
       required: true,
       type: 'string',
@@ -132,7 +136,7 @@ the account verification message.)`,
     this.req.session.userId = newUserRecord.id;
   
     if (!this.req.wantsJSON) {
-      throw {redirect: '/'};
+      throw {redirect: '/signup'};
     }
   }
 

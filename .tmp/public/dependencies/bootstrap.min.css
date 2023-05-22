@@ -2215,7 +2215,7 @@ textarea.form-control {
   display: none;
   width: 100%;
   margin-top: .25rem;
-  font-size: 80%;
+  font-size: 100%;
   color: red
 }
 
@@ -9641,7 +9641,7 @@ a.text-secondary:focus, a.text-secondary:hover {
 }
 
 .text-success {
-  color: #28a745 !important
+  color: blue !important
 }
 
 a.text-success:focus, a.text-success:hover {
@@ -9657,7 +9657,7 @@ a.text-info:focus, a.text-info:hover {
 }
 
 .text-warning {
-  color: brown !important
+  color: var(--red) !important
 }
 
 a.text-warning:focus, a.text-warning:hover {

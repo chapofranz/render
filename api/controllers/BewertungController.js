@@ -3,63 +3,6 @@ const Sails = require("sails/lib/app/Sails");
 module.exports = {
 
 
-  // create: async function (req, res) {
-  //   const { userId, itemId, bewertung, type } = req.body;
-
-  //   if (type && typeof type === "string") {
-  //     // Du kannst den String "type" hier verwenden
-  //     console.log("Der Wert von 'type' ist:", type);
-  //   } else {
-  //     console.log("'type' ist nicht vorhanden oder kein String");
-  //   }
-
-
-
-  //   let bestehendeBewertung, bewertungen;
-  //   let durchschnittBewertung, gesamtBewertungen;
-
-  //   if (type === "skripte") {
-
-  //     console.log ("wir sind im skript block!!")
-  //   // Suchen einer bestehenden Bewertung vom gleichen Benutzer für das gleiche Skript
-  //   bestehendeBewertung = await Bewertung.findOne({ user: userId, skript: itemId });
-
-  //   if (bestehendeBewertung) {
-  //     // Wenn eine Bewertung existiert, aktualisieren Sie sie
-  //     await Bewertung.updateOne({ id: bestehendeBewertung.id }).set({ wert: bewertung });
-  //   } else {
-  //     // Erstellen einer neuen Bewertung, falls keine existiert
-  //     await Bewertung.create({
-  //       wert: bewertung,
-  //       user: userId,
-  //       skript: itemId
-  //     });
-  //   }
-
-  //   // Alle Bewertungen für das Skript holen 
-  //   bewertungen = await Bewertung.find({ skript: itemId });
-
-  //   // Berechnung Durchschnittsbewertung
-  //   gesamtBewertungen = bewertungen.reduce((sum, bewertung) => sum + bewertung.wert, 0);
-  //   durchschnittBewertung = gesamtBewertungen / bewertungen.length;
-
-  //   // Durchschnittsbewertung aktualisieren
-  //   await Skript.updateOne({ id: itemId }).set({ averageRating: durchschnittBewertung });
-  // } else if (type==="anleitungen") {
-  //   console.log("wir sind in anleitung!")
-
-  //   //  selber code für anleitung!!
-  // }
-
-  //   console.log("bestehendeBewertung: ", bestehendeBewertung);
-  //   console.log("bewertungen: ", bewertungen);
-  //   console.log("gesamtBewertungen: ", gesamtBewertungen);
-  //   console.log("durchschnittBewertung: ", durchschnittBewertung);
-
-  //   // Zurücksenden der Durchschnittsbewertung
-  //   return res.json({ averageRating: durchschnittBewertung });
-  // },
-
   create: async function (req, res) {
 
     const { userId, itemId, bewertung, type } = req.body;
