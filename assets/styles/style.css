@@ -6,6 +6,34 @@
   cursor: default;
 }
 
+#login .card {
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1) !important;
+}
+
+
+#login .btn-primary:hover {
+  background-color: #b300aa;
+}
+
+#account-overview .card {
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+}
+
+#account-overview .card-header {
+  background-color: #f8f9fa;
+  border-bottom: none;
+}
+
+#account-overview .btn-effect:hover {
+  background-color: #8884d8;
+  color: white;
+}
+
+#account-overview .font-weight-bold {
+  color: #210a88;
+}
+
 .notification {
     padding: 15px;
     margin-bottom: 20px;
