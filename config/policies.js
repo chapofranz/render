@@ -24,6 +24,8 @@ module.exports.policies = {
   'entrance/*': true,
   'account/logout': true,
 
+  'check/*': true,
+
   SearchController: {
     '*': true,
   },

@@ -1,4 +1,4 @@
-<div id="edit-profile" v-cloak>
+<div id="edit-profile">
   <div class="container pt-5 pb-5">
     <h1>Update personal info</h1>
     <form action="/updateProfile" method="POST">
@@ -85,6 +85,9 @@
           userName: '<%= req.me.userName %>',
           password: '',
           birthday: '<%= req.me.birthday %>',
+          invalidEmail: false,
+          invalidUserName: false, 
+          invalidBirthday: false,
         }
       },
       methods: {
