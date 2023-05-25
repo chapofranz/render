@@ -1,33 +1,107 @@
 <body>
   <div id="login">
     <div class="container-fluid pt-5 pb-5">
-      <h1 class="text-center">Sign in to your account</h1>
-      <div style="max-width: 450px;" class="mx-auto">
-        <hr />
-        <form action="login" method="POST">
-          <div class="form-group">
-            <input type="email" name="emailAddress" class="form-control" placeholder="Email address"
-              autocomplete="email" focus-first>
-            <div class="invalid-feedback">Please provide a valid email address.</div>
-          </div>
-          <div class="form-group">
-            <input name="password" type="password" class="form-control" placeholder="Password"
-              autocomplete="current-password">
-            <div class="invalid-feedback">Please enter your password.</div>
-          </div>
-          <div class="form-group form-check">
-            <input class="form-check-input" type="checkbox" id="remember" name="rememberMe" />
-            <label class="form-check-label" for="rememberMe">Remember me</label>
-          </div>
-          <span>The credentials you entered are not associated with an account. Please check your email and/or password
-            and try again.</span>
-          <div class="form-group">
-            <button type="submit" class="btn-dark btn-lg btn-block">Sign in</button>
-          </div>
-        </form>
-        <p class="text-center"><a href="/password/forgot">Forgot your password?</a></p>
+      <h1 class="text-center">Bitte deine Daten eingeben zum Einloggen</h1>
+      <div class="card mx-auto" style="max-width: 450px;">
+        <div class="card-body">
+          <form @submit.prevent="submitForm">
+            <div class="form-group">
+              <label for="email" class="form-label">E-Mail Adresse</label>
+              <input id="email" type="email" v-model="emailAddress" name="emailAddress"
+                :class="{'is-invalid': invalidEmail }" class="form-control" placeholder="Email address" focus-first
+                required>
+              <div class="invalid-feedback" v-if="invalidEmail">Bitte geben Sie eine gültige E-Mail-Adresse an.</div>
+            </div>
+
+            <div class="form-group">
+              <label for="password" class="form-label">Passwort</label>
+              <input id="password" name="password" type="password" v-model="password" class="form-control"
+                placeholder="Password" required>
+              <div class="invalid-feedback">Please enter your password.</div>
+            </div>
+            <div v-bind:class="['notification', notificationType]">
+              {{ notificationMessage }}
+            </div>
+
+            <div class="form-group">
+              <button type="submit" class="btn btn-lg btn-block mt-3" style="background-color: #4a47a3; color: #fff;">Sign in</button>
+            </div>
+          </form>
+          <!-- <p class="text-center mt-3"><a href="/password/forgot">Forgot your password?</a></p> -->
+        </div>
       </div>
     </div>
   </div>
 </body>
 <%- /* Expose locals as `window.SAILS_LOCALS` :: */ exposeLocalsToBrowser() %>
+  <script>
+    const { createApp } = Vue;
+    createApp({
+      data() {
+        return {
+          emailAddress: '',
+          password: '',
+          invalidEmail: false,
+          notificationMessage: '',
+          notificationType: '',
+        }
+      },
+      methods: {
+        validEmail: function (email) {
+          let re = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
+          return re.test(email);
+        },
+        submitForm: function () {
+          if (!this.validEmail(this.emailAddress)) {
+            this.invalidEmail = true;
+            return;
+          }
+
+          fetch('/login', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              emailAddress: this.emailAddress,
+              password: this.password
+            })
+          })
+            .then(response => {
+              console.log('Response status:', response.status);
+
+              if (!response.ok) {
+                return response.json().then(err => { throw err; });
+              }
+              return response.json();
+            })
+            .then(data => {
+
+
+              //Hinzufügen einer Benachrichtigung für den Benutzer
+              this.notificationMessage = data.message;
+              this.notificationType = 'success';
+              console.log(data);
+
+              //Weiterleitungsüberprüfung
+              if (data.redirect) {
+                window.location.href = data.redirect; // leitet den Benutzer auf die homepage um
+              }
+            })
+            .catch((error) => {
+              console.error('There has been a problem with the fetch operation:', error);
+              this.notificationMessage = 'Bitte gültige Daten eingeben'
+              this.notificationType = 'error';
+
+            });
+        }
+      },
+      watch: {
+        emailAddress: function (newEmail) {
+          this.invalidEmail = !this.validEmail(newEmail);
+        }
+      }
+    }).mount("#login");
+  </script>
+
+  

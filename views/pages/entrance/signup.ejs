@@ -1,70 +1,194 @@
 <div id="signup">
   <div class="container-fluid pt-5 pb-5">
-    <h1 class="text-center">Create an account</h1>
-    <div style="max-width: 450px;" class="mx-auto" >
-      <p class="text-center">Let's get started! Becoming a member is free and only takes a few minutes.</p>
-      <hr/>
-      <form action="/signup" method="POST">
-        <div class="form-group">
-          <label for="vorName">First Name</label>
-          <input class="form-control" id="full-name" name="vorName" type="text"  placeholder="Doloris F." autocomplete="firstName" focus-first>
-          <div class="invalid-feedback">Please enter your first Name.</div>
-        </div>
-        
-        <div class="form-group">
-          <label for="nachName">Second Name</label>
-          <input class="form-control" id="height" name="nachName" type="text"  placeholder="Sinister" autocomplete="secondName" focus-first>
-          <div class="invalid-feedback">Please enter your second Name.</div>
-        </div> 
-        <div class="form-group">
-          <label for="birthday">Birthday</label>
-          <input class="form-control" id="birthday" name="birthday" type="text"  placeholder="01.01.2000" autocomplete="birthday" focus-first>
-          <div class="invalid-feedback">Please enter your birthday.</div>
-        </div> 
-        
-        <div class="form-group">
-          <label for="userName">UserName</label>
-          <input class="form-control" id="weight" name="userName" type="text"  placeholder="chapo_Franz123" autocomplete="userName" focus-first>
-          <div class="invalid-feedback">Please enter your username.</div>
-        </div> 
-        <div class="form-group">
-          <label for="studiengang" class="form-label">Studiengang</label>
-          <select name="studiengang" id="studiengang" class="form-select" required>
+    <h1 class="text-center">Wunderbar, du möchtest Mitglied von Studie-Connect werden!</h1>
+    <div class="card mx-auto" style="max-width: 450px;">
+      <div class="card-body">
+        <p class="text-center">Die Registrierung ist kostenfrei und geht ganz schnell.</p>
+        <hr />
+        <form action="/signup" method="POST" @submit="validateForm">
+          <div class="form-group">
+            <label for="vorName">Vorname</label>
+            <input class="form-control" id="vor-name" name="vorName" type="text" placeholder="Doloris F."
+              v-model="vorName" :class="{'is-invalid': invalidVorName}" autocomplete="firstName" focus-first required>
+            <div class="invalid-feedback" v-if="invalidVorName">Bitte gültigen Vornamen eingeben.</div>
+          </div>
+
+          <div class="form-group">
+            <label for="nachName">Nachname</label>
+            <input class="form-control" id="nachName" name="nachName" type="text" v-model="nachName"
+              :class="{'is-invalid': invalidNachName}" placeholder="Sinister" autocomplete="secondName" focus-first
+              required>
+            <div class="invalid-feedback" v-if="invalidNachName">Bitte gültigen Nachnamen eingeben</div>
+          </div>
+          <div class="form-group">
+            <label for="birthday">Geburtsdatum</label>
+            <input class="form-control" id="birthday" name="birthday" type="text" v-model="birthday"
+              :class="{'is-invalid': invalidBirthday }" placeholder="01.01.2000" autocomplete="birthday" required>
+            <span class="invalid-feedback" v-if="invalidBirthday">Bitte geben Sie ein gültiges Geburtsdatum an.</span>
+          </div>
+
+          <div class="form-group">
+            <label for="userName">User Name</label>
+            <input class="form-control" :class="{'is-invalid': invalidUserName }" id="userName" name="userName"
+              type="text" placeholder="test_user" v-model="userName" autocomplete="userName"
+              v-on:blur="checkUserNameExists(userName)" required>
+            <div class="invalid-feedback" v-if="invalidUserName">Dein User Name wird schon verwendet
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="studiengang" class="form-label">Studiengang</label>
+            <select name="studiengang" id="studiengang" class="form-select" required>
               <option value="">--Wählen einen Studiengang aus--</option>
               <% studiengaenge.forEach(function(studiengang) { %>
-                  <option value="<%= studiengang.id %>">
-                      <%= studiengang.name %> (<%= studiengang.id %>)
-                  </option>
-                  <% }); %>
-          </select>
-      </div>
+                <option value="<%= studiengang.id %>">
+                  <%= studiengang.name %> (<%= studiengang.id %>)
+                </option>
+                <% }); %>
+            </select>
+          </div>
 
-        <div class="form-group">
-          <label for="email-address">Email address</label>
-          <input class="form-control" id="emaila-address" name="emailAddress" type="email"  placeholder="sturgeon@example.com" autocomplete="email">
-          <div class="invalid-feedback">Please enter a valid email address.</div>
-        </div>
-        <div class="form-group">
-          <label for="password">Choose a password</label>
-          <input class="form-control" id="password" name="password" type="password"  placeholder="••••••••" autocomplete="new-password">
-          <div class="invalid-feedback">Please enter a password.</div>
-        </div>
-        <div class="form-group">
-          <label for="confirm-password">Confirm password</label>
-          <input class="form-control" id="confirm-password" name="confirmPassword" type="password"  placeholder="••••••••" autocomplete="new-password">
-          <div class="invalid-feedback">Your password and confirmation do not match.</div>
-        </div>
-        <div class="form-group form-check">
-          <input class="form-check-input" id="terms-agreement" name="termsAgreement" type="checkbox" v-model="formData.agreed">
-          <label for="terms-agreement" class="form-check-label">I have read &amp; agree to the <a target="_blank" href="/terms">terms of service</a>.</label>
-        </div>
-        <span>It looks like there's already an account with your email address. If you forgot your password, you can recover it <a href="password/forgot">here</a>.</span>
-        <div class="form-group">
-          <button type="submit" class="btn-dark btn-lg btn-block">Create account</button>
-        </div>
-      </ajax>
-      <p class="text-center">Have an account? <a href="/login">Sign in</a></p>
+          <div class="form-group">
+            <label for="email-address">Email Addresse</label>
+            <input class="form-control" id="email-address" name="emailAddress" type="email" v-model="emailAddress"
+              :class="{'is-invalid': invalidEmail }" placeholder="sturgeon@example.com" autocomplete="email"
+              v-on:blur="checkEmailExists(email)" required>
+            <div class="invalid-feedback" v-if="invalidEmail">Ihre Email ist im falschen Format oder wird schon
+              verwendet
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="password">Gib ein Passwort ein</label>
+            <input class="form-control" id="password" name="password" type="password" v-model="password"
+              placeholder="••••••••" autocomplete="new-password" required>
+            <div class="invalid-feedback" v-if="passwordsDontMatch">Bitte geben Sie ein Passwort ein.</div>
+          </div>
+          <div class="form-group">
+            <label for="confirm-password">Passwort bestätigen</label>
+            <input class="form-control" id="confirm-password" name="confirmPassword" type="password"
+              v-model="confirmPassword" :class="{'is-invalid': passwordsDontMatch }" placeholder="••••••••"
+              autocomplete="new-password" required>
+            <div class="invalid-feedback" v-if="passwordsDontMatch">Passwörter stimmen nicht überein</div>
+            <div class="text-success" v-if="!passwordsDontMatch">Passwörter stimmen überein</div>
+          </div>
+
+          <div class="form-group form-check">
+            <input class="form-check-input" id="terms-agreement" name="termsAgreement" type="checkbox"
+              v-model="termsAgreement">
+            <label for="terms-agreement" class="form-check-label">I have read &amp; agree to the <a target="_blank"
+                href="/terms">terms of service</a>.</label>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-lg btn-block mt-3" style="background-color: #4a47a3; color: #fff;"
+              :disabled="passwordsDontMatch">Account erstellen</button>
+          </div>
+
+        </form>
+        <p class="text-center mt-3">Hast du schon ein Account? <a href="/login">Sign in</a></p>
+      </div>
     </div>
   </div>
 </div>
 <%- /* Expose locals as `window.SAILS_LOCALS` :: */ exposeLocalsToBrowser() %>
+  <script>
+    const { createApp } = Vue;
+    createApp({
+      data() {
+        return {
+          emailAddress: '',
+          userName: '',
+          password: '',
+          confirmPassword: '',
+          birthday: '',
+          vorName: '',
+          nachName: '',
+          invalidEmail: false,
+          invalidUserName: false,
+          invalidBirthday: false,
+          passwordsDontMatch: false,
+          invalidVorName: false,
+          invalidNachName: false,
+          termsAgreement: false
+        }
+      },
+      methods: {
+
+        isTermsAgreed: function () {
+          return this.termsAgreement
+        },
+        validEmail: function (email) {
+          let re = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
+          return re.test(email);
+        },
+        validName: function (name) {
+          let re = /^[a-zA-Z]+$/;
+          return re.test(name);
+        },
+        validateForm: async function (event) {
+          if (!this.isTermsAgreed()) {
+            alert('Sie müssen die Nutzungsbedingungen zustimmen, bevor Sie fortfahren!');
+            event.preventDefault();
+          }
+        },
+        validBirthday: function (birthday) {
+          let re = /^\d{2}\.\d{2}\.\d{4}$/;
+          return re.test(birthday);
+        },
+        passwordsMatch: function (password, confirmPassword) {
+          return password === confirmPassword;
+        },
+        checkEmailExists: async function () {
+          if (this.validEmail(this.emailAddress)) {
+            const response = await fetch('/check-email-exists', {
+              method: 'POST',
+              body: JSON.stringify({ emailAddress: this.emailAddress }),
+              headers: { 'Content-Type': 'application/json' },
+            });
+            if (response.status === 409) {
+              this.invalidEmail = true;
+            } else {
+              this.invalidEmail = false;
+            }
+          } else {
+            this.invalidEmail = true;
+          }
+        },
+        checkUserNameExists: async function () {
+          const response = await fetch('/check-username-exists', {
+            method: 'POST',
+            body: JSON.stringify({ userName: this.userName }),
+            headers: { 'Content-Type': 'application/json' },
+          });
+          if (response.status === 409) {
+
+            this.invalidUserName = true;
+          } else {
+
+            this.invalidUserName = false;
+          }
+        }
+      },
+      watch: {
+        emailAddress: function () {
+          this.checkEmailExists();
+        },
+        userName: function () {
+          this.checkUserNameExists();
+        },
+        birthday: function (newBirthday) {
+          this.invalidBirthday = !this.validBirthday(newBirthday);
+        },
+        confirmPassword: function (newConfirmPassword) {
+          this.passwordsDontMatch = !this.passwordsMatch(this.password, newConfirmPassword);
+        },
+        vorName: function (newVorName) {
+          this.invalidVorName = !this.validName(newVorName);
+        },
+        nachName: function (newNachName) {
+          this.invalidNachName = !this.validName(newNachName);
+        },
+        password: function (newPassword) {
+          this.passwordsDontMatch = !this.passwordsMatch(newPassword, this.confirmPassword);
+        }
+      }
+    }).mount("#signup");
+  </script>

@@ -1,49 +1,53 @@
-<div id="edit-profile" v-cloak>
-  <account-notification-banner></account-notification-banner>
+<div id="edit-profile">
   <div class="container pt-5 pb-5">
-    <h1>Update personal info</h1>
-    <hr />
+    <h1>Persönliche Infos updaten </h1>
     <form action="/updateProfile" method="POST">
       <div class="row">
 
         <div class="col-sm-6">
           <div class="form-group">
-            <label for="user-Name">User name</label>
-            <input class="form-control" id="user-name" name="userName" type="text" autocomplete="userName" focus-first
-              value="<%= req.me.userName %>">
-            <div class="invalid-feedback">Please enter your user name.</div>
+            <label for="userName">User Name</label>
+            <input class="form-control" value="<%= req.me.userName %>" :class="{'is-invalid': invalidUserName }" id="userName" name="userName"
+              type="text"  v-model="userName" autocomplete="userName"
+              v-on:blur="checkUserNameExists(userName)" required>
+            <div class="invalid-feedback" v-if="invalidUserName">Dein User Name wird schon verwendet
+            </div>
           </div>
         </div>
         <div class="col-sm-6">
           <div class="form-group">
-            <label for="first-name">First name</label>
-            <input class="form-control" id="first-name" name="vorName" type="text" autocomplete="firstName" 
+            <label for="first-name">Vorname</label>
+            <input class="form-control" id="first-name" name="vorName" type="text" autocomplete="firstName" v-model="vorName" :class="{'is-invalid': invalidVorName}"
               value="<%= req.me.vorName %>">
-            <div class="invalid-feedback">Please enter your first name.</div>
+            <div class="invalid-feedback" v-if="invalidVorName">Bitte gültigen Vornamen eingeben</div>
           </div>
         </div>
         <div class="col-sm-6">
           <div class="form-group">
-            <label for="second-name">Second name</label>
-            <input class="form-control" id="second-name" name="nachName" type="text" autocomplete="secondName" 
+            <label for="second-name">Nachname</label>
+            <input class="form-control" id="second-name" name="nachName" type="text" autocomplete="secondName" v-model="nachName" :class="{'is-invalid': invalidNachName}"
               value="<%= req.me.nachName %>">
-            <div class="invalid-feedback">Please enter your second name.</div>
+            <div class="invalid-feedback " v-if="invalidNachName">Bitte gültigen Nachnamen eingeben</div>
           </div>
         </div>
         <div class="col-sm-6">
           <div class="form-group">
-            <label for="birthday">Birthday</label>
-            <input class="form-control" id="birthday" name="birthday" type="string" autocomplete="birthday"
-              value="<%= req.me.birthday %>">
-            <div class="invalid-feedback">Please enter a valid Birthday.</div>
+            <label for="birthday">Geburtdatum</label>
+            <input class="form-control" value="<%= req.me.birthday %>" id="birthday" v-model="birthday" name="birthday" type="string"
+              autocomplete="birthday" :class="{'is-invalid': invalidBirthday }" >
+            <span class="invalid-feedback" v-if="invalidBirthday">Bitte geben Sie ein gültiges Geburtsdatum
+              an.</span>
           </div>
         </div>
         <div class="col-sm-6">
           <div class="form-group">
-            <label for="email-address">Email address</label>
-            <input class="form-control" id="email-address" name="emailAddress" type="email" autocomplete="email"
-              value="<%= req.me.emailAddress %>">
-            <div class="invalid-feedback">Please enter a valid email address.</div>
+            <label for="email-address">Email Addresse</label>
+            <input class="form-control" value="<%= req.me.emailAddress %>" id="email-address" name="emailAddress" type="email" v-model="emailAddress"
+              :class="{'is-invalid': invalidEmail }" autocomplete="email"
+              v-on:blur="checkEmailExists(email)" required>
+            <div class="invalid-feedback" v-if="invalidEmail">Ihre Email ist im falschen Format oder wird schon
+              verwendet
+            </div>
           </div>
         </div>
         <div class="col-sm-6">
@@ -51,8 +55,8 @@
             <label for="studiengang">Studiengang</label>
             <select class="form-control" id="studiengang" name="studiengang">
               <% studiengaenge.forEach(function(studiengang) { %>
-                <option value="<%= studiengang.id %>" <%=req.me.studiengang.id===studiengang.id ? 'selected' : '' %>><%=
-                    studiengang.name %>
+                <option value="<%= studiengang.id %>" <%=req.me.studiengang.id===studiengang.id ? 'selected' : '' %>
+                  ><%= studiengang.name %>
                 </option>
                 <% }); %>
             </select>
@@ -60,13 +64,10 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-sm-6">
-            There is already an account using that email address.
-          </div>
-          <div class="col-sm-6">
+          <div class="col-12">
             <div class="form-group text-right">
-              <a class="btn btn-outline-info" href="/account">Cancel</a>
-              <button type="submit" class="btn btn-dark">Save changes</button>
+              <button type="submit" class="btn btn-lg btn-block mt-3" style="background-color: #4a47a3; color: #fff;" :disabled="invalidEmail || invalidBirthday || invalidNachName || invalidVorName ||invalidUserName">Save changes</button>
+              <button class="btn btn-lg btn-block mt-3" href=/account style="background-color: #a34d47; color: #fff;">Cancel</button>
             </div>
           </div>
         </div>
@@ -75,3 +76,85 @@
   </div>
 </div>
 <%- /* Expose locals as `window.SAILS_LOCALS` :: */ exposeLocalsToBrowser() %>
+  <script>
+    const { createApp } = Vue;
+    createApp({
+      data() {
+        return {
+          emailAddress: '<%= req.me.emailAddress %>',
+          userName: '<%= req.me.userName %>',
+          password: '',
+          birthday: '<%= req.me.birthday %>',
+          vorName: '<%= req.me.vorName %>',
+          nachName: '<%= req.me.nachName %>',
+          invalidEmail: false,
+          invalidUserName: false, 
+          invalidVorName: false,
+          invalidNachName: false,
+          invalidBirthday: false,
+        }
+      },
+      methods: {
+        validEmail: function (email) {
+          let re = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
+          return re.test(email);
+        },
+        validBirthday: function (birthday) {
+          let re = /^\d{2}\.\d{2}\.\d{4}$/;
+          return re.test(birthday);
+        },
+        validName: function (name) {
+          let re = /^[a-zA-Z]+$/;
+          return re.test(name);
+        },
+
+        checkEmailExists: async function () {
+          if (this.validEmail(this.emailAddress)) {
+            const response = await fetch('/check-email-exists', {
+              method: 'POST',
+              body: JSON.stringify({ emailAddress: this.emailAddress}),
+              headers: { 'Content-Type': 'application/json' },
+            });
+            if (response.status === 409) {
+              this.invalidEmail = true;
+            } else {
+              this.invalidEmail = false;
+            }
+          } else {
+            this.invalidEmail = true;
+          }
+        },
+        checkUserNameExists: async function () {
+          const response = await fetch('/check-username-exists', {
+            method: 'POST',
+            body: JSON.stringify({ userName: this.userName}),
+            headers: { 'Content-Type': 'application/json' },
+          });
+          if (response.status === 409) {
+
+            this.invalidUserName = true;
+          } else {
+
+            this.invalidUserName = false;
+          }
+        }
+      },
+      watch: {
+        emailAddress: function () {
+          this.checkEmailExists();
+        },
+        userName: function () {
+          this.checkUserNameExists();
+        },
+        vorName: function (newVorName) {
+          this.invalidVorName = !this.validName(newVorName);
+        },
+        nachName: function (newNachName) {
+          this.invalidNachName = !this.validName(newNachName);
+        },
+        birthday: function (newBirthday) {
+          this.invalidBirthday = !this.validBirthday(newBirthday);
+        }
+      }
+    }).mount("#edit-profile");
+  </script>

@@ -53,7 +53,9 @@ module.exports = {
   },
 
 
-  fn: async function ({ userName, vorName, nachName, emailAddress, birthday, studiengang }) {
+  fn: async function ({ req,res,userName, vorName, nachName, emailAddress, birthday, studiengang }) {
+
+  
 
     var newEmailAddress = emailAddress;
     if (newEmailAddress !== undefined) {
@@ -121,7 +123,8 @@ module.exports = {
     await User.updateOne({ id: this.req.me.id })
       .set(valuesToSet);
 
-    throw { redirect: '/account' };
+
+    throw {redirect: '/account'};
 
   }
 

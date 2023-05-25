@@ -28,14 +28,6 @@ password attempt.`,
       required: true
     },
 
-    rememberMe: {
-      description: 'Whether to extend the lifetime of the user\'s session.',
-      extendedDescription:
-        `Note that this is NOT SUPPORTED when using virtual requests (e.g. sending
-requests over WebSockets instead of HTTP).`,
-      type: 'boolean'
-    }
-
   },
 
 
@@ -62,7 +54,10 @@ and exposed as \`req.me\`.)`
     badCombo: {
       description: `The provided email and password combination does not
       match any user in the database.`,
-      responseType: 'unauthorized'
+      responseType: 'unauthorized',
+      data: {
+        message: 'Invalid email or password.', 
+      }
       // ^This uses the custom `unauthorized` response located in `api/responses/unauthorized.js`.
       // To customize the generic "unauthorized" response across this entire app, change that file
       // (see api/responses/unauthorized).
@@ -75,7 +70,7 @@ and exposed as \`req.me\`.)`
   },
 
 
-  fn: async function ({ emailAddress, password, rememberMe }) {
+  fn: async function ({ emailAddress, password }) {
 
     // Look up by the email address.
     // (note that we lowercase it to ensure the lookup is always case-insensitive,
@@ -99,20 +94,6 @@ and exposed as \`req.me\`.)`
     // response header to be sent as the result of this request -- thus
     // we must be dealing with a traditional HTTP request in order for
     // this to work.)
-    if (rememberMe) {
-      if (this.req.isSocket) {
-        sails.log.warn(
-          'Received `rememberMe: true` from a virtual request, but it was ignored\n' +
-          'because a browser\'s session cookie cannot be reset over sockets.\n' +
-          'Please use a traditional HTTP request instead.'
-        );
-      } else {
-        this.req.session.cookie.maxAge = sails.config.custom.rememberMeCookieMaxAge;
-      }
-    }//ﬁ
-
-
-
 
 
 
@@ -122,19 +103,24 @@ and exposed as \`req.me\`.)`
     this.req.session.User = userRecord;
     this.req.session.studiengang = userRecord.studiengang;
 
-    
+
 
     // In case there was an existing session (e.g. if we allow users to go to the login page
     // when they're already logged in), broadcast a message that we can display in other open tabs.
     //    if (sails.hooks.sockets) {
     //      await sails.helpers.broadcastSessionChange(this.req);
     //    }
-
+    if (this.req.wantsJSON) {
+      return {
+        message: "Successful login",
+        redirect: '/',
+      }
+    }
 
     if (!this.req.wantsJSON) {
-    throw { redirect: '/' };
-      // return this.res.view('pages/account/account-overview');
-      
+      throw { redirect: '/' };
+
+
     }
 
 
