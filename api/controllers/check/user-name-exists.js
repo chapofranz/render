@@ -19,9 +19,7 @@ module.exports = {
     },
   },
   fn: async function ({ userName }) {
-
-    
-    
+      
     var user = await User.findOne({
       userName: userName
     });
