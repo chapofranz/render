@@ -2215,7 +2215,7 @@ textarea.form-control {
   display: none;
   width: 100%;
   margin-top: .25rem;
-  font-size: 80%;
+  font-size: 100%;
   color: red
 }
 
@@ -4342,7 +4342,7 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
 }
 
 .navbar-light .navbar-text {
-  color: rgba(0, 0, 0, .5)
+  color: black;
 }
 
 .navbar-light .navbar-text a {
@@ -4407,7 +4407,8 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
   background-color: #fff;
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, .125);
-  border-radius: .25rem
+  border-radius: .25rem;
+  color: var(--white);
 }
 
 .card > hr {
@@ -9640,7 +9641,7 @@ a.text-secondary:focus, a.text-secondary:hover {
 }
 
 .text-success {
-  color: #28a745 !important
+  color: blue !important
 }
 
 a.text-success:focus, a.text-success:hover {
@@ -9656,7 +9657,7 @@ a.text-info:focus, a.text-info:hover {
 }
 
 .text-warning {
-  color: brown !important
+  color: var(--red) !important
 }
 
 a.text-warning:focus, a.text-warning:hover {

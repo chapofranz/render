@@ -1,72 +1,83 @@
 <div id="account-overview">
-  <account-notification-banner></account-notification-banner>
   <div class="container pt-5 pb-5">
-    <h1>My account</h1>
-    <hr/>
-    <div class="row mb-3">
-      <div class="col-sm-6">
-        <h4>Personal information</h4>
+    <h1 class="text-center mb-4">Mein Account</h1>
+
+    <% if (req.me.isSuperAdmin) { %>
+      <div class="text-right mb-3">
+        <a style="width: 150px" class="btn btn-sm btn-outline-info btn-effect" href="/admin">Admin bearbeiten</a>
       </div>
-      <div class="col-sm-6">
-        <span class="float-sm-right">
-          <a style="width: 150px" class="btn btn-sm btn-outline-info" href="/account/profile">Edit profile</a>
-        </span>
-        <% if (req.me.isSuperAdmin) { %>
-        <span class="float-sm-left">
-          <a style="width: 150px" class="btn btn-sm btn-outline-info" href="/admin/profiles" >Edit profiles</a>
-        </span>
-        <% } %>
-      
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-3">Nutzernane:</div>
-      <div class="col"><strong><%= user.userName %></strong></div>
-    </div>
-    <div class="row">
-      <div class="col-3">Email:</div>
-      <div class="col">
-        <strong><%= user.emailAddress %></strong>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-3">Vorname:</div>
-      <div class="col">
-        <strong><%= user.vorName %> </strong>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-3">Nachname:</div>
-      <div class="col">
-        <strong><%= user.nachName %> </strong>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-3">Birthday:</div>
-      <div class="col">
-        <strong><%= user.birthday %></strong>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-3">Studiengang:</div>
-      <div class="col">
-        <strong><%= user.studiengang.name %></strong>
-      </div>
-    </div>
-    <hr/>
-    <div class="row mb-3">
-      <div class="col-sm-6">
-        <h4>Password</h4>
-      </div>
-      <div class="col-sm-6">
-        <span class="float-sm-right">
-          <a style="width: 150px" class="btn btn-sm btn-outline-info" href="/account/password">Change password</a>
-        </span>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-3">Password:</div>
-      <div class="col"><strong>••••••••••</strong></div>
-    </div>    
+      <% } %>
+        <div class="card mb-5">
+          <div class="card-header d-flex justify-content-between align-items-center">
+            <h4 class="text-dark">Persönliche Informationen</h4>
+            <a style="width: 150px" class="btn btn-sm btn-outline-info btn-effect" href="/account/profile">Profil
+              bearbeiten</a>
+          </div>
+          <div class="card-body">
+            <div class="row mb-3">
+              <div class="col-3">Nutzername</div>
+              <div class="col font-weight-bold">
+                <%= user.userName %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-3">Email</div>
+              <div class="col">
+                <strong>
+                  <%= user.emailAddress %>
+                </strong>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-3">Vorname</div>
+              <div class="col">
+                <strong>
+                  <%= user.vorName %>
+                </strong>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-3">Nachname</div>
+              <div class="col">
+                <strong>
+                  <%= user.nachName %>
+                </strong>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-3">Geburtsdatum</div>
+              <div class="col">
+                <strong>
+                  <%= user.birthday %>
+                </strong>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-3">Studiengang</div>
+              <div class="col">
+                <strong>
+                  <%= user.studiengang.name %>
+                </strong>
+              </div>
+            </div>
+            <hr />
+            <div class="card">
+              <div class="card-header d-flex justify-content-between align-items-center">
+                <h4 class="text-dark">Password</h4>
+                <a style="width: 150px" class="btn btn-sm btn-outline-info btn-effect ml-1"
+                  href="/account/password">Change
+                  password</a>
+              </div>
+              <div class="card-body">
+                <div class="row mb-3">
+                  <div class="col-3">Passwor:</div>
+                  <div class="col font-weight-bold">••••••••••</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+  </div>
 </div>
 <%- /* Expose locals as `window.SAILS_LOCALS` :: */ exposeLocalsToBrowser() %>

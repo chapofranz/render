@@ -93,24 +93,24 @@ module.exports = {
         }
         res.view('pages/skript/index', { skripte: skripte });
     },
-
-
     findOrCreate: async function (req, res) {
         const criteria = {
-            name: req.param("name"),
-            // modul: req.param("modul")
+          name: req.param("name"),
+          // modul: req.param("modul")
         };
-        const values = req.allParams();
-
+        let values = req.allParams();
+      
         const existingRecord = await Skript.findOne(criteria);
-
+      
         if (existingRecord) {
-            return res.json(existingRecord);
+          return res.json(existingRecord);
         } else {
-            const newRecord = await Skript.create(values).fetch();
-            return res.json(newRecord);
+        
+          if (values.averageRating === undefined) {
+            values.averageRating = 0;
+          }
+          const newRecord = await Skript.create(values).fetch();
+          return res.json(newRecord);
         }
-
-
-    }
+      }
 };

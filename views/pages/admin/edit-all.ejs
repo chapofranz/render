@@ -1,0 +1,86 @@
+<div class="container" id="admin-dashboard">
+    <h1 class="my-4 admin-dashboard-header">Admin Dashboard</h1>
+    <p>Willkommen im Administrationsbereich. Hier können Sie alle Benutzer, Studiengänge, Module, Skripte und
+        Anleitungen verwalten.</p>
+
+    <div class="my-4" v-for="(items, title) in itemsGroup" :key="title">
+        <h2>
+            <span @click="toggle(title)">
+                {{ title }}
+                <span v-if="isVisible[title]">&#9660;</span>
+                <span v-else>&#9654;</span>
+            </span>
+
+
+        </h2>
+        <div class="table-responsive" v-if="isVisible[title]">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Aktionen</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="item in items" :key="item.id">
+                        <td>
+                            {{ item.id }}
+                        </td>
+                        <td>
+                            {{ getName(item, title) }}
+                        </td>
+                        <td>
+                            <form :action="'/' + title.toLowerCase() + '/'  + item.id + '/edit'" method="GET">
+                                <input class="btn btn-warning mr-2 mb-2" type="submit" value="Bearbeiten"
+                                    onclick="return confirm('Sind Sie sicher, dass Sie diesen Eintrag bearbeiten möchten?');">
+                            </form>
+                            <form :action="'/' + title.toLowerCase() +'/' + item.id + '/delete'" method="POST">
+                                <input class="btn btn-danger" type="submit" value="Löschen"
+                                    onclick="return confirm('Sind Sie sicher, dass Sie diesen Eintrag löschen möchten?');">
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script>
+
+
+    var users = JSON.parse('<%- JSON.stringify(users) %>');
+    var studiengaenge = JSON.parse('<%- JSON.stringify(studiengaenge) %>');
+    var module = JSON.parse('<%- JSON.stringify(module) %>');
+    var skripte = JSON.parse('<%- JSON.stringify(skripte) %>');
+    var anleitungen = JSON.parse('<%- JSON.stringify(anleitungen) %>');
+
+    const { createApp } = Vue
+    createApp({
+
+        data() {
+            return {
+                isVisible: {},
+                itemsGroup: {
+                    'User': users,
+                    'Studiengange': studiengaenge,
+                    'Module': module,
+                    'Skripte': skripte,
+                    'Anleitungen': anleitungen
+                }
+            }
+        },
+        methods: {
+            toggle: function (title) {
+                this.isVisible[title] = !this.isVisible[title];
+            },
+            getName: function (item, title) {
+                if (title === 'User') {
+                    return item.userName;
+                }
+                return item.name;
+            }
+        }
+    }).mount("#admin-dashboard")
+</script>
+</body>

@@ -39,20 +39,22 @@ module.exports = {
   edit: async function (req, res) {
     sails.log.debug("Edit a single user....")
     let user = await User.findOne({ id: req.params.id }).populate('studiengang');
-    res.view ('pages/user/edit', { user: user } );
+    let studiengaenge = await Studiengang.find();
+
+    res.view ('pages/user/edit', { user: user, studiengaenge: studiengaenge } );
   },
 
   destroy: async function (req, res) {
     sails.log.debug("Delete a single user....")
     let user = await User.destroyOne({ id: req.params.id });
     // 
-    res.redirect ('/user' );
+    res.redirect ('/admin' );
   },
   update: async function (req, res) {
     sails.log.debug("Update users....")
     let params = req.allParams();
     await User.updateOne({id: req.params.id}).set(params);
-    res.redirect ('/user' );
+    res.redirect ('/admin' );
   },
 
   findAll: async function (req, res) {

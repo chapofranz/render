@@ -1,16 +1,15 @@
 module.exports = {
     attributes: {
-        wert: { type: 'number', columnType: 'integer', required: true, min: 1, max: 10 },
+        
+        wert: { type: 'number', columnType: 'integer', required: true, min: 1, max: 5 },
         user: {
             model: 'user'
         },
-        anleitung_bewertung: {
-            collection: 'anleitung_bewertung',
-            via: 'bewertung'
+        anleitung: {
+            model: 'anleitung'
         },
-        skript_bewertung: {
-            collection: 'skript_bewertung',
-            via: 'bewertung'
-        },
+        skript: {
+            model: 'skript'
+        }
     },
 };

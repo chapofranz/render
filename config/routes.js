@@ -8,8 +8,8 @@
  * https://sailsjs.com/anatomy/config/routes-js
  */
 
-// const StudiengangController = require("../api/controllers/StudiengangController");
-// const UploadController = require("../api/controllers/UploadController");
+const buildOntologyAndRunAutoMigrations = require("sails-hook-orm/lib/build-ontology-and-run-auto-migrations");
+
 
 module.exports.routes = {
 
@@ -23,42 +23,41 @@ module.exports.routes = {
   ***************************************************************************/
   '/': { view: 'pages/homepage' },
 
-  'GET /signup': { action: 'entrance/view-signup' },
-  'GET /login': { action: 'entrance/view-login' },
+  'POST /check-email-exists': {action: 'check/email-exists'},
+  'POST /check-username-exists': {action: 'check/user-name-exists'},
+
+  'GET /signup':            { action: 'entrance/view-signup' },
+  'GET /login':             { action: 'entrance/view-login' },
 
 
-  'GET /account': { action: 'account/view-account-overview' },
-  'GET /account/password': { action: 'account/view-edit-password' },
-  'GET /account/profile': { action: 'account/view-edit-profile' },
+  'GET /account':           { action: 'account/view-account-overview' },
+  'GET /account/password':  { action: 'account/view-edit-password' },
+  'GET /account/profile':   { action: 'account/view-edit-profile' },
 
   //  ╔═╗╔═╗╦  ╔═╗╔╗╔╔╦╗╔═╗╔═╗╦╔╗╔╔╦╗╔═╗
   //  ╠═╣╠═╝║  ║╣ ║║║ ║║╠═╝║ ║║║║║ ║ ╚═╗
   //  ╩ ╩╩  ╩  ╚═╝╝╚╝═╩╝╩  ╚═╝╩╝╚╝ ╩ ╚═╝
   // Note that, in this app, these API endpoints may be accessed using the `Cloud.*()` methods
   // from the Parasails library, or by using those method names as the `action` in <ajax-form>.
-  'GET /logout': { action: 'account/logout' },
-  'POST  /login': { action: 'entrance/login' },
-  'POST  /signup': { action: 'entrance/signup' },
-  'POST  /updateProfile': { action: 'account/update-profile' },
-  'POST  /updatePassword': { action: 'account/update-password' },
 
-  'GET /admin': {action: 'admin/view-edit-all'},
-  'GET /admin/profiles': {action: 'admin/view-edit-profiles'},
+  'GET /logout':            { action: 'account/logout' },
+  'POST  /login':           { action: 'entrance/login' },
+  'POST  /signup':          { action: 'entrance/signup' },
+  'POST  /updateProfile':   { action: 'account/update-profile' },
+  'POST  /updatePassword':  { action: 'account/update-password' },
 
-
+  'GET /admin':             {action: 'admin/view-edit-all'},
 
   'POST /user': 'user.create',
   'GET /user': 'user.find',
-  // 'GET /user/show/:id': 'user.findOne',
-  'GET /user/delete/:id': 'user.destroy',
-  'GET /user/edit/:id': 'user.edit',
-  'POST /user/update/:id': 'user.update',
-  'GET /user/dashboard': { view: 'pages/user/dashboard' },
-
+  'POST /user/:id/delete': 'user.destroy',
+  'GET /user/:id/edit': 'user.edit',
+  'POST /user/:id/update/': 'user.update',
 
   'GET /ressourcen/show': { view: 'pages/ressources/show' },
-  'GET /studiengang ': 'studiengang.show',
-  'GET /studiengang/show ': { controller: 'StudiengangController', action: 'show' },
+
+  'GET /studiengang ': 'studiengang.show', //! funkts
+
   'GET /studiengang/new': { view: 'pages/studiengang/new' },
   'GET /studiengang/edit ': { controller: 'StudiengangController', action: 'find' },
 
@@ -68,7 +67,7 @@ module.exports.routes = {
   // 'POST /studiengang/update/:id': { controller: 'StudiengangController', action: 'updateOne' },
 
 
-  'GET /wirtschaftsinformatik': { controller: 'WinController', action: 'show' },
+  'GET /wirtschaftsinformatik': { action: 'wirtschaftsinformatik/show' },
   'GET /download/skript/:id': 'skript.download',
   'GET /download/anleitung/:id': 'anleitung.download',
 
@@ -97,9 +96,11 @@ module.exports.routes = {
   'GET /impressum': { view: 'pages/impressum'},
   'GET /datenschutz': { view: 'pages/datenschutz'},
   'GET /concept': { view: 'pages/concept'},
+  'GET /ressources/upload': { controller: 'UploadController', action: 'new' },
 
   'GET /search': 'SearchController.search',
-  'POST /upload/new': 'upload.save'
+  'POST /upload/new': 'upload.save',
+  'POST /bewertung/create': 'bewertung.create'
 
 
   /***************************************************************************

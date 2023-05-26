@@ -17,9 +17,33 @@ module.exports.policies = {
   *                                                                          *
   ***************************************************************************/
 
-  // '*': true,
-  // 'BenutzerController.editOne': 'isAdmin',
-  // 'BenutzerController.login' : 'isNotLoggedIn',
-  // 'BenutzerController.findOneDashboard' : 'isLoggedIn'
+  '*': true,
+  '*': 'is-logged-in',
+
+  //  Bypass the `is-logged-in` policy for:
+  'entrance/*': true,
+  'account/logout': true,
+
+  'check/*': true,
+
+  SearchController: {
+    '*': true,
+  },
+
+  StudiengangController: {
+    'update': 'is-super-admin',
+    'delete': 'is-super-admin',
+    'findOne': 'is-super-admin',
+    'findAll': 'is-super-admin',
+    'create': 'is-super-admin',
+    'editOne': 'is-super-admin',
+  },
+
+
+  ModulController: {
+    'findOne': 'is-super-admin',
+    'find': 'is-super-admin',
+    'findOrCreate': 'is-super-admin',
+  },
 
 };

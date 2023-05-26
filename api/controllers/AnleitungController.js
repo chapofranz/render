@@ -70,6 +70,9 @@ module.exports = {
     if (existingRecord) {
       return res.json(existingRecord);
     } else {
+      if (values.averageRating==undefined) {
+        values.averageRating = 0;
+      }
       const newRecord = await Anleitung.create(values).fetch();
       return res.json(newRecord);
     }
