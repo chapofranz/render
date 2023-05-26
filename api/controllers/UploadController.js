@@ -42,6 +42,7 @@ module.exports = {
     req.session.messageClass = null;
     return;
   }
+}
 
 //   upload: function  (req, res) {
 //     req.file('file').upload(function (err, files) {
