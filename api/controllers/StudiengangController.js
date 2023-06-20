@@ -21,6 +21,15 @@ module.exports = {
     res.redirect('/studiengang');
   },
 
+  edit: async function (req, res) {
+    sails.log.debug("Edit a single Studiengang....")
+    let studiengang = await Studiengang.findOne({ id: req.params.id });
+    let studiengaenge = await Studiengang.find();
+    let module = await Modul.find();
+
+    res.view ('pages/studiengang/edit', { studiengang: studiengang, studiengaenge: studiengaenge } );
+  },
+
 
   findOne: async function (req, res) {
     let id = req.param('id');
@@ -39,10 +48,10 @@ module.exports = {
   },
 
   update: async function (req, res) {
-    let id = req.param('id');
-    let updatedParams = req.allParams();
-    await Studiengang.update({ id: id }, updatedParams);
-    res.redirect(`/studiengang/${id}`);
+    sails.log.debug("Update Studiengang....")
+    let params = req.allParams();
+    await Studiengang.updateOne({id: req.params.id}).set(params);
+    res.redirect ('/admin' );
   },
 
   editOne: async function (req, res) {
@@ -51,10 +60,11 @@ module.exports = {
     res.view('pages/studiengang/edit', { studiengang: studiengang });
   },
 
-  delete: async function (req, res) {
-    let id = req.param('id');
-    await Studiengang.destroy({ id: id });
-    res.redirect('/studiengang');
+  destroy: async function (req, res) {
+    sails.log.debug("Delete a single Studiengang....")
+    let user = await Studiengang.destroyOne({ id: req.params.id });
+    // 
+    res.redirect ('/admin' );
   },
 
 

@@ -4,6 +4,7 @@ const path = require('path');
 const { promisify } = require('util');
 const readFile = promisify(fs.readFile);
 const https = require('https');
+const ModulController = require("./ModulController");
 
 
 module.exports = {
@@ -66,7 +67,7 @@ module.exports = {
     await Skript.destroyOne({ id: id });
     res.redirect('/skript/edit');
   },
- 
+
 
   find: async function (req, res) {
     sails.log.debug("List all Skripte....")
@@ -82,11 +83,11 @@ module.exports = {
     }
     res.view('pages/skript/index', { skripte: skripte });
   },
-  
+
   findOrCreate: async function (req, res) {
     const criteria = {
       name: req.param("name"),
-      
+
     };
     let values = req.allParams();
 
@@ -123,12 +124,16 @@ module.exports = {
 
     let uploadedFiles = await new Promise((resolve, reject) => {
       req.file('data').upload(params, (err, files) => {
-        if (err) return reject(err);
+        if (err) {
+          sails.log.error("Error during file upload: ", err);
+          return reject(err);
+        }
         resolve(files);
       });
     });
 
     if (uploadedFiles && uploadedFiles.length > 0) {
+      sails.log.debug(uploadedFiles[0])
       let fname = require('path').basename(uploadedFiles[0].fd);
       return fname; // Rückgabe des Dateinamens
     } else {
@@ -136,8 +141,59 @@ module.exports = {
       return null;
     }
   },
+  destroy: async function (req, res) {
+    sails.log.debug("Delete a single Skript....")
+    let skript = await Skript.destroyOne({ id: req.params.id });
+    // 
+    res.redirect('/admin');
+  },
 
-  
+
+  update: async function (req, res) {
+    sails.log.debug("Update Skript....")
+    let params = req.allParams();
+
+    let uploadParams = {
+      adapter: require('skipper-s3'),
+      key: sails.config.s3accesskey,
+      secret: sails.config.s3secret,
+      bucket: 'wetebucket',
+    };
+
+    let uploadedFiles = await new Promise((resolve, reject) => {
+      req.file('data').upload(uploadParams, (err, files) => {
+        if (err) {
+          sails.log.error("Error during file upload: ", err);
+          return reject(err);
+        }
+        resolve(files);
+      });
+    });
+
+    if (uploadedFiles && uploadedFiles.length > 0) {
+      sails.log.debug(uploadedFiles[0])
+      let fpath = uploadedFiles[0].fd; // Pfad zur Datei auf S3
+      params.data = fpath; // Setze den Dateipfad
+    } else {
+      sails.log("No files were uploaded.");
+    }
+
+    // Aktualisiere das Skript mit den neuen Daten
+    await Skript.updateOne({ id: req.params.id }).set(params);
+
+    res.redirect('/admin');
+  },
+
+  edit: async function (req, res) {
+    sails.log.debug("Edit a single Skript....")
+    let skript = await Skript.findOne({ id: req.params.id }).populate('modul');
+    let studiengaenge = await Studiengang.find();
+    let module = await Modul.find();
+
+    res.view('pages/skript/edit', { skript: skript, studiengaenge: studiengaenge, module: module });
+  },
+
+
 
 
 };

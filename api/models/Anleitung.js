@@ -12,6 +12,7 @@ module.exports = {
         averageRating: { type: 'number', columnType: 'float' },
         modul: {
             model: 'modul',
+            required: true
            
         },
 

@@ -28,7 +28,7 @@
                     <div class="stars mb-2">
                         <i v-for="n in 5" :key="n" class="star"
                             :class="{ 'star-selected': n <= item.averageRating, 'star-hover': n <= item.tempRating }"
-                            @click="updateRating(n, item, item.modelName)" @mouseover="item.tempRating = n"
+                            @click="updateRating(n, item, item.type)" @mouseover="item.tempRating = n"
                             @mouseout="item.tempRating = item.averageRating">
                             ★
                         </i>
@@ -42,24 +42,28 @@
             <h1>Neueste Ressourcen</h1>
         </div>
         <div class="container-flex top-10-downloads">
-            <ul class="unordered-lists">
-                <li class="list-items">
-                    <a href="#">Placeholder A</a>
-                </li>
-                <li class="list-items">
-                    <a href="#">Placeholder B</a>
-                </li>
-                <li class="list-items">
-                    <a href="#">Placeholder C</a>
-                </li>
-                <li class="list-items">
-                    <a href="#">Placeholder D</a>
-                </li>
-                <li class="list-items">
-                    <a href="#">Placeholder E</a>
-                </li>
-            </ul>
+            <div id="newestResourcesApp">
+                <div v-for="item in newestResources" :key="item.id" class="list-items">
+                    <h5 class="card-title">
+                        <a>{{ item.name }}</a>
+                        (Autor: {{ item.author }})
+                    </h5>
+                    <p> Bewertung: </p>
+                    <div class="stars mb-2">
+                        <i v-for="n in 5" :key="n" class="star"
+                            :class="{ 'star-selected': n <= item.averageRating, 'star-hover': n <= item.tempRating }"
+                            @click="updateRating(n, item, item.type)" @mouseover="item.tempRating = n"
+                            @mouseout="item.tempRating = item.averageRating">
+                            ★
+                        </i>
+                    </div>
+                    <p v-if="item.averageRating">Durchschnittsbewertung: {{ item.averageRating.toFixed(2) }}</p>
+                    <a :href="'/downloadFile?filename=' + item.data" class="btn btn-sm btn-primary">Download</a>
+                </div>
+            </div>
         </div>
+
+
     </div>
     <% } else { %>
 
@@ -90,7 +94,7 @@
                 const createApp = Vue.createApp({
                     data() {
                         return {
-                          
+
                             topDownloads: []
                         };
                     },
@@ -136,7 +140,8 @@
                                 return response.json();
                             })
                             .then(data => {
-                                this.topDownloads = data.map(item => ({ ...item, tempRating: item.averageRating || 0 }));
+                                this.topDownloads = data.map(item => ({ ...item, tempRating: item.averageRating || 0, type: item.type }));
+
                             })
                             .catch(e => {
                                 console.log("There was a problem with the fetch operation: " + e.message);
@@ -145,4 +150,64 @@
                 });
 
                 createApp.mount('#topDownloadsApp');
+
+
+                const newestResourcesApp = Vue.createApp({
+                    data() {
+                        return {
+                            newestResources: []
+                        };
+                    },
+                    methods: {
+                        updateRating: function (rating, item, type) {
+                            const data = {
+                                userId: window.userId,
+                                itemId: item.id,
+                                bewertung: rating,
+                                type: type
+                            };
+
+                            console.log("Sending data: ", data);
+
+                            fetch('/bewertung/create', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify(data)
+                            })
+                                .then(response => {
+                                    if (!response.ok) {
+                                        throw new Error(`HTTP error! status: ${response.status}`);
+                                    }
+                                    return response.json();
+                                })
+                                .then(data => {
+                                    console.log("Received data: ", data);
+                                    item.averageRating = data.averageRating;
+                                })
+                                .catch(e => {
+                                    console.log("There was a problem with the fetch operation: " + e.message);
+                                });
+                        }
+                    },
+                    created() {
+                        fetch('/api/newestresources')
+                            .then(response => {
+                                if (!response.ok) {
+                                    throw new Error(`HTTP error! status: ${response.status}`);
+                                }
+                                return response.json();
+                            })
+                            .then(data => {
+                                this.newestResources = data.map(item => ({ ...item, tempRating: item.averageRating || 0, type: item.type }));
+                            })
+                            .catch(e => {
+                                console.log("There was a problem with the fetch operation: " + e.message);
+                            });
+                    }
+                });
+
+                newestResourcesApp.mount('#newestResourcesApp');
+
             </script>

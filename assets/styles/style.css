@@ -172,6 +172,26 @@ h4 {
 }
 
 
+.modul-box {
+  font-size: 1.5rem; /* Größere Schriftgröße */
+  font-weight: normal; /* Weniger fette Schrift */
+}
+
+.modul-box .badge {
+  margin: 0.2em;
+}
+
+/* Für kleine Bildschirme */
+@media (max-width: 576px) {
+  .modul-box {
+    font-size: 1.7rem;
+  }
+}
+@media (max-width: 768px) {
+  .modul-box {
+      flex-direction: column; /* Elemente stapeln sich untereinander statt nebeneinander */
+  }
+}
 
 
 a {
