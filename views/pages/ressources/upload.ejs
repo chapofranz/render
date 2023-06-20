@@ -1,4 +1,4 @@
-<div class="container-flex main-container">
+<div class="container-flex main-container" id="upload">
     <div class="container-fluid headline">
         <h1>
             Upload
@@ -15,7 +15,10 @@
                 <form class="wrapper upload" id="upload-form" action="/upload/new" method="POST">
                     <div class="nested">
                         <label for="name">Name</label>
-                        <input id="Dateiname-input" type="text" placeholder="Dateiname" name="name" class="upload-form">
+                        <input id="Dateiname-input" type="text" v-model="name" :class="{'is-invalid': invalidName}"
+                            placeholder="Dateiname" name="name" class="upload-form">
+                        <div class="invalid-feedback" v-if="invalidName">Max 15 Zeichen, _ - Buchstaben und Zahlen!
+                        </div>
                     </div>
                     <div class="nested">
                         <label for="kategorie">Kategorie</label>
@@ -69,3 +72,35 @@
                 </form>
             </div>
 </div>
+
+<script>
+    const { createApp } = Vue;
+
+    createApp({
+        data() {
+            return {
+                name: '',
+                invalidName: false,
+            }
+
+
+        },
+        methods: {
+            validName: function (name) {
+                let re = /^[0-9a-zA-Z\s_-]{1,15}$/; ;
+                return re.test(name);
+
+            }
+
+        },
+
+        watch: {
+            name: function (newName) {
+                this.invalidName = !this.validName(newName);
+            }
+
+        }
+
+
+    }).mount("#upload");
+</script>
