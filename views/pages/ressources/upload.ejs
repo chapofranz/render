@@ -12,7 +12,7 @@
         </div>
         <% } %>
             <div class="wrapper-grid">
-                <form class="wrapper upload" id="upload-form" action="/upload/new" method="POST">
+                <form class="wrapper upload" id="upload-form" action="/upload/new" method="post" enctype="multipart/form-data">
                     <div class="nested">
                         <label for="name">Name</label>
                         <input id="Dateiname-input" type="text" v-model="name" :class="{'is-invalid': invalidName}"
@@ -62,11 +62,11 @@
                     </div>
                     <div class="nested">
                         <label for="pfad">Dokument</label>
-                        <input id="Dokument-selection" type="text" placeholder="Datei Pfad eingeben" name="pfad">
+                        <input id="Dokument-selection" type="file" placeholder="Datei aus Verzeichniss wählen" name="data">
                     </div>
                     <div class="nested">
                         <label for="upload-button">Jetzt hochladen</label>
-                        <button class="btn btn-primary" id="upload-button">Upload</button>
+                        <button type="submit" class="btn btn-primary" id="upload-button">Upload</button>
                     </div>
 
                 </form>

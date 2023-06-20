@@ -1,6 +1,18 @@
 <div class="container-fluid">
+  <div class="row">
     <h1 class="my-4" id="searchUberschrift">Suchergebnisse</h1>
-  
+    <div class="col-12 col-md-3">
+      <div class="modul-box">
+        <% module.forEach(function(modul) { %>
+          <span class="badge bg-primary modul-filter" onclick="filterByModul('<%- modul.name %>')"
+            style="cursor: pointer;"><%- modul.name %></span>
+          <% }); %>
+            <span class="badge bg-primary modul-filter" onclick="filterByModul('')" style="cursor: pointer;">Alle</span>
+      </div>
+    </div>
+
+
+
     <h2 class="my-3">Skripte</h2>
     <div class="d-flex mb-3">
       <select id="skripteFilter" class="form-select">
@@ -9,25 +21,33 @@
         <option value="author">Autor</option>
       </select>
     </div>
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Beschreibung</th>
-          <th>Autor</th>
-        </tr>
-      </thead>
-      <tbody class="skripte-list" data-skripte='<%- JSON.stringify(skripte) %>'>
-        <% skripte.forEach(function(skript) { %>
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
           <tr>
-            <td><%- skript.name %></td>
-            <td><%- skript.beschreibung %></td>
-            <td><%- skript.author %></td>
+            <th>Name</th>
+            <th>Modul</th>
+            <th>Beschreibung</th>
+            <th>Autor</th>
+            <th>Download</th>
           </tr>
-        <% }); %>
-      </tbody>
-    </table>
-  
+        </thead>
+        <tbody class="skripte-list" data-skripte='<%- JSON.stringify(skripte) %>'>
+          <% skripte.forEach(function(skript) { %>
+            <tr>
+              <td><%- skript.name %></td>
+              <td><%- skript.modul.name %></td>
+              <td><%- skript.beschreibung %></td>
+
+              <td><%- skript.author %></td>
+              <td><a :href="'/downloadFile?filename=' + skript.data" class="btn btn-sm btn-primary">Download</a>
+              </td>
+            </tr>
+            <% }); %>
+        </tbody>
+      </table>
+    </div>
+
     <h2 class="my-3">Anleitungen</h2>
     <div class="d-flex mb-3">
       <select id="anleitungenFilter" class="form-select">
@@ -36,24 +56,138 @@
         <option value="author">Autor</option>
       </select>
     </div>
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Beschreibung</th>
-          <th>Autor</th>
-        </tr>
-      </thead>
-      <tbody class="anleitungen-list" data-anleitungen='<%- JSON.stringify(anleitungen) %>'>
-        <% anleitungen.forEach(function(anleitung) { %>
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
           <tr>
-            <td><%- anleitung.name %></td>
-            <td><%- anleitung.beschreibung %></td>
-            <td><%- anleitung.author %></td>
+            <th>Name</th>
+            <th>Modul</th>
+            <th>Beschreibung</th>
+            <th>Autor</th>
+            <th>Download</th>
           </tr>
-        <% }); %>
-      </tbody>
-    </table>
-  
+        </thead>
+        <tbody class="anleitungen-list" data-anleitungen='<%- JSON.stringify(anleitungen) %>'>
+          <% anleitungen.forEach(function(anleitung) { %>
+            <tr>
+              <td><%- anleitung.name %></td>
+              <td><%- anleitung.modul.name %></td>
+              <td><%- anleitung.beschreibung %></td>
+              <td><%- anleitung.author %></td>
+              <td> <a :href="'/downloadFile?filename=' + anleitung.data" class="btn btn-sm btn-primary">Download</a>
+              </td>
+            </tr>
+            <% }); %>
+        </tbody>
+      </table>
+    </div>
   </div>
-  
+</div>
+<script> function updateList(listType, items) {
+    const tableBody = document.querySelector(`.${listType}-list`);
+    tableBody.innerHTML = ''; items.forEach(item => {
+      const tableRow = document.createElement('tr');
+
+      const nameCell = document.createElement('td');
+      nameCell.textContent = item.name;
+      tableRow.appendChild(nameCell);
+
+      const modulCell = document.createElement('td');
+      modulCell.textContent = item.modul.name;
+      tableRow.appendChild(modulCell);
+
+      const descriptionCell = document.createElement('td');
+      descriptionCell.textContent = item.beschreibung;
+      tableRow.appendChild(descriptionCell);
+
+      const authorCell = document.createElement('td');
+      authorCell.textContent = item.author;
+      tableRow.appendChild(authorCell);
+
+      const downloadCell = document.createElement('td');
+      const downloadButton = document.createElement('a');
+      downloadButton.href = `/downloadFile?filename=${item.data}`; // Verwenden Sie item.data als Dateinamen
+      downloadButton.textContent = 'Download';
+      downloadButton.className = 'btn btn-primary';
+      downloadCell.appendChild(downloadButton);
+      tableRow.appendChild(downloadCell);
+
+      tableBody.appendChild(tableRow);
+    });
+  }
+
+
+  function filterItems(items, filterValue) {
+    if (filterValue === 'default') {
+      return items;
+    }
+    return items.sort((a, b) => a[filterValue].localeCompare(b[filterValue]));
+  }
+
+  function initializeSearchFilter() {
+    const skripteListElement = document.querySelector('.skripte-list');
+    const anleitungenListElement = document.querySelector('.anleitungen-list');
+
+    if (skripteListElement && anleitungenListElement) {
+      const skripteList = JSON.parse(skripteListElement.dataset.skripte);
+      const anleitungenList = JSON.parse(anleitungenListElement.dataset.anleitungen);
+
+      document.getElementById('skripteFilter').addEventListener('change', function () {
+        const filterValue = this.value;
+        const filteredSkripte = filterItems(skripteList, filterValue);
+        updateList('skripte', filteredSkripte);
+      });
+
+      document.getElementById('anleitungenFilter').addEventListener('change', function () {
+        const filterValue = this.value;
+        const filteredAnleitungen = filterItems(anleitungenList, filterValue);
+        updateList('anleitungen', filteredAnleitungen);
+      });
+    } else {
+      console.error('Unable to find elements with class .skripte-list or .anleitungen-list');
+    }
+  }
+
+  let currentModulFilter = '';
+
+  function filterByModul(modulName) {
+    currentModulFilter = modulName;
+
+    filterAndUpdateLists();
+  }
+
+  function filterItems(items, filterValue) {
+    let filteredItems = items;
+
+    if (filterValue !== 'default') {
+      filteredItems = filteredItems.sort((a, b) => a[filterValue].localeCompare(b[filterValue]));
+    }
+
+    if (currentModulFilter) {
+      filteredItems = filteredItems.filter(item => item.modul.name === currentModulFilter);
+    }
+
+    return filteredItems;
+  }
+
+  function filterAndUpdateLists() {
+    const skripteListElement = document.querySelector('.skripte-list');
+    const anleitungenListElement = document.querySelector('.anleitungen-list');
+    const skripteList = JSON.parse(skripteListElement.dataset.skripte);
+    const anleitungenList = JSON.parse(anleitungenListElement.dataset.anleitungen);
+
+    const skripteFilterValue = document.getElementById('skripteFilter').value;
+    const filteredSkripte = filterItems(skripteList, skripteFilterValue);
+    updateList('skripte', filteredSkripte);
+
+    const anleitungenFilterValue = document.getElementById('anleitungenFilter').value;
+    const filteredAnleitungen = filterItems(anleitungenList, anleitungenFilterValue);
+    updateList('anleitungen', filteredAnleitungen);
+  }
+
+  document.addEventListener('DOMContentLoaded', initializeSearchFilter);
+  document.getElementById('skripteFilter').addEventListener('change', filterAndUpdateLists);
+  document.getElementById('anleitungenFilter').addEventListener('change', filterAndUpdateLists);
+
+  document.addEventListener('DOMContentLoaded', filterAndUpdateLists);
+</script>

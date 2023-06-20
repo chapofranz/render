@@ -2,11 +2,17 @@ module.exports = {
     attributes: {
         name: { type: 'string', columnType: 'varchar(80)', required: true },
         beschreibung: { type: 'string', columnType: 'varchar(80)' },
-        pfad: { type: 'string', columnType: 'varchar(255)', required: true },
+        data: {
+            type: 'string',
+            required: true,
+            columnType: 'varchar(128)',
+            columnName: 'skript_url',
+        },
         author: { type: 'string', columnType: 'varchar(80)', required: true },
-        averageRating: {type: 'number' , columnType: 'float'},
+        averageRating: { type: 'number', columnType: 'float' },
         modul: {
-            model: 'modul'
+            model: 'modul',
+           
         },
 
         bewertung: {

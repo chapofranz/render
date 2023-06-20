@@ -1,6 +1,40 @@
 const Sails = require("sails/lib/app/Sails");
 
 module.exports = {
+  
+  uploadDataForm: async function (req, res) {
+    sails.log.debug("Upload data form....")
+    let skript = await Skript.findOne({ id: req.params.id })
+
+    res.view('pages/ressoucres/upload', { skript: skript });
+  },
+
+  uploadData: async function (req, res) {
+    sails.log("Upload data for anleitung...");
+    let params = {
+      adapter: require('skipper-s3'),
+      key: sails.config.s3accesskey,
+      secret: sails.config.s3secret,
+      bucket: 'wetebucket',
+      region: 'us-west-2'
+    };
+
+    let uploadedFiles = await new Promise((resolve, reject) => {
+      req.file('data').upload(params, (err, files) => {
+        if (err) return reject(err);
+        resolve(files);
+      });
+    });
+
+    if (uploadedFiles && uploadedFiles.length > 0) {
+      let fname = require('path').basename(uploadedFiles[0].fd);
+      return fname; // Rückgabe des Dateinamens
+    } else {
+      sails.log("No files were uploaded.");
+      return null;
+    }
+  },
+
   create: async function (req, res) {
     sails.log.debug("Erstellt Anleitung....");
     let params = req.allParams();

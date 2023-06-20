@@ -33,16 +33,12 @@
                     <div v-show="section.showContent">
                         <div v-for="item in section.items" :key="item.id" class="card mb-3">
                             <div class="card-body">
-                                <!-- <h5 class="card-title">
-                                    <a :href="'/download/' + section.title.toLowerCase() + '/' + item.id">{{ item.name
-                                        }}</a>
-                                    (Autor: {{ item.author }})
-                                </h5> -->
                                 <h5 class="card-title">
                                     <a>{{ item.name
                                         }}</a>
                                     (Autor: {{ item.author }})
                                 </h5>
+
                                 <p class="card-text"> Bewertung: </p>
                                 <div class="stars mb-2">
                                     <i v-for="n in 5" :key="n" class="star"
@@ -55,6 +51,10 @@
                                 </div>
                                 <p class="card-text" v-if="item.averageRating">Durchschnittsbewertung: {{
                                     item.averageRating.toFixed(2) }}</p>
+                                <a :href="'/downloadFile?filename=' + item.data"
+                                    class="btn btn-sm btn-primary">Download</a>
+
+
                             </div>
                         </div>
                     </div>
