@@ -100,7 +100,9 @@ module.exports.routes = {
 
   'GET /search': 'SearchController.search',
   'POST /upload/new': 'upload.save',
-  'POST /bewertung/create': 'bewertung.create'
+  'POST /bewertung/create': 'bewertung.create',
+  'GET /contact/create': 'ContactController.index',
+  'POST /contact': 'ContactController.create'
 
 
   /***************************************************************************

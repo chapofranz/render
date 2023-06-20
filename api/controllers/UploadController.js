@@ -43,11 +43,3 @@ module.exports = {
     return;
   }
 }
-
-//   upload: function  (req, res) {
-//     req.file('file').upload(function (err, files) {
-//       if (err)
-//         return res.serverError(err);
-//     });
-//   }
-// }

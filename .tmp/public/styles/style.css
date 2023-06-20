@@ -4,6 +4,7 @@
   font-weight: 300;
   margin: 0px;
   cursor: default;
+  color: black;
 }
 
 #edit-password.form-control {
@@ -96,7 +97,8 @@
 body {
   font-size: 13px;
 
-  background: linear-gradient(135deg, #5A9, var(--secondary));
+  /*background: linear-gradient(135deg, #5A9, var(--secondary));*/
+  background-color: #E3F3CD;
   color: white;
 
 }
@@ -993,4 +995,9 @@ input[type="file"] {
   border: 1px solid black;
   padding: 10px;
   margin-top: 30px;
+}
+.contact-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

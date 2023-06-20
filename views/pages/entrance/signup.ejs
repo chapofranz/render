@@ -1,9 +1,9 @@
 <div id="signup">
   <div class="container-fluid pt-5 pb-5">
-    <h1 class="text-center">Wunderbar, du möchtest Mitglied von Studie-Connect werden!</h1>
+    <h1 class="text-center">Vielen Dank, dass du Mitglied von Studie-Connect wirst!</h1>
     <div class="card mx-auto" style="max-width: 450px;">
       <div class="card-body">
-        <p class="text-center">Die Registrierung ist kostenfrei und geht ganz schnell.</p>
+        <p class="text-center">Die Registrierung geht ganz schnell und ist komplett kostenlos.</p>
         <hr />
         <form action="/signup" method="POST" @submit="validateForm">
           <div class="form-group">
@@ -30,7 +30,7 @@
           <div class="form-group">
             <label for="userName">User Name</label>
             <input class="form-control" :class="{'is-invalid': invalidUserName }" id="userName" name="userName"
-              type="text" placeholder="test_user" v-model="userName" autocomplete="userName"
+              type="text" placeholder="Doloris_Sinister" v-model="userName" autocomplete="userName"
               v-on:blur="checkUserNameExists(userName)" required>
             <div class="invalid-feedback" v-if="invalidUserName">Dein User Name wird schon verwendet
             </div>
