@@ -17,17 +17,17 @@
         <div class="col-sm-6">
           <div class="form-group">
             <label for="first-name">Vorname</label>
-            <input class="form-control" id="first-name" name="vorName" type="text" autocomplete="firstName"
+            <input class="form-control" id="first-name" name="vorName" type="text" autocomplete="firstName" v-model="vorName" :class="{'is-invalid': invalidVorName}"
               value="<%= req.me.vorName %>">
-            <div class="invalid-feedback">Please enter your first name.</div>
+            <div class="invalid-feedback" v-if="invalidVorName">Bitte gültigen Vornamen eingeben</div>
           </div>
         </div>
         <div class="col-sm-6">
           <div class="form-group">
             <label for="second-name">Nachname</label>
-            <input class="form-control" id="second-name" name="nachName" type="text" autocomplete="secondName"
+            <input class="form-control" id="second-name" name="nachName" type="text" autocomplete="secondName" v-model="nachName" :class="{'is-invalid': invalidNachName}"
               value="<%= req.me.nachName %>">
-            <div class="invalid-feedback">Please enter your second name.</div>
+            <div class="invalid-feedback " v-if="invalidNachName">Bitte gültigen Nachnamen eingeben</div>
           </div>
         </div>
         <div class="col-sm-6">
@@ -85,8 +85,12 @@
           userName: '<%= req.me.userName %>',
           password: '',
           birthday: '<%= req.me.birthday %>',
+          vorName: '<%= req.me.vorName %>',
+          nachName: '<%= req.me.nachName %>',
           invalidEmail: false,
           invalidUserName: false, 
+          invalidVorName: false,
+          invalidNachName: false,
           invalidBirthday: false,
         }
       },
@@ -99,12 +103,16 @@
           let re = /^\d{2}\.\d{2}\.\d{4}$/;
           return re.test(birthday);
         },
+        validName: function (name) {
+          let re = /^[a-zA-Z]+$/;
+          return re.test(name);
+        },
 
         checkEmailExists: async function () {
           if (this.validEmail(this.emailAddress)) {
             const response = await fetch('/check-email-exists', {
               method: 'POST',
-              body: JSON.stringify({ emailAddress: this.emailAddress }),
+              body: JSON.stringify({ emailAddress: this.emailAddress}),
               headers: { 'Content-Type': 'application/json' },
             });
             if (response.status === 409) {
@@ -119,7 +127,7 @@
         checkUserNameExists: async function () {
           const response = await fetch('/check-username-exists', {
             method: 'POST',
-            body: JSON.stringify({ userName: this.userName }),
+            body: JSON.stringify({ userName: this.userName}),
             headers: { 'Content-Type': 'application/json' },
           });
           if (response.status === 409) {
@@ -137,6 +145,12 @@
         },
         userName: function () {
           this.checkUserNameExists();
+        },
+        vorName: function (newVorName) {
+          this.invalidVorName = !this.validName(newVorName);
+        },
+        nachName: function (newNachName) {
+          this.invalidNachName = !this.validName(newNachName);
         },
         birthday: function (newBirthday) {
           this.invalidBirthday = !this.validBirthday(newBirthday);

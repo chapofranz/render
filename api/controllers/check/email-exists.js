@@ -19,19 +19,24 @@ module.exports = {
         description: 'The provided email address does not exist.',
       },
     },
-    fn: async function ({ emailAddress }) {
+
+    fn: async function ({ emailAddress}) {
       var newEmailAddress = emailAddress.toLowerCase();
   
       var user = await User.findOne({
         emailAddress: newEmailAddress
       });
       
-  
-  
+
       if(user) {
-        throw 'emailExists';
+        if(this.req.me && user.id === this.req.me.id) {
+          throw 'emailDoesNotExist';
+        } else {
+          throw 'emailExists'; 
+        }
       } else {
-        throw 'emailDoesNotExist';
+        throw 'emailDoesNotExist'; 
       }
     }
   };
+  //  this.req.me

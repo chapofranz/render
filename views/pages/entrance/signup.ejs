@@ -8,16 +8,17 @@
         <form action="/signup" method="POST" @submit="validateForm">
           <div class="form-group">
             <label for="vorName">Vorname</label>
-            <input class="form-control" id="full-name" name="vorName" type="text" placeholder="Doloris F."
-              autocomplete="firstName" focus-first required>
-            <div class="invalid-feedback">Please enter your first Name.</div>
+            <input class="form-control" id="vor-name" name="vorName" type="text" placeholder="Doloris F."
+              v-model="vorName" :class="{'is-invalid': invalidVorName}" autocomplete="firstName" focus-first required>
+            <div class="invalid-feedback" v-if="invalidVorName">Bitte gültigen Vornamen eingeben.</div>
           </div>
 
           <div class="form-group">
             <label for="nachName">Nachname</label>
-            <input class="form-control" id="height" name="nachName" type="text" placeholder="Sinister"
-              autocomplete="secondName" focus-first required>
-            <div class="invalid-feedback">Please enter your second Name.</div>
+            <input class="form-control" id="nachName" name="nachName" type="text" v-model="nachName"
+              :class="{'is-invalid': invalidNachName}" placeholder="Sinister" autocomplete="secondName" focus-first
+              required>
+            <div class="invalid-feedback" v-if="invalidNachName">Bitte gültigen Nachnamen eingeben</div>
           </div>
           <div class="form-group">
             <label for="birthday">Geburtsdatum</label>
@@ -77,9 +78,10 @@
                 href="/terms">terms of service</a>.</label>
           </div>
           <div class="form-group">
-            <button type="submit" class="btn btn-lg btn-block mt-3" style="background-color: #4a47a3; color: #fff;" :disabled="passwordsDontMatch">Account erstellen</button>
+            <button type="submit" class="btn btn-lg btn-block mt-3" style="background-color: #4a47a3; color: #fff;"
+              :disabled="passwordsDontMatch">Account erstellen</button>
           </div>
-            
+
         </form>
         <p class="text-center mt-3">Hast du schon ein Account? <a href="/login">Sign in</a></p>
       </div>
@@ -97,10 +99,14 @@
           password: '',
           confirmPassword: '',
           birthday: '',
+          vorName: '',
+          nachName: '',
           invalidEmail: false,
           invalidUserName: false,
           invalidBirthday: false,
           passwordsDontMatch: false,
+          invalidVorName: false,
+          invalidNachName: false,
           termsAgreement: false
         }
       },
@@ -112,6 +118,10 @@
         validEmail: function (email) {
           let re = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
           return re.test(email);
+        },
+        validName: function (name) {
+          let re = /^[a-zA-Z]+$/;
+          return re.test(name);
         },
         validateForm: async function (event) {
           if (!this.isTermsAgreed()) {
@@ -169,6 +179,12 @@
         },
         confirmPassword: function (newConfirmPassword) {
           this.passwordsDontMatch = !this.passwordsMatch(this.password, newConfirmPassword);
+        },
+        vorName: function (newVorName) {
+          this.invalidVorName = !this.validName(newVorName);
+        },
+        nachName: function (newNachName) {
+          this.invalidNachName = !this.validName(newNachName);
         },
         password: function (newPassword) {
           this.passwordsDontMatch = !this.passwordsMatch(newPassword, this.confirmPassword);
