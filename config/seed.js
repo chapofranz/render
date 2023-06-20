@@ -238,17 +238,18 @@ module.exports = {
     for (const studiengang of studiengaenge) {
       await Studiengang.findOrCreate({ kuerzel: studiengang.kuerzel }, studiengang);
     }
-    for (const skript of skripte) {
-      // const uploadedFilePath = await uploadFile(skript.data);
-      // skript.data = uploadedFilePath;
-      await Skript.findOrCreate({ name: skript.name }, skript);
-    }
+    
+    // for (const skript of skripte) {
+    //   // const uploadedFilePath = await uploadFile(skript.data);
+    //   // skript.data = uploadedFilePath;
+    //   await Skript.findOrCreate({ name: skript.name }, skript);
+    // }
 
-    for (const anleitung of anleitungen) {
-      // const uploadedFilePath = await uploadFile(anleitung.data);
-      // anleitung.data = uploadedFilePath;
-      await Anleitung.findOrCreate({ name: anleitung.name }, anleitung);
-    }
+    // for (const anleitung of anleitungen) {
+    //   // const uploadedFilePath = await uploadFile(anleitung.data);
+    //   // anleitung.data = uploadedFilePath;
+    //   await Anleitung.findOrCreate({ name: anleitung.name }, anleitung);
+    // }
   }
 
 };
