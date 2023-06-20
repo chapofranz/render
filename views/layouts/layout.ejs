@@ -52,7 +52,6 @@
     <script src="/dependencies/bootstrap.min.js"></script>
     <script src="/dependencies/vue-router.global.js"></script>
     <script src="/dependencies/vuetify.min.js"></script>
-    <script src="/js/searchFilter.js"></script>
     <!--SCRIPTS END-->
 
     <header>
@@ -64,25 +63,25 @@
                     </a>
                     <div class="lefty d-flex align-items-center">
                         <% if (!req.me) { %>
-                        <a class="navbar-icon flex-item" href="/login">
-                            <span class="navbar-text">Login</span>
-                        </a>
-                        <a class="navbar-icon flex-item" href="/signup"> <!-- Signup Route -->
-                            <span class="navbar-text">Signup</span>
-                        </a>
-                        <% } else { %>
-                        <a class="navbar-icon flex-item" href="/logout">
-                            <span class="navbar-text">Logout</span>
-                        </a>
-                        <% } %>
-                        <a class="navbar-icon flex-item" href="/account">
-                            <img class="user-profile-img" src="/images/guest.png" alt="user-profile">
-                        </a>
-                        <button class="navbar-toggler flex-item" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
-                            aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
+                            <a class="navbar-icon flex-item" href="/login">
+                                <span class="navbar-text">Login</span>
+                            </a>
+                            <a class="navbar-icon flex-item" href="/signup"> <!-- Signup Route -->
+                                <span class="navbar-text">Signup</span>
+                            </a>
+                            <% } else { %>
+                                <a class="navbar-icon flex-item" href="/logout">
+                                    <span class="navbar-text">Logout</span>
+                                </a>
+                                <% } %>
+                                    <a class="navbar-icon flex-item" href="/account">
+                                        <img class="user-profile-img" src="/images/guest.png" alt="user-profile">
+                                    </a>
+                                    <button class="navbar-toggler flex-item" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                                        aria-label="Toggle navigation">
+                                        <span class="navbar-toggler-icon"></span>
+                                    </button>
                     </div>
 
                     <div class="collapse navbar-collapse" id="navbarNav">
@@ -101,11 +100,9 @@
                                 <a class="nav-link" href="/ressourcen/show">Ressourcen</a>
                             </li>
                             <li class="nav-item active">
-                                <a class="nav-link" href="/marketplace">Marketplace</a>
+                                <a class="nav-link" href="/ressources/upload">Upload</a>
                             </li>
-                            <li class="nav-item active">
-                                <a class="nav-link" href="/chat">Chat</a>
-                            </li>
+
                             <li class="nav-item active">
                                 <a class="nav-link" href="/dozenten">Dozenten</a>
                             </li>
@@ -114,17 +111,7 @@
                                     <a class="nav-link" href="/admin">Admin</a>
                                 </li>
                                 <% } %>
-                                    <!-- <% if (req.me) { %>
-                                        <li class="nav-item logout-button">
-                                            <a href="/logout">
-                                                <button class="yellow-button" type="button">Logout</button></a>
-                                        </li>
-                                        <% } else { %>
-                                            <li class="nav-item logout-button">
-                                                <a href="/login">
-                                                    <button class="yellow-button" type="button">Login</button></a>
-                                            </li>
-                                            <% } %> -->
+
                         </ul>
                     </div>
                 </div>

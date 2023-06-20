@@ -27,7 +27,7 @@ module.exports.policies = {
   'check/*': true,
 
   SearchController: {
-    '*': true,
+    '*': 'is-logged-in',
   },
 
   StudiengangController: {

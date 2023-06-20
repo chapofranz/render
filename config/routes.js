@@ -23,16 +23,16 @@ module.exports.routes = {
   ***************************************************************************/
   '/': { view: 'pages/homepage' },
 
-  'POST /check-email-exists': {action: 'check/email-exists'},
-  'POST /check-username-exists': {action: 'check/user-name-exists'},
+  'POST /check-email-exists': { action: 'check/email-exists' },
+  'POST /check-username-exists': { action: 'check/user-name-exists' },
 
-  'GET /signup':            { action: 'entrance/view-signup' },
-  'GET /login':             { action: 'entrance/view-login' },
+  'GET /signup': { action: 'entrance/view-signup' },
+  'GET /login': { action: 'entrance/view-login' },
 
 
-  'GET /account':           { action: 'account/view-account-overview' },
-  'GET /account/password':  { action: 'account/view-edit-password' },
-  'GET /account/profile':   { action: 'account/view-edit-profile' },
+  'GET /account': { action: 'account/view-account-overview' },
+  'GET /account/password': { action: 'account/view-edit-password' },
+  'GET /account/profile': { action: 'account/view-edit-profile' },
 
   //  ╔═╗╔═╗╦  ╔═╗╔╗╔╔╦╗╔═╗╔═╗╦╔╗╔╔╦╗╔═╗
   //  ╠═╣╠═╝║  ║╣ ║║║ ║║╠═╝║ ║║║║║ ║ ╚═╗
@@ -40,21 +40,26 @@ module.exports.routes = {
   // Note that, in this app, these API endpoints may be accessed using the `Cloud.*()` methods
   // from the Parasails library, or by using those method names as the `action` in <ajax-form>.
 
-  'GET /logout':            { action: 'account/logout' },
-  'POST  /login':           { action: 'entrance/login' },
-  'POST  /signup':          { action: 'entrance/signup' },
-  'POST  /updateProfile':   { action: 'account/update-profile' },
-  'POST  /updatePassword':  { action: 'account/update-password' },
+  'GET /logout': { action: 'account/logout' },
+  'POST  /login': { action: 'entrance/login' },
+  'POST  /signup': { action: 'entrance/signup' },
+  'POST  /updateProfile': { action: 'account/update-profile' },
+  'POST  /updatePassword': { action: 'account/update-password' },
 
+<<<<<<< HEAD
   'GET /admin':             {action: 'admin/view-edit-all'},
 
+=======
+  'GET /admin': { action: 'admin/view-edit-all' },
+
+>>>>>>> origin/main
   'POST /user': 'user.create',
   'GET /user': 'user.find',
   'POST /user/:id/delete': 'user.destroy',
   'GET /user/:id/edit': 'user.edit',
   'POST /user/:id/update/': 'user.update',
 
-  'GET /ressourcen/show': { view: 'pages/ressources/show' },
+  'GET /ressourcen/show': { action: 'ressources/show'},
 
   'GET /studiengang ': 'studiengang.show', //! funkts
 
@@ -68,17 +73,31 @@ module.exports.routes = {
 
 
   'GET /wirtschaftsinformatik': { action: 'wirtschaftsinformatik/show' },
-  'GET /download/skript/:id': 'skript.download',
+
+
+
   'GET /download/anleitung/:id': 'anleitung.download',
+
+
 
 
   'GET /skript/edit ': { controller: 'SkriptController', action: 'find' },
   'POST /skript/destroy/:id': 'skript.destroyOne',
   'POST /skript/edit/:id': 'skript.editOne',
   'POST /skript/create': 'skript.create',
-  'POST /skript/update/:id': 'skript.updateOne',
+  'POST /skript/:id/update': 'skript.updateOne',
   'GET /skript/new': { view: 'pages/skript/new' },
 
+
+  'GET /skript/:id/uploadDataForm': { controller: 'SkriptController', action: 'uploadDataForm' },
+  'POST /skript/:id/uploadData': { controller: 'SkriptController', action: 'uploadData' },
+
+  // 'GET /downloadFile/:filename': 'DateiController.downloadFile',
+  'GET /downloadFile': 'DateiController.downloadFile',
+
+
+
+  'GET /testDownload': 'DateiController.downloadFile',
 
 
   'GET /anleitung/edit ': { controller: 'AnleitungController', action: 'find' },
@@ -101,8 +120,12 @@ module.exports.routes = {
   'GET /search': 'SearchController.search',
   'POST /upload/new': 'upload.save',
   'POST /bewertung/create': 'bewertung.create',
+<<<<<<< HEAD
   'GET /contact/create': 'ContactController.index',
   'POST /contact': 'ContactController.create'
+=======
+  'GET /api/topdownloads': { action: 'topDownloads/show' },
+>>>>>>> origin/main
 
 
   /***************************************************************************
