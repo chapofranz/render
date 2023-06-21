@@ -465,13 +465,13 @@ module.exports = {
     //   await Skript.findOrCreate({ name: skript.name }, skript);
     // }
 
-    for (const skript of skripte) {
-      await Skript.findOrCreate({ name: skript.name }, skript);
-    }
-
-    for (const anleitung of anleitungen) {
-      await Anleitung.findOrCreate({ name: anleitung.name }, anleitung);
-    }
+    // for (const skript of skripte) {
+    //   await Skript.findOrCreate({ name: skript.name }, skript);
+    // }
+    //
+    // for (const anleitung of anleitungen) {
+    //   await Anleitung.findOrCreate({ name: anleitung.name }, anleitung);
+    // }
 
     for (const dozent of dozenten) {
       await Dozent.findOrCreate({nachname: dozent.nachname}, dozent);

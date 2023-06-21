@@ -55,7 +55,7 @@ module.exports.routes = {
   'POST /user/:id/update/': 'user.update',
 
   'GET /ressourcen/show': { action: 'ressources/show'},
-  'GET /studiengang ': 'studiengang.show', 
+  'GET /studiengang ': 'studiengang.show',
 
   'GET /studiengang/new': { view: 'pages/studiengang/new' },
   'GET /studiengang/edit ': { controller: 'StudiengangController', action: 'find' },
@@ -73,7 +73,7 @@ module.exports.routes = {
 
   'GET /skript/edit ': { controller: 'SkriptController', action: 'find' },
   'POST /skript/create': 'skript.create',
-  
+
   'POST /skripte/:id/delete': 'skript.destroy',
   'GET /skripte/:id/edit': 'skript.edit',
   'POST /skript/:id/update/': 'skript.update',
@@ -90,28 +90,21 @@ module.exports.routes = {
 
   'GET /skript/:id/uploadDataForm': { controller: 'SkriptController', action: 'uploadDataForm' },
   'POST /skript/:id/uploadData': { controller: 'SkriptController', action: 'uploadData' },
-<<<<<<< HEAD
 
   // 'GET /downloadFile/:filename': 'DateiController.downloadFile',
   'GET /downloadFile': 'DateiController.downloadFile',
 
 
 
-  'GET /testDownload': 'DateiController.downloadFile',
 
 
-  'GET /anleitung/edit ': { controller: 'AnleitungController', action: 'find' },
-  'POST /anleitung/destroy/:id': 'anleitung.destroyOne',
-  'POST /anleitung/edit/:id': 'anleitung.editOne',
-  'POST /anleitung/create': 'anleitung.create',
-  'POST /anleitung/update/:id': 'anleitung.updateOne',
-  'GET /anleitung/new': { view: 'pages/anleitung/new' },
-=======
-  
-  
-  'GET /downloadFile': 'DateiController.downloadFile',
+  // 'GET /anleitung/edit ': { controller: 'AnleitungController', action: 'find' },
+  // 'POST /anleitung/create': 'anleitung.create',
+  // 'GET /anleitung/new': { view: 'pages/anleitung/new' },
+  //
+  //
+  // 'GET /downloadFile': 'DateiController.downloadFile',
   'GET /wirtschaftsinformatik': { action: 'wirtschaftsinformatik/show' },
->>>>>>> origin/main
 
   'GET /dozenten': 'DozentenController.list',
 

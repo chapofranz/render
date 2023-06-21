@@ -1,12 +1,13 @@
 const nodemailer = require('nodemailer');
+const Sails = require("sails/lib/app/Sails");
 
 const transporter = nodemailer.createTransport({
   host: 'smtp.web.de',
   port: 587,
   secure: false, // true for 465 port, false for other ports
   auth: {
-    user: process.env.EMAIL_USERNAME,
-    pass: process.env.EMAIL_PASSWORD
+    user: sails.config.EMAIL_USERNAME,
+    pass: sails.config.EMAIL_PASSWORD
   }
 });
 
@@ -23,17 +24,26 @@ module.exports = {
 
     try {
       await transporter.sendMail({
-        from: process.env.EMAIL_USERNAME, // sender address
-        to: process.env.EMAIL_RECIPIANT, // recipient address
+        from: sails.config.EMAIL_USERNAME, // sender address
+        to: sails.config.EMAIL_RECIPIANT, // recipient address
         subject: 'New Contact Form Submission',
         text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`
       });
-
-      return res.ok('Form submitted successfully');
+      req.session.message = "Kontaktformular erf";
+      req.session.messageClass = 'text-success';
+      res.view("contact/create",{ messageClass: req.session.messageClass, message: req.session.message });
+      req.session.message = null;
+      req.session.messageClass = null;
+      return;
     } catch (err) {
 
       console.error('Error sending email:', err);
-      return res.serverError('An error occurred while processing the form');
+      req.session.message = "Kontaktformular nicht erfolgreich";
+      req.session.messageClass = 'text-warning';
+      res.view("contact/create",{ messageClass: req.session.messageClass, message: req.session.message });
+      req.session.message = null;
+      req.session.messageClass = null;
+      return;
     }
   }
 };
