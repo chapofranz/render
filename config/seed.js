@@ -226,8 +226,16 @@ module.exports = {
         anleitung: [],
         skript: [],
 
-      }
+      },
 
+      {
+        name: 'Webtechnologie',
+        beschreibung: 'Einführung in Webentwicklung',
+        studiengang_modul: [],
+        anleitung: [],
+        skript: [],
+
+      }
     ]
     const dozenten = [
       {
