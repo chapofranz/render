@@ -17,6 +17,28 @@ module.exports = {
         res.redirect('/modul');
     },
 
+    destroy: async function (req, res) {
+        sails.log.debug("Delete a single Modul....")
+        let modul = await Modul.destroyOne({ id: req.params.id });
+        // 
+        res.redirect ('/admin' );
+      },
+
+      edit: async function (req, res) {
+        sails.log.debug("Edit a single Moduk....")
+        let modul = await Modul.findOne({ id: req.params.id });
+        let studiengaenge = await Studiengang.find();
+    
+        res.view ('pages/modul/edit', { modul: modul, studiengaenge: studiengaenge } );
+      },
+    
+    update: async function (req, res) {
+        sails.log.debug("Update Modul....")
+        let params = req.allParams();
+        await Modul.updateOne({id: req.params.id}).set(params);
+        res.redirect ('/admin' );
+      },
+    
 
     findOne: async function (req, res) {
         let id = req.param('id');

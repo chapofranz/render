@@ -8,6 +8,7 @@ module.exports = {
 
         modul: {
             model: 'modul',
+            required: true
           
         },
         bewertung: {

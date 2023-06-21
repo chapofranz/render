@@ -9,7 +9,6 @@ module.exports = {
         or: [
           { name: { contains: searchTerm } },
           { beschreibung: { contains: searchTerm } },
-          { modul: { contains: searchTerm } },
           { author: { contains: searchTerm } },
         ],
       }).populate('modul');
@@ -18,7 +17,6 @@ module.exports = {
         or: [
           { name: { contains: searchTerm } },
           { beschreibung: { contains: searchTerm } },
-          { modul: { contains: searchTerm } },
           { author: { contains: searchTerm } },
         ],
       }).populate('modul');
