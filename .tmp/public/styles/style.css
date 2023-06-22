@@ -96,11 +96,9 @@
 
 body {
   font-size: 13px;
-
   /*background: linear-gradient(135deg, #5A9, var(--secondary));*/
   background-color: #E3F3CD;
   color: white;
-
 }
 
 header {
