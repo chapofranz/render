@@ -23,8 +23,8 @@ module.exports.routes = {
   ***************************************************************************/
   '/': { view: 'pages/homepage' },
 
-  'POST /check-email-exists': { action: 'check/email-exists' },
-  'POST /check-username-exists': { action: 'check/user-name-exists' },
+  'POST /check-email-exists': {action: 'check/email-exists'},
+  'POST /check-username-exists': {action: 'check/user-name-exists'},
 
   'GET /signup': { action: 'entrance/view-signup' },
   'GET /login': { action: 'entrance/view-login' },
@@ -47,7 +47,7 @@ module.exports.routes = {
   'POST  /updatePassword': { action: 'account/update-password' },
 
   'GET /admin': { action: 'admin/view-edit-all' },
-  
+
   'POST /user': 'user.create',
   'GET /user': 'user.find',
   'POST /user/:id/delete': 'user.destroy',
@@ -55,7 +55,7 @@ module.exports.routes = {
   'POST /user/:id/update/': 'user.update',
 
   'GET /ressourcen/show': { action: 'ressources/show'},
-  'GET /studiengang ': 'studiengang.show', 
+  'GET /studiengang ': 'studiengang.show',
 
   'GET /studiengang/new': { view: 'pages/studiengang/new' },
   'GET /studiengang/edit ': { controller: 'StudiengangController', action: 'find' },
@@ -73,7 +73,7 @@ module.exports.routes = {
 
   'GET /skript/edit ': { controller: 'SkriptController', action: 'find' },
   'POST /skript/create': 'skript.create',
-  
+
   'POST /skripte/:id/delete': 'skript.destroy',
   'GET /skripte/:id/edit': 'skript.edit',
   'POST /skript/:id/update/': 'skript.update',
@@ -90,22 +90,42 @@ module.exports.routes = {
 
   'GET /skript/:id/uploadDataForm': { controller: 'SkriptController', action: 'uploadDataForm' },
   'POST /skript/:id/uploadData': { controller: 'SkriptController', action: 'uploadData' },
-  
-  
+
+  // 'GET /downloadFile/:filename': 'DateiController.downloadFile',
   'GET /downloadFile': 'DateiController.downloadFile',
+
+
+
+
+
+  // 'GET /anleitung/edit ': { controller: 'AnleitungController', action: 'find' },
+  // 'POST /anleitung/create': 'anleitung.create',
+  // 'GET /anleitung/new': { view: 'pages/anleitung/new' },
+  //
+  //
+  // 'GET /downloadFile': 'DateiController.downloadFile',
   'GET /wirtschaftsinformatik': { action: 'wirtschaftsinformatik/show' },
+
+  'GET /dozenten': 'DozentenController.list',
 
   'GET /marketplace': { view: 'pages/marketplace/show' },
   'GET /chat': { view: 'pages/chat/show' },
-  'GET /dozenten': { view: 'pages/dozenten/show' },
+  'GET /upload': { controller: 'UploadController', action: 'new' },
+  'GET /impressum': { view: 'pages/impressum'},
+  'GET /datenschutz': { view: 'pages/datenschutz'},
+  'GET /concept': { view: 'pages/concept'},
   'GET /ressources/upload': { controller: 'UploadController', action: 'new' },
-
 
   'GET /search': 'SearchController.search',
   'POST /upload/new': 'upload.save',
   'POST /bewertung/create': 'bewertung.create',
+
+  'POST /contact/create': 'ContactController.create',
+  'GET /contact': 'ContactController.index',
+
   'GET /api/topdownloads': { action: 'topDownloads/show' },
   'GET /api/newestresources': {action: 'newestRessources/show'}
+
 
 
   /***************************************************************************

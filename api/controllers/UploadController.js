@@ -59,5 +59,4 @@ module.exports = {
     req.session.messageClass = null;
     return;
   }
-
 }
