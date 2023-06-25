@@ -231,9 +231,8 @@ module.exports = {
 
     ]
 
-    for (const modul of module) {
-      await Modul.findOrCreate({ name: modul.name }, modul)
-    }
+  
+    
 
     for (const studiengang of studiengaenge) {
       await Studiengang.findOrCreate({ kuerzel: studiengang.kuerzel }, studiengang);
