@@ -12,7 +12,8 @@
         </div>
         <% } %>
             <div class="wrapper-grid">
-                <form class="wrapper upload" id="upload-form" action="/upload/new" method="post" enctype="multipart/form-data">
+                <form class="wrapper upload" id="upload-form" action="/upload/new" method="post"
+                    enctype="multipart/form-data">
                     <div class="nested">
                         <label for="name">Name</label>
                         <input id="Dateiname-input" type="text" v-model="name" :class="{'is-invalid': invalidName}"
@@ -30,7 +31,8 @@
                     </div>
                     <div class="nested">
                         <label for="studiengang">Studiengang</label>
-                        <select name="studiengang" id="studiengang" class="upload-form" required>
+                        <select name="studiengang" id="studiengang" class="upload-form" required
+                            onchange="updateModule(this.value)">
                             <option value="Studiengang wählen">Wählen einen Studiengang aus</option>
                             <% studiengaenge.forEach(function(studiengang) { %>
                                 <option value="<%= studiengang.id %>">
@@ -43,11 +45,7 @@
                         <label for="modul">Modul</label>
                         <select name="modul" id="modul" class="upload-form" required>
                             <option value="Modul">Wählen ein Modul aus</option>
-                            <% module.forEach(function(modul) { %>
-                                <option value="<%= modul.id %>">
-                                    <%= modul.name %> (<%= modul.id %>)
-                                </option>
-                                <% }); %>
+                            <!-- Module options werden hier reingeladen! -->
                         </select>
                     </div>
                     <div class="nested">
@@ -62,7 +60,8 @@
                     </div>
                     <div class="nested">
                         <label for="pfad">Dokument</label>
-                        <input id="Dokument-selection" type="file" placeholder="Datei aus Verzeichniss wählen" name="data">
+                        <input id="Dokument-selection" type="file" placeholder="Datei aus Verzeichniss wählen"
+                            name="data">
                     </div>
                     <div class="nested">
                         <label for="upload-button">Jetzt hochladen</label>
@@ -87,7 +86,7 @@
         },
         methods: {
             validName: function (name) {
-                let re = /^[0-9a-zA-Z\s_-]{1,15}$/; ;
+                let re = /^[0-9a-zA-Z\s_-]{1,15}$/;;
                 return re.test(name);
 
             }
@@ -103,4 +102,25 @@
 
 
     }).mount("#upload");
+
+    function updateModule(studiengangId) {
+        // Fetch modules für den ausgewählen studiengang
+        fetch('/studiengang/' + studiengangId + '/module')
+            .then(response => response.json())
+            .then(module => {
+                
+                const modulDropdown = document.getElementById('modul');
+
+              
+                modulDropdown.innerHTML = '';
+
+                // Modul optionen hinzufügen! 
+                module.forEach(modul => {
+                    const option = document.createElement('option');
+                    option.value = modul.id;
+                    option.text = modul.name + ' (' + modul.id + ')';
+                    modulDropdown.add(option);
+                });
+            });
+    }
 </script>

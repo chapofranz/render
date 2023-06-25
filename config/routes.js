@@ -8,8 +8,6 @@
  * https://sailsjs.com/anatomy/config/routes-js
  */
 
-const buildOntologyAndRunAutoMigrations = require("sails-hook-orm/lib/build-ontology-and-run-auto-migrations");
-
 
 module.exports.routes = {
 
@@ -91,25 +89,21 @@ module.exports.routes = {
   'GET /skript/:id/uploadDataForm': { controller: 'SkriptController', action: 'uploadDataForm' },
   'POST /skript/:id/uploadData': { controller: 'SkriptController', action: 'uploadData' },
 
-  // 'GET /downloadFile/:filename': 'DateiController.downloadFile',
+  
   'GET /downloadFile': 'DateiController.downloadFile',
 
 
+  // dynamische route zum laden der Studiengänge
+  'GET /studiengang/:kuerzel': { action : 'ressources/show-all'},
+
+  // für Upload ansicht -> Nur die Module sollen angezeigt werden die zum Studiengang gehören
+  'GET /studiengang/:id/module': 'ModulController.getModulesForStudiengang',
 
 
-
-  // 'GET /anleitung/edit ': { controller: 'AnleitungController', action: 'find' },
-  // 'POST /anleitung/create': 'anleitung.create',
-  // 'GET /anleitung/new': { view: 'pages/anleitung/new' },
-  //
-  //
-  // 'GET /downloadFile': 'DateiController.downloadFile',
-  'GET /wirtschaftsinformatik': { action: 'wirtschaftsinformatik/show' },
 
   'GET /dozenten': 'DozentenController.list',
 
-  'GET /marketplace': { view: 'pages/marketplace/show' },
-  'GET /chat': { view: 'pages/chat/show' },
+
   'GET /upload': { controller: 'UploadController', action: 'new' },
   'GET /impressum': { view: 'pages/impressum'},
   'GET /datenschutz': { view: 'pages/datenschutz'},

@@ -23,8 +23,10 @@
                         <a>{{ item.name
                             }}</a>
                         (Autor: {{ item.author }})
+                        <br>
+                        <a>Beschreibung: {{item.beschreibung}}</a>
                     </h5>
-                    <p> Bewertung: </p>
+                    <p> Bewertung abgeben: </p>
                     <div class="stars mb-2">
                         <i v-for="n in 5" :key="n" class="star"
                             :class="{ 'star-selected': n <= item.averageRating, 'star-hover': n <= item.tempRating }"
@@ -47,8 +49,10 @@
                     <h5 class="card-title">
                         <a>{{ item.name }}</a>
                         (Autor: {{ item.author }})
+                        <br>
+                        <a>Beschreibung: {{item.beschreibung}}</a>
                     </h5>
-                    <p> Bewertung: </p>
+                    <p> Bewertung abgeben: </p>
                     <div class="stars mb-2">
                         <i v-for="n in 5" :key="n" class="star"
                             :class="{ 'star-selected': n <= item.averageRating, 'star-hover': n <= item.tempRating }"

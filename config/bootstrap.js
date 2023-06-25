@@ -11,7 +11,7 @@
 
 module.exports.bootstrap = async function () {
 
-  // await sails.config.seed();
+  await sails.config.seed();
 
 
 

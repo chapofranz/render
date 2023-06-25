@@ -4,6 +4,15 @@ const Sails = require("sails/lib/app/Sails");
 module.exports = {
 
 
+    getModulesForStudiengang: async function(req, res) {
+        const studiengangId = req.params.id;
+        const studiengang_modul = await Studiengang_modul.find({ studiengang: studiengangId });
+        const moduleIds = studiengang_modul.map(sm => sm.modul);
+        const module = await Modul.find({ id: moduleIds });
+        return res.json(module);
+    },
+
+
     create: async function (req, res) {
         sails.log.debug("Erstellt Modul....");
         let params = req.allParams();

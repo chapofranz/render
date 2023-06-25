@@ -32,7 +32,6 @@ module.exports.policies = {
 
   StudiengangController: {
     'update': 'is-super-admin',
-    'delete': 'is-super-admin',
     'findOne': 'is-super-admin',
     'findAll': 'is-super-admin',
     'create': 'is-super-admin',
