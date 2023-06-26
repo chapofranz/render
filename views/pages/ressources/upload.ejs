@@ -15,14 +15,14 @@
                 <form class="wrapper upload" id="upload-form" action="/upload/new" method="post"
                     enctype="multipart/form-data">
                     <div class="nested">
-                        <label for="name">Name</label>
+                        <label for="name" id="label">Name</label>
                         <input id="Dateiname-input" type="text" v-model="name" :class="{'is-invalid': invalidName}"
                             placeholder="Dateiname" name="name" class="upload-form">
                         <div class="invalid-feedback" v-if="invalidName">Max 15 Zeichen, _ - Buchstaben und Zahlen!
                         </div>
                     </div>
                     <div class="nested">
-                        <label for="kategorie">Kategorie</label>
+                        <label for="kategorie" id="label">Kategorie</label>
                         <select id="Kategorie-selector" name="kategorie" class="nested upload-form">
                             <option value="Bitte auswählen">Bitte auswählen</option>
                             <option value="Skript">Skript</option>
@@ -30,7 +30,7 @@
                         </select>
                     </div>
                     <div class="nested">
-                        <label for="studiengang">Studiengang</label>
+                        <label for="studiengang" id="label">Studiengang</label>
                         <select name="studiengang" id="studiengang" class="upload-form" required
                             onchange="updateModule(this.value)">
                             <option value="Studiengang wählen">Wählen einen Studiengang aus</option>
@@ -42,29 +42,29 @@
                         </select>
                     </div>
                     <div class="nested">
-                        <label for="modul">Modul</label>
+                        <label for="modul" id="label">Modul</label>
                         <select name="modul" id="modul" class="upload-form" required>
                             <option value="Modul">Wählen ein Modul aus</option>
                             <!-- Module options werden hier reingeladen! -->
                         </select>
                     </div>
                     <div class="nested">
-                        <label for="beschreibung">Beschreibung</label>
-                        <input id="Beschreibung-input" type="text" placeholder="Beschreibung des Inhalts"
+                        <label for="beschreibung" id="label">Beschreibung</label>
+                        <input id="Beschreibung-input " type="text" placeholder="Beschreibung des Inhalts"
                             name="beschreibung" class="upload-form">
                     </div>
                     <div class="nested">
-                        <label for="author">Author</label>
+                        <label for="author" id="label">Author</label>
                         <input id="Author-input" type="text" placeholder="Dein Name (optional)" name="author"
                             class="upload-form">
                     </div>
                     <div class="nested">
-                        <label for="pfad">Dokument</label>
+                        <label for="pfad" id="label">Dokument</label>
                         <input id="Dokument-selection" type="file" placeholder="Datei aus Verzeichniss wählen"
                             name="data">
                     </div>
                     <div class="nested">
-                        <label for="upload-button">Jetzt hochladen</label>
+                        <label for="upload-button" id="label">Jetzt hochladen</label>
                         <button type="submit" class="btn btn-primary" id="upload-button">Upload</button>
                     </div>
 

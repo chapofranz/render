@@ -174,8 +174,10 @@ h4 {
 
 
 .modul-box {
-  font-size: 1.5rem; /* Größere Schriftgröße */
-  font-weight: normal; /* Weniger fette Schrift */
+  font-size: 1.5rem;
+  /* Größere Schriftgröße */
+  font-weight: normal;
+  /* Weniger fette Schrift */
 }
 
 .modul-box .badge {
@@ -187,6 +189,7 @@ h4 {
   .modul-box {
     font-size: 1.7rem;
   }
+
   .wrapper {
     max-width: 600px;
     margin: 0 auto;
@@ -203,15 +206,54 @@ h4 {
   .nested {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
     margin-top: 10px;
   }
 }
+
 @media (max-width: 768px) {
   .modul-box {
-      flex-direction: column; /* Elemente stapeln sich untereinander statt nebeneinander */
+    flex-direction: column;
+    /* Elemente stapeln sich untereinander statt nebeneinander */
+  }
+
+  .modul-box {
+    font-size: 1.7rem;
+  }
+
+
+
+}
+
+@media (min-width: 576px) {
+
+  label{
+    font-size: 18px;
+  }
+  .modul-box {
+    font-size: 2rem;
+  }
+
+  .wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px;
+  }
+
+  .wrapper-grid {
+    margin-top: 50px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 30px;
+  }
+
+  .nested {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
   }
 }
+
+
 
 
 a {
@@ -686,6 +728,8 @@ ul.statusbar-text {
   }
 }
 
+
+
 @media (max-width: 385px) {
   .sc-image {
     display: none;
@@ -716,6 +760,14 @@ ul.statusbar-text {
 
 @media screen and (min-width: 768px) {
 
+  #Beschreibung-input\  {
+    margin-left: 20px;
+  }
+
+  label{
+    font-size: 20px;
+  }
+
   .social-media-icons-size {
     width: 32px;
     height: 32px;
@@ -738,22 +790,22 @@ ul.statusbar-text {
   .wrapper-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    padding: 1em;
-    margin-top: 20px;
+    padding: 2em;
+    margin-top: 30px;
   }
 
   .wrapper {
     justify-content: center;
     grid-column: 2 / 3;
-    padding-left: 20px;
+    padding-left: 30px;
+    max-width: 1400px;
   }
 
   .nested {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    padding: 10px;
+    padding: 20px;
   }
-
 }
 
 
@@ -1055,6 +1107,7 @@ input[type="file"] {
   padding: 10px;
   margin-top: 30px;
 }
+
 .contact-form {
   display: flex;
   align-items: center;
