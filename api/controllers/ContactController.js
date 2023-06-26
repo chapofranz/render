@@ -13,7 +13,7 @@ const transporter = nodemailer.createTransport({
 
 module.exports = {
   index: function (req, res) {
-    res.view('contact/create');
+    res.view('pages/contact');
   },
 
   create: async function (req, res) {
@@ -29,18 +29,18 @@ module.exports = {
         subject: 'New Contact Form Submission',
         text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`
       });
-      req.session.message = "Kontaktformular erf";
+      req.session.message = "Kontaktformular erfolgreich abgeschickt";
       req.session.messageClass = 'text-success';
-      res.view("contact/create",{ messageClass: req.session.messageClass, message: req.session.message });
+      res.view("pages/contact",{ messageClass: req.session.messageClass, message: req.session.message });
       req.session.message = null;
       req.session.messageClass = null;
       return;
     } catch (err) {
 
       console.error('Error sending email:', err);
-      req.session.message = "Kontaktformular nicht erfolgreich";
+      req.session.message = "Kontaktformular nicht erfolgreich abgeschickt";
       req.session.messageClass = 'text-warning';
-      res.view("contact/create",{ messageClass: req.session.messageClass, message: req.session.message });
+      res.view("pages/contact",{ messageClass: req.session.messageClass, message: req.session.message });
       req.session.message = null;
       req.session.messageClass = null;
       return;

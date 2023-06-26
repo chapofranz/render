@@ -59,14 +59,14 @@
           <div class="form-group">
             <label for="password">Gib ein Passwort ein</label>
             <input class="form-control" id="password" name="password" type="password" v-model="password"
-              placeholder="••••••••" autocomplete="new-password" required>
-            <div class="invalid-feedback" v-if="passwordsDontMatch">Bitte geben Sie ein Passwort ein.</div>
+              placeholder="••••••••" autocomplete="new-password" :class="{'is-invalid': invalidPassword}" required>
+            <div class="invalid-feedback">Bitte Passwort eingeben</div>
           </div>
           <div class="form-group">
             <label for="confirm-password">Passwort bestätigen</label>
             <input class="form-control" id="confirm-password" name="confirmPassword" type="password"
-              v-model="confirmPassword" :class="{'is-invalid': passwordsDontMatch }" placeholder="••••••••"
-              autocomplete="new-password" required>
+              v-model="confirmPassword" :class="{'is-invalid': passwordsDontMatch || invalidPassword }"
+              placeholder="••••••••" autocomplete="new-password" required>
             <div class="invalid-feedback" v-if="passwordsDontMatch">Passwörter stimmen nicht überein</div>
             <div class="text-success" v-if="!passwordsDontMatch">Passwörter stimmen überein</div>
           </div>
@@ -88,107 +88,109 @@
     </div>
   </div>
 </div>
-<%- /* Expose locals as `window.SAILS_LOCALS` :: */ exposeLocalsToBrowser() %>
-  <script>
-    const { createApp } = Vue;
-    createApp({
-      data() {
-        return {
-          emailAddress: '',
-          userName: '',
-          password: '',
-          confirmPassword: '',
-          birthday: '',
-          vorName: '',
-          nachName: '',
-          invalidEmail: false,
-          invalidUserName: false,
-          invalidBirthday: false,
-          passwordsDontMatch: false,
-          invalidVorName: false,
-          invalidNachName: false,
-          termsAgreement: false
+
+<script>
+  const { createApp } = Vue;
+  createApp({
+    data() {
+      return {
+        emailAddress: '',
+        userName: '',
+        password: '',
+        confirmPassword: '',
+        birthday: '',
+        vorName: '',
+        nachName: '',
+        invalidEmail: false,
+        invalidUserName: false,
+        invalidBirthday: false,
+        passwordsDontMatch: false,
+        invalidVorName: false,
+        invalidNachName: false,
+        termsAgreement: false
+      }
+    },
+    methods: {
+
+
+      isTermsAgreed: function () {
+        return this.termsAgreement
+      },
+      validEmail: function (email) {
+        let re = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
+        return re.test(email);
+      },
+      validName: function (name) {
+        let re = /^[a-zA-Z]+$/;
+        return re.test(name);
+      },
+      validateForm: async function (event) {
+        if (!this.isTermsAgreed()) {
+          alert('Sie müssen die Nutzungsbedingungen zustimmen, bevor Sie fortfahren!');
+          event.preventDefault();
         }
       },
-      methods: {
-
-        isTermsAgreed: function () {
-          return this.termsAgreement
-        },
-        validEmail: function (email) {
-          let re = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
-          return re.test(email);
-        },
-        validName: function (name) {
-          let re = /^[a-zA-Z]+$/;
-          return re.test(name);
-        },
-        validateForm: async function (event) {
-          if (!this.isTermsAgreed()) {
-            alert('Sie müssen die Nutzungsbedingungen zustimmen, bevor Sie fortfahren!');
-            event.preventDefault();
-          }
-        },
-        validBirthday: function (birthday) {
-          let re = /^\d{2}\.\d{2}\.\d{4}$/;
-          return re.test(birthday);
-        },
-        passwordsMatch: function (password, confirmPassword) {
-          return password === confirmPassword;
-        },
-        checkEmailExists: async function () {
-          if (this.validEmail(this.emailAddress)) {
-            const response = await fetch('/check-email-exists', {
-              method: 'POST',
-              body: JSON.stringify({ emailAddress: this.emailAddress }),
-              headers: { 'Content-Type': 'application/json' },
-            });
-            if (response.status === 409) {
-              this.invalidEmail = true;
-            } else {
-              this.invalidEmail = false;
-            }
-          } else {
-            this.invalidEmail = true;
-          }
-        },
-        checkUserNameExists: async function () {
-          const response = await fetch('/check-username-exists', {
+      validBirthday: function (birthday) {
+        let re = /^\d{2}\.\d{2}\.\d{4}$/;
+        return re.test(birthday);
+      },
+      passwordsMatch: function (password, confirmPassword) {
+        return password === confirmPassword;
+      },
+      checkEmailExists: async function () {
+        if (this.validEmail(this.emailAddress)) {
+          const response = await fetch('/check-email-exists', {
             method: 'POST',
-            body: JSON.stringify({ userName: this.userName }),
+            body: JSON.stringify({ emailAddress: this.emailAddress }),
             headers: { 'Content-Type': 'application/json' },
           });
           if (response.status === 409) {
-
-            this.invalidUserName = true;
+            this.invalidEmail = true;
           } else {
-
-            this.invalidUserName = false;
+            this.invalidEmail = false;
           }
+        } else {
+          this.invalidEmail = true;
         }
       },
-      watch: {
-        emailAddress: function () {
-          this.checkEmailExists();
-        },
-        userName: function () {
-          this.checkUserNameExists();
-        },
-        birthday: function (newBirthday) {
-          this.invalidBirthday = !this.validBirthday(newBirthday);
-        },
-        confirmPassword: function (newConfirmPassword) {
-          this.passwordsDontMatch = !this.passwordsMatch(this.password, newConfirmPassword);
-        },
-        vorName: function (newVorName) {
-          this.invalidVorName = !this.validName(newVorName);
-        },
-        nachName: function (newNachName) {
-          this.invalidNachName = !this.validName(newNachName);
-        },
-        password: function (newPassword) {
-          this.passwordsDontMatch = !this.passwordsMatch(newPassword, this.confirmPassword);
+      checkUserNameExists: async function () {
+        const response = await fetch('/check-username-exists', {
+          method: 'POST',
+          body: JSON.stringify({ userName: this.userName }),
+          headers: { 'Content-Type': 'application/json' },
+        });
+        if (response.status === 409) {
+
+          this.invalidUserName = true;
+        } else {
+
+          this.invalidUserName = false;
         }
       }
-    }).mount("#signup");
-  </script>
+    },
+    watch: {
+
+      emailAddress: function () {
+        this.checkEmailExists();
+      },
+      userName: function () {
+        this.checkUserNameExists();
+      },
+      birthday: function (newBirthday) {
+        this.invalidBirthday = !this.validBirthday(newBirthday);
+      },
+      confirmPassword: function (newConfirmPassword) {
+        this.passwordsDontMatch = !this.passwordsMatch(this.password, newConfirmPassword);
+      },
+      vorName: function (newVorName) {
+        this.invalidVorName = !this.validName(newVorName);
+      },
+      nachName: function (newNachName) {
+        this.invalidNachName = !this.validName(newNachName);
+      },
+      password: function (newPassword) {
+        this.passwordsDontMatch = !this.passwordsMatch(newPassword, this.confirmPassword);
+      }
+    }
+  }).mount("#signup");
+</script>

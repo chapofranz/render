@@ -1,53 +1,25 @@
-<!--<div class="main-container container-flex">-->
-<!--    <div class="headline">-->
-<!--        <h1>Dozenten</h1>-->
-<!--    </div>-->
-<!--    <div class="col-auto">-->
-<!--        <ul class="unordered-lists">-->
-<!--            <% for (let i = 0; i < dozenten.length; i++) { %>-->
-<!--                <li class="dozenten-list col-3">-->
-<!--                    <strong> Name:</strong> <%= dozenten[i].vorname  %> <%= dozenten[i].nachname %> <br>-->
-<!--                    <strong> Email:</strong> <%= dozenten[i].email %> <br>-->
-<!--                    <strong> Telefonnummer:</strong> <%= dozenten[i].telefonnummer %> <br>-->
-<!--                    <strong> Studiengang:</strong> <%= dozenten[i].studiengang.name %> <br>-->
-<!--                </li>-->
-<!--            <% } %>-->
-<!--        </ul>-->
-<!--    </div>-->
-<!--</div>-->
-
-<!--<div class="main-container container-flex">-->
-<!--    <div class="headline">-->
-<!--        <h1>Dozenten</h1>-->
-<!--    </div>-->
-<!--    <div class="col-12 col-md-8 col-lg-6 mx-auto"> &lt;!&ndash; Added responsive grid classes &ndash;&gt;-->
-<!--        <ul class="unordered-lists">-->
-<!--            <% for (let i = 0; i < dozenten.length; i++) { %>-->
-<!--                <li class="dozenten-list col-12 col-sm-6 col-md-4 col-lg-3"> &lt;!&ndash; Added responsive grid classes &ndash;&gt;-->
-<!--                    <strong> Name:</strong> <%= dozenten[i].vorname  %> <%= dozenten[i].nachname %> <br>-->
-<!--                    <strong> Email:</strong> <%= dozenten[i].email %> <br>-->
-<!--                    <strong> Telefonnummer:</strong> <%= dozenten[i].telefonnummer %> <br>-->
-<!--                    <strong> Studiengang:</strong> <%= dozenten[i].studiengang.name %> <br>-->
-<!--                </li>-->
-<!--            <% } %>-->
-<!--        </ul>-->
-<!--    </div>-->
-<!--</div>-->
-
-<div class="main-container container-flex">
-    <div class="headline">
-        <h1>Dozenten</h1>
-    </div>
-    <div class="col-12 col-md-8 col-lg-6 mx-auto">
-        <ul class="unordered-lists justify-content-center text-center"> <!-- Add text-center class -->
-            <% for (let i = 0; i < dozenten.length; i++) { %>
-                <li class="dozenten-list col-12 col-sm-6 col-md-4 col-lg-12">
-                    <strong> Name:</strong> <%= dozenten[i].vorname  %> <%= dozenten[i].nachname %> <br>
-                    <strong> Email:</strong> <%= dozenten[i].email %> <br>
-                    <strong> Telefonnummer:</strong> <%= dozenten[i].telefonnummer %> <br>
-                    <strong> Studiengang:</strong> <%= dozenten[i].studiengang.name %> <br>
-                </li>
+<div class="main-container container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-12">
+            <h1 class="text-center mb-4">Dozenten</h1>
+        </div>
+        <% for (let i=0; i < dozenten.length; i++) { %>
+            <div class="col-12 col-sm-10 col-md-8 col-lg-6 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <%= dozenten[i].vorname %>
+                                <%= dozenten[i].nachname %>
+                        </h5>
+                        <p class="card-text">
+                            <strong>Email:</strong>
+                            <%= dozenten[i].email %> <br>
+                                <strong>Telefonnummer:</strong>
+                                <%= dozenten[i].telefonnummer %>
+                        </p>
+                    </div>
+                </div>
+            </div>
             <% } %>
-        </ul>
     </div>
 </div>

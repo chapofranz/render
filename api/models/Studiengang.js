@@ -6,10 +6,6 @@ module.exports = {
             collection: 'user',
             via: 'studiengang'
         },
-        dozent: {
-            collection: 'dozent',
-            via: 'studiengang'
-        },
         studiengang_modul: {
             collection: 'studiengang_modul',
             via: 'studiengang'

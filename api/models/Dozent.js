@@ -4,9 +4,5 @@ module.exports = {
         vorname: { type: 'string', columnType: 'varchar(80)', required: true },
         nachname: { type: 'string', columnType: 'varchar(80)', required: true },
         telefonnummer: { type: 'string', columnType: 'varchar(20)' },
-        studiengang: {
-            collection: 'studiengang',
-            via: 'dozent'
-        },
     },
 };

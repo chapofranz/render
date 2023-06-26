@@ -1,0 +1,38 @@
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="card shadow-lg col-12 col-md-8 col-lg-6">
+        <div class="card-body">
+            <div class="text-center mb-4">
+                <h1>Kontakt</h1>
+                <p>Wir freuen uns auf Ihre Nachricht. Füllen Sie bitte das untenstehende Formular aus und wir werden uns
+                    so schnell wie möglich mit Ihnen in Verbindung setzen.</p>
+            </div>
+            <% if (typeof message !=='undefined' && message) { %>
+                <div class="container-fluid text-center message <%= messageClass %>">
+                    <p>
+                        <%= message %>
+                    </p>
+                </div>
+                <% } %>
+                    <form action="/contact/create" method="POST">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Vollständiger Name:</label>
+                            <input type="text" id="name" name="name" required class="form-control">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email Adresse:</label>
+                            <input type="email" id="email" name="email" required class="form-control">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="message" class="form-label">Ihre Nachricht:</label>
+                            <textarea id="message" name="message" required class="form-control" rows="5"></textarea>
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">Nachricht absenden</button>
+                        </div>
+                    </form>
+        </div>
+    </div>
+</div>
