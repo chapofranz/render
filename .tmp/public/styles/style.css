@@ -174,7 +174,7 @@ h4 {
 
 
 .modul-box {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   /* Größere Schriftgröße */
   font-weight: normal;
   /* Weniger fette Schrift */
@@ -186,8 +186,17 @@ h4 {
 
 /* Für kleine Bildschirme */
 @media (max-width: 576px) {
+
+  #searchUberschrift {
+
+    font-size: 2.8rem;
+  }
+
   .modul-box {
     font-size: 1.7rem;
+  }
+  .text-justify.concept {
+    font-size: 14px;
   }
 
   .wrapper {
@@ -217,7 +226,7 @@ h4 {
   }
 
   .modul-box {
-    font-size: 1.7rem;
+    font-size: 1.3rem;
   }
 
 
@@ -227,12 +236,25 @@ h4 {
 
 
 @media (min-width: 576px) {
+  h6 {
+    font-size: 25px;
+
+  }
+
+  .admin-text {
+    font-size:22px;
+  }
 
   .social-media-icons-size {
     width: 40px;
     height: 40px;
   }
-
+  .sec-button-own.uploadButton {
+    font-size: 20px;
+  }
+  .text-justify.concept {
+    font-size: 18px;
+  }
   label{
     font-size: 18px;
   }
@@ -502,6 +524,7 @@ ul.statusbar-text {
 }
 
 
+
 .dashboard-container {
   display: flex;
   justify-content: center;
@@ -686,7 +709,7 @@ ul.statusbar-text {
 }
 
 .card {
-  background: linear-gradient(135deg, #5A9, var(--secondary));
+  background: linear-gradient(135deg, #55aa99, var(--secondary));
 }
 
 .star {
@@ -731,13 +754,30 @@ ul.statusbar-text {
   color: var(--secondary)
 }
 
+
 @media (min-width: 435px) {
   .navbar-text {
     font-size: 1.5rem;
   }
+  .sec-button-own.uploadButton {
+    font-size: 15px;
+  }
+
+ 
+
+ 
+  
 }
 
+@media(max-width: 420px) {
+  #upload-form {
+    max-width: 300px;
+  }
+  #searchUberschrift {
 
+    font-size: 1.8rem;
+  }
+}
 
 @media (max-width: 385px) {
   .sc-image {
@@ -765,10 +805,17 @@ ul.statusbar-text {
     height: 1.25em;
   }
 
+  
+
 }
 
 @media screen and (min-width: 768px) {
 
+
+   #searchUberschrift {
+
+    font-size: 3.8rem;
+  }
   #Beschreibung-input\  {
     margin-left: 20px;
   }
@@ -888,10 +935,7 @@ ul.statusbar-text {
     font-size: 20px;
   }
 
-  h6 {
-    font-size: 25px;
-
-  }
+  
 
   h1 {
     font-size: 36px;

@@ -1,6 +1,7 @@
 <div class="container" id="admin-dashboard">
     <h1 class="my-4 admin-dashboard-header" style="color: black">Admin Dashboard</h1>
-    <p>Willkommen im Administrationsbereich. Hier können Sie alle Benutzer, Studiengänge, Module, Skripte und
+    <p class="admin-text">Willkommen im Administrationsbereich. Hier können Sie alle Benutzer, Studiengänge, Module,
+        Skripte und
         Anleitungen verwalten.</p>
 
     <div class="my-4" v-for="(items, title) in itemsGroup" :key="title">
@@ -10,9 +11,16 @@
                 <span v-if="isVisible[title]">&#9660;</span>
                 <span v-else>&#9654;</span>
             </span>
-
-
         </h2>
+
+      
+        <!-- Hinzufügen von Schaltflächen -->
+        <button v-if="title === 'Anleitungen'" class="btn btn-success" @click="addRessource">Anleitung hinzufügen</button>
+      
+        <button v-if="title === 'Skripte'" class="btn btn-success" @click="addRessource">Skript hinzufügen</button>
+        <button v-if="title === 'Module'" class="btn btn-success" @click="addModul">Modul hinzufügen</button>
+        <button v-if="title === 'Studiengange'" class="btn btn-success" @click="addStudiengang">Studiengang hinzufügen</button>
+
         <div class="table-responsive" v-if="isVisible[title]">
             <table class="table table-striped">
                 <thead>
@@ -79,8 +87,16 @@
                     return item.userName;
                 }
                 return item.name;
+            },
+            addRessource: function () {
+               window.location.href='/upload'
+            },
+            addModul: function() {
+                window.location.href='/module/new'
+            },
+            addStudiengang: function() {
+                window.location.href='/studiengang/new'
             }
         }
     }).mount("#admin-dashboard")
 </script>
-</body>

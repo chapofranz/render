@@ -1,5 +1,6 @@
 
 const Sails = require("sails/lib/app/Sails");
+var viewEditAll = require('./admin/view-edit-all');
 
 module.exports = {
 
@@ -18,7 +19,11 @@ module.exports = {
 
     sails.log.debug("Studiengang-Modell: ", Studiengang)
     await Studiengang.create(params);
-    res.redirect('/studiengang');
+
+    await viewEditAll(req, res);
+   
+
+
   },
 
   edit: async function (req, res) {

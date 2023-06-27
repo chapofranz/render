@@ -7,7 +7,23 @@
             </div>
             <div class="form-group">
                 <label class="col-form-label-lg">Beschreibung</label>
-                <input type="text" class="form-control" maxlength="80" value="<%= modul.beschreibung %>" name="beschreibung">
+                <input type="text" class="form-control" maxlength="80" value="<%= modul.beschreibung %>"
+                    name="beschreibung">
+            </div>
+            <div class="form-group">
+                <label for="studiengang" id="label">Studiengang</label>
+                <select name="studiengang[]" id="studiengang" class="upload-form" required multiple>
+                    <option value="" disabled>Wählen Sie einen oder mehrere Studiengänge aus</option>
+                    <% studiengaenge.forEach(function(studiengang) { %>
+                        <option value="<%= studiengang.id %>" <% if(modul.studiengang_modul.some(studiengang_modul=>
+                            studiengang_modul.studiengang == studiengang.id)) { %>
+                            selected
+                            <% } %>
+                                >
+                                <%= studiengang.name %> (<%= studiengang.id %>)
+                        </option>
+                        <% }); %>
+                </select>
             </div>
         </div>
         <button type="submit" class="btn btn-primary">Aktualisieren</button>
