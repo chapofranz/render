@@ -4,7 +4,8 @@
         <div class="col-12 col-lg-3 d-none d-lg-block statusbar">
             <div class="row">
                 <div class="col-12 libraryPicture-container">
-                        <img src="/images/welcome-desktop.jpg" alt="welcome-desktop" class="img-fluid d-none d-lg-block">
+                    
+                    <img src="/images/welcome-desktop.jpg" alt="welcome-desktop" class="img-fluid d-none d-lg-block">
                 </div>
             </div>
             <ul class="statusbar-text">
@@ -18,52 +19,52 @@
             </ul>
         </div>
 
-    <div class="col-12 col-lg-6 content">
-        <div class="row">
-            <div class="col-12 handshake-image">
-                <img src="/images/handshake.png" alt="handshake" class="img-fluid">
-            </div>
-            <div class="col-12 col-md-12 col-lg-12 textbox">
-                <div class="row">
-                    <div class="col-4 offset-1 slogan slogan-animation-1">
-                        Du bist Student oder Dozent?
-                    </div>
-                    <div class="col-7 slogan slogan-animation-2">
-                        Du hast wenig Geld, willst aber trotzdem Zugang zu den besten Lehrmaterialien?
-                    </div>
-                    <div class="col-4 col-md-6 slogan slogan-animation-3"> Du willst anderen helfen?
-                    </div>
+        <div class="col-12 col-lg-6 content">
+            <div class="row">
+                <div class="col-12 handshake-image">
+                    <img src="/images/handshake.png" alt="handshake" class="img-fluid">
                 </div>
-                <div class="row">
-                    <% if (req.me) { %>
-                        <div class="sign-up-button text-center">
-                            <div class="button"><a class="sec-button-own" href="/ressources/upload"> Zum Upload
-                                    ></a></div>
+                <div class="col-12 col-md-12 col-lg-12 textbox">
+                    <div class="row">
+                        <div class="col-4 offset-1 slogan slogan-animation-1">
+                            Du bist Student oder Dozent?
                         </div>
-                        <% } else { %>
+                        <div class="col-7 slogan slogan-animation-2">
+                            Du hast wenig Geld, willst aber trotzdem Zugang zu den besten Lehrmaterialien?
+                        </div>
+                        <div class="col-4 col-md-6 slogan slogan-animation-3"> Du willst anderen helfen?
+                        </div>
+                    </div>
+                    <div class="row">
+                        <% if (req.me) { %>
                             <div class="sign-up-button text-center">
-                                <div class="button"><a class="sec-button-own" href="/signup">Kostenlos
-                                        Account
-                                        erstellen
+                                <div class="button"><a class="sec-button-own" href="/ressources/upload"> Zum Upload
                                         ></a></div>
-
                             </div>
-                            <% } %>
+                            <% } else { %>
+                                <div class="sign-up-button text-center">
+                                    <div class="button"><a class="sec-button-own" href="/signup">Kostenlos
+                                            Account
+                                            erstellen
+                                            ></a></div>
+
+                                </div>
+                                <% } %>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-12 col-lg-3 d-flex flex-column">
+            <div class="row">
+                <div class="col-12 libraryPicture-container">
+                    <a href="/ressourcen/show">
+                        <img src="/images/library.jpg" alt="library" class="img-fluid d-lg-none"><!-- Mobile-->
+                        <img src="/images/library-desktop.jpg" alt="test-desktop" class="img-fluid d-none d-lg-block">
+                        <!-- Desktop -->
+                    </a>
                 </div>
             </div>
-
-        </div>
-    </div>
-    <div class="col-12 col-lg-3 d-flex flex-column">
-        <div class="row">
-            <div class="col-12 libraryPicture-container">
-                <a href="/ressourcen/show">
-                    <img src="/images/library.jpg" alt="library" class="img-fluid d-lg-none"><!-- Mobile-->
-                    <img src="/images/library-desktop.jpg" alt="test-desktop" class="img-fluid d-none d-lg-block">
-                    <!-- Desktop -->
-                </a>
-            </div>
-        </div>
             <div class="row">
                 <div class="col-12 peoplePicture-container">
                     <a href="/concept">

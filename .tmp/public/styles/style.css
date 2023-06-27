@@ -79,8 +79,8 @@
 }
 
 .social-media-icons-size {
-  width: 20px;
-  height: 20px;
+  width: 25px;
+  height: 25px;
 }
 
 
@@ -224,7 +224,14 @@ h4 {
 
 }
 
+
+
 @media (min-width: 576px) {
+
+  .social-media-icons-size {
+    width: 40px;
+    height: 40px;
+  }
 
   label{
     font-size: 18px;
@@ -453,6 +460,7 @@ ul.statusbar-text {
 
 
 
+
 .libraryPicture-container {
   width: 100%;
   text-align: center;
@@ -462,6 +470,7 @@ ul.statusbar-text {
   border-style: solid;
   border-color: black;
   border-radius: 20px;
+  position: relative;
 }
 
 .peoplePicture-container {
@@ -768,10 +777,7 @@ ul.statusbar-text {
     font-size: 20px;
   }
 
-  .social-media-icons-size {
-    width: 32px;
-    height: 32px;
-  }
+  
 
   footer {
     margin-top: 30px

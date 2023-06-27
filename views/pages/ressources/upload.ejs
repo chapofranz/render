@@ -17,13 +17,13 @@
                     <div class="nested">
                         <label for="name" id="label">Name</label>
                         <input id="Dateiname-input" type="text" v-model="name" :class="{'is-invalid': invalidName}"
-                            placeholder="Dateiname" name="name" class="upload-form">
+                            placeholder="Dateiname" name="name" class="upload-form" required>
                         <div class="invalid-feedback" v-if="invalidName">Max 15 Zeichen, _ - Buchstaben und Zahlen!
                         </div>
                     </div>
                     <div class="nested">
                         <label for="kategorie" id="label">Kategorie</label>
-                        <select id="Kategorie-selector" name="kategorie" class="nested upload-form">
+                        <select id="Kategorie-selector" name="kategorie" class="nested upload-form" required>
                             <option value="Bitte auswählen">Bitte auswählen</option>
                             <option value="Skript">Skript</option>
                             <option value="Anleitung">Anleitung</option>
@@ -51,17 +51,17 @@
                     <div class="nested">
                         <label for="beschreibung" id="label">Beschreibung</label>
                         <input id="Beschreibung-input " type="text" placeholder="Beschreibung des Inhalts"
-                            name="beschreibung" class="upload-form">
+                            name="beschreibung" class="upload-form" required>
                     </div>
                     <div class="nested">
                         <label for="author" id="label">Author</label>
                         <input id="Author-input" type="text" placeholder="Dein Name (optional)" name="author"
-                            class="upload-form">
+                            class="upload-form" required>
                     </div>
                     <div class="nested">
                         <label for="pfad" id="label">Dokument</label>
                         <input id="Dokument-selection" type="file" placeholder="Datei aus Verzeichniss wählen"
-                            name="data">
+                            name="data required">
                     </div>
                     <div class="nested">
                         <label for="upload-button" id="label">Jetzt hochladen</label>
