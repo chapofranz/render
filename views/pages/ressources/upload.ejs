@@ -106,12 +106,20 @@
     function updateModule(studiengangId) {
         // Fetch modules für den ausgewählen studiengang
         fetch('/studiengang/' + studiengangId + '/module')
-            .then(response => response.json())
+            .then(response => {
+                // Prüfen, ob die Antwort ok ist
+                if (!response.ok) {
+                    throw new Error("Netzwerkantwort war nicht ok");
+                }
+                return response.json();
+            })
             .then(module => {
-                
-                const modulDropdown = document.getElementById('modul');
+                // Prüfen, ob module null ist
+                if (module === null) {
+                    throw new Error("Module sind null");
+                }
 
-              
+                const modulDropdown = document.getElementById('modul');
                 modulDropdown.innerHTML = '';
 
                 // Modul optionen hinzufügen! 
@@ -121,6 +129,18 @@
                     option.text = modul.name + ' (' + modul.id + ')';
                     modulDropdown.add(option);
                 });
+            })
+            .catch(error => {
+                console.error('Es gab ein Problem mit Ihrer fetch Operation: ', error);
+
+                const modulDropdown = document.getElementById('modul');
+                modulDropdown.innerHTML = '';
+
+                // Platzhalteroption hinzufügen, um den Benutzer zu informieren, dass keine Module geladen werden konnten
+                const option = document.createElement('option');
+                option.text = 'Module konnten nicht geladen werden';
+                modulDropdown.add(option);
             });
     }
+
 </script>
